@@ -9,6 +9,8 @@ namespace l10_test
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+
+
         }
     }
 }
