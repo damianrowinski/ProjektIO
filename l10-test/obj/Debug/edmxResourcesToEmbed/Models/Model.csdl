@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="ModelContainer" annotation:LazyLoadingEnabled="true" cg:TypeAccess="Public">
+    <EntitySet Name="KoloNaukoweSet" EntityType="Model.KoloNaukowe" />
+    <EntitySet Name="PortfolioSet" EntityType="Model.Portfolio" />
+    <AssociationSet Name="KoloNaukowePortfolio" Association="Model.KoloNaukowePortfolio">
+      <End Role="KoloNaukowe" EntitySet="KoloNaukoweSet" />
+      <End Role="Portfolio" EntitySet="PortfolioSet" />
+    </AssociationSet>
+    <EntitySet Name="CzlonkowieSet" EntityType="Model.Czlonkowie" />
+    <AssociationSet Name="KoloNaukoweCzlonkowie" Association="Model.KoloNaukoweCzlonkowie">
+      <End Role="KoloNaukowe" EntitySet="KoloNaukoweSet" />
+      <End Role="Czlonkowie" EntitySet="CzlonkowieSet" />
+    </AssociationSet>
+    <EntitySet Name="KomentarzSet" EntityType="Model.Komentarz" />
+    <EntitySet Name="PostSet" EntityType="Model.Post" />
+    <EntitySet Name="UzytkownikSet" EntityType="Model.Uzytkownik" />
+    <EntitySet Name="EventSet" EntityType="Model.Event" />
+    <EntitySet Name="UczestnictwoSet" EntityType="Model.Uczestnictwo" />
+    <EntitySet Name="WiadomoscSet" EntityType="Model.Wiadomosc" />
+    <AssociationSet Name="WiadomoscUzytkownik" Association="Model.WiadomoscWysyla">
+      <End Role="Wiadomosc" EntitySet="WiadomoscSet" />
+      <End Role="Uzytkownik" EntitySet="UzytkownikSet" />
+    </AssociationSet>
+    <AssociationSet Name="WiadomoscOdbiera" Association="Model.WiadomoscOdbiera">
+      <End Role="Wiadomosc" EntitySet="WiadomoscSet" />
+      <End Role="Uzytkownik" EntitySet="UzytkownikSet" />
+    </AssociationSet>
+    <AssociationSet Name="UczestnictwoEvent" Association="Model.UczestnictwoEvent">
+      <End Role="Uczestnictwo" EntitySet="UczestnictwoSet" />
+      <End Role="Event" EntitySet="EventSet" />
+    </AssociationSet>
+    <AssociationSet Name="UczestnictwoUzytkownik" Association="Model.UczestnictwoUzytkownik">
+      <End Role="Uczestnictwo" EntitySet="UczestnictwoSet" />
+      <End Role="Uzytkownik" EntitySet="UzytkownikSet" />
+    </AssociationSet>
+    <AssociationSet Name="UzytkownikCzlonkowie" Association="Model.UzytkownikCzlonkowie">
+      <End Role="Uzytkownik" EntitySet="UzytkownikSet" />
+      <End Role="Czlonkowie" EntitySet="CzlonkowieSet" />
+    </AssociationSet>
+    <AssociationSet Name="PostKoloNaukowe" Association="Model.PostKoloNaukowe">
+      <End Role="Post" EntitySet="PostSet" />
+      <End Role="KoloNaukowe" EntitySet="KoloNaukoweSet" />
+    </AssociationSet>
+    <AssociationSet Name="KomentarzPost" Association="Model.KomentarzPost">
+      <End Role="Komentarz" EntitySet="KomentarzSet" />
+      <End Role="Post" EntitySet="PostSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="KoloNaukowe">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nazwa" Type="String" Nullable="false" />
+    <Property Name="DataUtworzenia" Type="DateTime" Nullable="false" />
+    <Property Name="Uczelnia" Type="Int32" Nullable="false" />
+    <Property Name="Aktywny" Type="Boolean" Nullable="false" />
+    <Property Name="DataDoUsuniecia" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="Portfolio" Relationship="Model.KoloNaukowePortfolio" FromRole="KoloNaukowe" ToRole="Portfolio" cg:SetterAccess="Private" />
+    <NavigationProperty Name="Czlonkowie" Relationship="Model.KoloNaukoweCzlonkowie" FromRole="KoloNaukowe" ToRole="Czlonkowie" cg:SetterAccess="Private" />
+    <NavigationProperty Name="Post" Relationship="Model.PostKoloNaukowe" FromRole="KoloNaukowe" ToRole="Post" cg:SetterAccess="Private" />
+  </EntityType>
+  <EntityType Name="Portfolio">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdKola" Type="Int32" Nullable="false" />
+    <Property Name="Zawartosc" Type="String" Nullable="false" />
+    <Property Name="DataUtworzenia" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="KoloNaukowe" Relationship="Model.KoloNaukowePortfolio" FromRole="Portfolio" ToRole="KoloNaukowe" />
+  </EntityType>
+  <Association Name="KoloNaukowePortfolio">
+    <End Type="Model.KoloNaukowe" Role="KoloNaukowe" Multiplicity="1" />
+    <End Type="Model.Portfolio" Role="Portfolio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KoloNaukowe">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Portfolio">
+        <PropertyRef Name="IdKola" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Czlonkowie">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdKola" Type="Int32" Nullable="false" />
+    <Property Name="Rola" Type="Int32" Nullable="false" />
+    <Property Name="Aktywny" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="KoloNaukowe" Relationship="Model.KoloNaukoweCzlonkowie" FromRole="Czlonkowie" ToRole="KoloNaukowe" />
+    <NavigationProperty Name="Uzytkownik" Relationship="Model.UzytkownikCzlonkowie" FromRole="Czlonkowie" ToRole="Uzytkownik" />
+    <Property Name="IdUzytkownika" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="KoloNaukoweCzlonkowie">
+    <End Type="Model.KoloNaukowe" Role="KoloNaukowe" Multiplicity="1" />
+    <End Type="Model.Czlonkowie" Role="Czlonkowie" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="KoloNaukowe">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Czlonkowie">
+        <PropertyRef Name="IdKola" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Komentarz">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdPostu" Type="Int32" Nullable="false" />
+    <Property Name="Zawartosc" Type="String" Nullable="false" />
+    <Property Name="DataPrzeslania" Type="DateTime" Nullable="false" />
+    <Property Name="IdUzytkownika" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Post" Relationship="Model.KomentarzPost" FromRole="Komentarz" ToRole="Post" />
+  </EntityType>
+  <EntityType Name="Post">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdUzytkownika" Type="Int32" Nullable="false" />
+    <Property Name="IdKola" Type="Int32" Nullable="false" />
+    <Property Name="Zawartosc" Type="String" Nullable="false" />
+    <Property Name="DataUtworzenia" Type="DateTime" Nullable="false" />
+    <Property Name="Przypiety" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="KoloNaukowe" Relationship="Model.PostKoloNaukowe" FromRole="Post" ToRole="KoloNaukowe" />
+    <NavigationProperty Name="Komentarz" Relationship="Model.KomentarzPost" FromRole="Post" ToRole="Komentarz" />
+  </EntityType>
+  <EntityType Name="Uzytkownik">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Imie" Type="String" Nullable="false" />
+    <Property Name="Nazwisko" Type="String" Nullable="false" />
+    <Property Name="DataUtworzenia" Type="DateTime" Nullable="false" />
+    <Property Name="DataModyfikacji" Type="DateTime" Nullable="false" />
+    <Property Name="DataLogowania" Type="DateTime" Nullable="false" />
+    <Property Name="Login" Type="String" Nullable="false" />
+    <Property Name="Email" Type="String" Nullable="false" />
+    <Property Name="Haslo" Type="String" Nullable="false" />
+    <Property Name="IDP" Type="Int32" Nullable="false" />
+    <Property Name="Salt" Type="String" Nullable="false" />
+    <Property Name="Rola" Type="Int32" Nullable="false" DefaultValue="0" />
+    <NavigationProperty Name="Wiadomosc" Relationship="Model.WiadomoscWysyla" FromRole="Uzytkownik" ToRole="Wiadomosc" />
+    <NavigationProperty Name="Wiadomosc1" Relationship="Model.WiadomoscOdbiera" FromRole="Uzytkownik" ToRole="Wiadomosc" />
+    <NavigationProperty Name="Uczestnictwo" Relationship="Model.UczestnictwoUzytkownik" FromRole="Uzytkownik" ToRole="Uczestnictwo" />
+    <NavigationProperty Name="Czlonkowie" Relationship="Model.UzytkownikCzlonkowie" FromRole="Uzytkownik" ToRole="Czlonkowie" />
+  </EntityType>
+  <EntityType Name="Event">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nazwa" Type="String" Nullable="false" />
+    <Property Name="Lokalizacja" Type="String" Nullable="false" />
+    <Property Name="DataUtworzenia" Type="DateTime" Nullable="false" />
+    <Property Name="DataRozpoczecia" Type="DateTime" Nullable="false" />
+    <Property Name="DataZakonczenia" Type="DateTime" Nullable="false" />
+    <Property Name="Zawartosc" Type="String" Nullable="false" />
+    <Property Name="IdKola" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Uczestnictwo" Relationship="Model.UczestnictwoEvent" FromRole="Event" ToRole="Uczestnictwo" />
+  </EntityType>
+  <EntityType Name="Uczestnictwo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdUzytkownika" Type="Int32" Nullable="false" />
+    <Property Name="IdEventu" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Event" Relationship="Model.UczestnictwoEvent" FromRole="Uczestnictwo" ToRole="Event" />
+    <NavigationProperty Name="Uzytkownik" Relationship="Model.UczestnictwoUzytkownik" FromRole="Uczestnictwo" ToRole="Uzytkownik" />
+  </EntityType>
+  <EntityType Name="Wiadomosc">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdOdbiorcy" Type="Int32" Nullable="false" />
+    <Property Name="IdNadawcy" Type="Int32" Nullable="false" />
+    <Property Name="Zawartosc" Type="String" Nullable="false" />
+    <Property Name="Tytul" Type="String" Nullable="false" />
+    <Property Name="DataPrzeslania" Type="DateTime" Nullable="false" />
+    <Property Name="DataOdebrania" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="Nadawca" Relationship="Model.WiadomoscWysyla" FromRole="Wiadomosc" ToRole="Uzytkownik" />
+    <NavigationProperty Name="Odbiorca" Relationship="Model.WiadomoscOdbiera" FromRole="Wiadomosc" ToRole="Uzytkownik" />
+  </EntityType>
+  <Association Name="WiadomoscWysyla">
+    <End Type="Model.Wiadomosc" Role="Wiadomosc" Multiplicity="*" />
+    <End Type="Model.Uzytkownik" Role="Uzytkownik" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Uzytkownik">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Wiadomosc">
+        <PropertyRef Name="IdNadawcy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="WiadomoscOdbiera">
+    <End Type="Model.Wiadomosc" Role="Wiadomosc" Multiplicity="*" />
+    <End Type="Model.Uzytkownik" Role="Uzytkownik" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Uzytkownik">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Wiadomosc">
+        <PropertyRef Name="IdOdbiorcy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UczestnictwoEvent">
+    <End Type="Model.Uczestnictwo" Role="Uczestnictwo" Multiplicity="*" />
+    <End Type="Model.Event" Role="Event" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Event">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Uczestnictwo">
+        <PropertyRef Name="IdEventu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UczestnictwoUzytkownik">
+    <End Type="Model.Uczestnictwo" Role="Uczestnictwo" Multiplicity="*" />
+    <End Type="Model.Uzytkownik" Role="Uzytkownik" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Uzytkownik">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Uczestnictwo">
+        <PropertyRef Name="IdUzytkownika" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="UzytkownikCzlonkowie">
+    <End Type="Model.Uzytkownik" Role="Uzytkownik" Multiplicity="1" />
+    <End Type="Model.Czlonkowie" Role="Czlonkowie" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Uzytkownik">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Czlonkowie">
+        <PropertyRef Name="IdUzytkownika" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PostKoloNaukowe">
+    <End Type="Model.Post" Role="Post" Multiplicity="*" />
+    <End Type="Model.KoloNaukowe" Role="KoloNaukowe" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="KoloNaukowe">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Post">
+        <PropertyRef Name="IdKola" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="KomentarzPost">
+    <End Type="Model.Komentarz" Role="Komentarz" Multiplicity="*" />
+    <End Type="Model.Post" Role="Post" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Post">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Komentarz">
+        <PropertyRef Name="IdPostu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
