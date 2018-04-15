@@ -1,0 +1,20 @@
+body{
+	background-color: #fcfcfc;
+}
+
+.header{
+	min-height: 180px;
+	background-color: #fbfbfb;
+}
+
+.header-logers-button{
+	margin-right: 20px;
+}
+
+.line-10{
+	height: 10px;
+}
+
+.line-15{
+	height: 15px;
+}
