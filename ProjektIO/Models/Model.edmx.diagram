@@ -23,6 +23,8 @@
         <AssociationConnector Association="Model.UzytkownikCzlonkowie" />
         <AssociationConnector Association="Model.PostKoloNaukowe" />
         <AssociationConnector Association="Model.KomentarzPost" />
+        <AssociationConnector Association="Model.KomentarzCzlonkowie" />
+        <AssociationConnector Association="Model.PostCzlonkowie" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

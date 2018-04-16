@@ -58,6 +58,14 @@
             <End Role="Komentarz" EntitySet="KomentarzSet" />
             <End Role="Post" EntitySet="PostSet" />
           </AssociationSet>
+          <AssociationSet Name="KomentarzCzlonkowie" Association="Model.KomentarzCzlonkowie">
+            <End Role="Komentarz" EntitySet="KomentarzSet" />
+            <End Role="Czlonkowie" EntitySet="CzlonkowieSet" />
+          </AssociationSet>
+          <AssociationSet Name="PostCzlonkowie" Association="Model.PostCzlonkowie">
+            <End Role="Post" EntitySet="PostSet" />
+            <End Role="Czlonkowie" EntitySet="CzlonkowieSet" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="KoloNaukowe">
           <Key>
@@ -106,6 +114,8 @@
           <NavigationProperty Name="KoloNaukowe" Relationship="Model.KoloNaukoweCzlonkowie" FromRole="Czlonkowie" ToRole="KoloNaukowe" />
           <NavigationProperty Name="Uzytkownik" Relationship="Model.UzytkownikCzlonkowie" FromRole="Czlonkowie" ToRole="Uzytkownik" />
           <Property Name="IdUzytkownika" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Komentarz" Relationship="Model.KomentarzCzlonkowie" FromRole="Czlonkowie" ToRole="Komentarz" />
+          <NavigationProperty Name="Post" Relationship="Model.PostCzlonkowie" FromRole="Czlonkowie" ToRole="Post" />
         </EntityType>
         <Association Name="KoloNaukoweCzlonkowie">
           <End Type="Model.KoloNaukowe" Role="KoloNaukowe" Multiplicity="1" />
@@ -127,21 +137,23 @@
           <Property Name="IdPostu" Type="Int32" Nullable="false" />
           <Property Name="Zawartosc" Type="String" Nullable="false" />
           <Property Name="DataPrzeslania" Type="DateTime" Nullable="false" />
-          <Property Name="IdUzytkownika" Type="Int32" Nullable="false" />
+          <Property Name="IdCzlonka" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Post" Relationship="Model.KomentarzPost" FromRole="Komentarz" ToRole="Post" />
+          <NavigationProperty Name="Czlonkowie" Relationship="Model.KomentarzCzlonkowie" FromRole="Komentarz" ToRole="Czlonkowie" />
         </EntityType>
         <EntityType Name="Post">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdUzytkownika" Type="Int32" Nullable="false" />
+          <Property Name="IdCzlonka" Type="Int32" Nullable="false" />
           <Property Name="IdKola" Type="Int32" Nullable="false" />
           <Property Name="Zawartosc" Type="String" Nullable="false" />
           <Property Name="DataUtworzenia" Type="DateTime" Nullable="false" />
           <Property Name="Przypiety" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="KoloNaukowe" Relationship="Model.PostKoloNaukowe" FromRole="Post" ToRole="KoloNaukowe" />
           <NavigationProperty Name="Komentarz" Relationship="Model.KomentarzPost" FromRole="Post" ToRole="Komentarz" />
+          <NavigationProperty Name="Czlonkowie" Relationship="Model.PostCzlonkowie" FromRole="Post" ToRole="Czlonkowie" />
         </EntityType>
         <EntityType Name="Uzytkownik">
           <Key>
@@ -283,6 +295,30 @@
             </Principal>
             <Dependent Role="Komentarz">
               <PropertyRef Name="IdPostu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="KomentarzCzlonkowie">
+          <End Type="Model.Komentarz" Role="Komentarz" Multiplicity="*" />
+          <End Type="Model.Czlonkowie" Role="Czlonkowie" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Czlonkowie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Komentarz">
+              <PropertyRef Name="IdCzlonka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PostCzlonkowie">
+          <End Type="Model.Post" Role="Post" Multiplicity="*" />
+          <End Type="Model.Czlonkowie" Role="Czlonkowie" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Czlonkowie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="IdCzlonka" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

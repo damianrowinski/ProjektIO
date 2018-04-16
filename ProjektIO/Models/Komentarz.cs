@@ -18,8 +18,9 @@ namespace ProjektIO.Models
         public int IdPostu { get; set; }
         public string Zawartosc { get; set; }
         public System.DateTime DataPrzeslania { get; set; }
-        public int IdUzytkownika { get; set; }
+        public int IdCzlonka { get; set; }
     
         public virtual Post Post { get; set; }
+        public virtual Czlonkowie Czlonkowie { get; set; }
     }
 }

@@ -3,7 +3,7 @@ namespace ProjektIO.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialMigration : DbMigration
+    public partial class AddForeignKeysToPostSthEtc : DbMigration
     {
         public override void Up()
         {
@@ -57,15 +57,18 @@ namespace ProjektIO.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        IdUzytkownika = c.Int(nullable: false),
+                        IdCzlonka = c.Int(nullable: false),
                         IdKola = c.Int(nullable: false),
                         Zawartosc = c.String(),
                         DataUtworzenia = c.DateTime(nullable: false),
                         Przypiety = c.Boolean(nullable: false),
+                        Czlonkowie_Id = c.Int(),
                         KoloNaukowe_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Czlonkowie", t => t.Czlonkowie_Id)
                 .ForeignKey("dbo.KoloNaukowe", t => t.KoloNaukowe_Id)
+                .Index(t => t.Czlonkowie_Id)
                 .Index(t => t.KoloNaukowe_Id);
             
             CreateTable(
@@ -76,11 +79,14 @@ namespace ProjektIO.Migrations
                         IdPostu = c.Int(nullable: false),
                         Zawartosc = c.String(),
                         DataPrzeslania = c.DateTime(nullable: false),
-                        IdUzytkownika = c.Int(nullable: false),
+                        IdCzlonka = c.Int(nullable: false),
+                        Czlonkowie_Id = c.Int(),
                         Post_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Czlonkowie", t => t.Czlonkowie_Id)
                 .ForeignKey("dbo.Post", t => t.Post_Id)
+                .Index(t => t.Czlonkowie_Id)
                 .Index(t => t.Post_Id);
             
             CreateTable(
@@ -171,7 +177,9 @@ namespace ProjektIO.Migrations
             DropForeignKey("dbo.Uczestnictwo", "Event_Id", "dbo.Event");
             DropForeignKey("dbo.Czlonkowie", "Uzytkownik_Id", "dbo.Uzytkownik");
             DropForeignKey("dbo.Komentarz", "Post_Id", "dbo.Post");
+            DropForeignKey("dbo.Komentarz", "Czlonkowie_Id", "dbo.Czlonkowie");
             DropForeignKey("dbo.Post", "KoloNaukowe_Id", "dbo.KoloNaukowe");
+            DropForeignKey("dbo.Post", "Czlonkowie_Id", "dbo.Czlonkowie");
             DropForeignKey("dbo.Portfolio", "KoloNaukowe_Id", "dbo.KoloNaukowe");
             DropForeignKey("dbo.Czlonkowie", "KoloNaukowe_Id", "dbo.KoloNaukowe");
             DropIndex("dbo.Wiadomosc", new[] { "Uzytkownik_Id1" });
@@ -181,7 +189,9 @@ namespace ProjektIO.Migrations
             DropIndex("dbo.Uczestnictwo", new[] { "Uzytkownik_Id" });
             DropIndex("dbo.Uczestnictwo", new[] { "Event_Id" });
             DropIndex("dbo.Komentarz", new[] { "Post_Id" });
+            DropIndex("dbo.Komentarz", new[] { "Czlonkowie_Id" });
             DropIndex("dbo.Post", new[] { "KoloNaukowe_Id" });
+            DropIndex("dbo.Post", new[] { "Czlonkowie_Id" });
             DropIndex("dbo.Portfolio", new[] { "KoloNaukowe_Id" });
             DropIndex("dbo.Czlonkowie", new[] { "Uzytkownik_Id" });
             DropIndex("dbo.Czlonkowie", new[] { "KoloNaukowe_Id" });

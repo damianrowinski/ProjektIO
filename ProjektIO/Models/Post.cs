@@ -21,7 +21,7 @@ namespace ProjektIO.Models
         }
     
         public int Id { get; set; }
-        public int IdUzytkownika { get; set; }
+        public int IdCzlonka { get; set; }
         public int IdKola { get; set; }
         public string Zawartosc { get; set; }
         public System.DateTime DataUtworzenia { get; set; }
@@ -30,5 +30,6 @@ namespace ProjektIO.Models
         public virtual KoloNaukowe KoloNaukowe { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Komentarz> Komentarz { get; set; }
+        public virtual Czlonkowie Czlonkowie { get; set; }
     }
 }

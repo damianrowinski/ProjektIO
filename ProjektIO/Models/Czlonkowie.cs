@@ -14,6 +14,13 @@ namespace ProjektIO.Models
     
     public partial class Czlonkowie
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Czlonkowie()
+        {
+            this.Komentarz = new HashSet<Komentarz>();
+            this.Post = new HashSet<Post>();
+        }
+    
         public int Id { get; set; }
         public int IdKola { get; set; }
         public int Rola { get; set; }
@@ -22,5 +29,9 @@ namespace ProjektIO.Models
     
         public virtual KoloNaukowe KoloNaukowe { get; set; }
         public virtual Uzytkownik Uzytkownik { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Komentarz> Komentarz { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Post> Post { get; set; }
     }
 }
