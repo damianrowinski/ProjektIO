@@ -1,43 +1,101 @@
-﻿<!DOCTYPE html>
-<html>
+﻿<!doctype html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title — moja aplikacja platformy ASP.NET</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+
+    <title>Strona główna - zarządzanie</title>
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Nazwa aplikacji", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Strona główna", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Informacje", "About", "Home")</li>
-                    <li>@Html.ActionLink("Kontakt", "Contact", "Home")</li>
-                </ul>
+
+    <div class="container">
+
+        <div class="header">
+            <div class="row align-items-center">
+                <div class="col col-12 col-sm-9">
+                    <h1 class="text-center">Katalog kół naukowych</h1>
+                </div>
+                <div class="col col-12 col-sm-3">
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col col-sd-4 offset-sd-6"><button class="btn float-right  btn-block btn-block">Zaloguj się</button></div>
+                    </div>
+
+                    <div class="line-10"></div>
+
+                    <div class="row align-items-center">
+                        <div class="col"><button class="btn  float-right  btn-block btn-block">Zarejestruj się</button></div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year — moja aplikacja platformy ASP.NET</p>
-        </footer>
+
+        <div class="line-15"></div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col col-12 col-sm-2">
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col col-sd-4 offset-sd-6"><button class="btn float-right btn-block">Współpraca</button></div>
+                    </div>
+
+                    <div class="line-10"></div>
+
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col col-sd-4 offset-sd-6"><button class="btn float-right btn-block">Kategorie kół</button></div>
+                    </div>
+
+                    <div class="line-10"></div>
+
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col col-sd-4 offset-sd-6"><button class="btn float-right btn-block">Regulamin</button></div>
+                    </div>
+
+                    <div class="line-10"></div>
+
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col col-sd-4 offset-sd-6"><button class="btn float-right btn-block">Kontakt</button></div>
+                    </div>
+
+                    <div class="line-10"></div>
+
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col col-sd-4 offset-sd-6"><button class="btn float-right btn-block">Aktualności</button></div>
+                    </div>
+
+                    <div class="line-10"></div>
+
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col col-sd-4 offset-sd-6"><button class="btn float-right btn-block">O stronie</button></div>
+                    </div>
+
+                    <div class="line-10"></div>
+
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col col-sd-4 offset-sd-6"><button class="btn float-right btn-block">Aplikacja</button></div>
+                    </div>
+
+                </div>
+
+                <div class="col col-12 col-sm-7">
+                    @RenderBody()
+                </div>
+                <div class="col col-12 col-sm-3">
+                    <img align="right" src="@Url.Content("~/Images/logo_prz.png")">
+                </div>
+            </div>
+        </div>
+
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 </body>
 </html>
