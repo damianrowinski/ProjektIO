@@ -3,7 +3,7 @@ namespace ProjektIO.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class AddForeignKeysToPostSthEtc : DbMigration
+    public partial class InitialMigration : DbMigration
     {
         public override void Up()
         {
@@ -31,10 +31,10 @@ namespace ProjektIO.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Nazwa = c.String(),
-                        DataUtworzenia = c.DateTime(nullable: false),
+                        DataUtworzenia = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                         Uczelnia = c.Int(nullable: false),
                         Aktywny = c.Boolean(nullable: false),
-                        DataDoUsuniecia = c.DateTime(nullable: false),
+                        DataDoUsuniecia = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -45,7 +45,7 @@ namespace ProjektIO.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         IdKola = c.Int(nullable: false),
                         Zawartosc = c.String(),
-                        DataUtworzenia = c.DateTime(nullable: false),
+                        DataUtworzenia = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                         KoloNaukowe_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
@@ -60,7 +60,7 @@ namespace ProjektIO.Migrations
                         IdCzlonka = c.Int(nullable: false),
                         IdKola = c.Int(nullable: false),
                         Zawartosc = c.String(),
-                        DataUtworzenia = c.DateTime(nullable: false),
+                        DataUtworzenia = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                         Przypiety = c.Boolean(nullable: false),
                         Czlonkowie_Id = c.Int(),
                         KoloNaukowe_Id = c.Int(),
@@ -78,7 +78,7 @@ namespace ProjektIO.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         IdPostu = c.Int(nullable: false),
                         Zawartosc = c.String(),
-                        DataPrzeslania = c.DateTime(nullable: false),
+                        DataPrzeslania = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                         IdCzlonka = c.Int(nullable: false),
                         Czlonkowie_Id = c.Int(),
                         Post_Id = c.Int(),
@@ -96,9 +96,9 @@ namespace ProjektIO.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         Imie = c.String(),
                         Nazwisko = c.String(),
-                        DataUtworzenia = c.DateTime(nullable: false),
-                        DataModyfikacji = c.DateTime(nullable: false),
-                        DataLogowania = c.DateTime(nullable: false),
+                        DataUtworzenia = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
+                        DataModyfikacji = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
+                        DataLogowania = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                         Login = c.String(),
                         Email = c.String(),
                         Haslo = c.String(),
@@ -131,9 +131,9 @@ namespace ProjektIO.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         Nazwa = c.String(),
                         Lokalizacja = c.String(),
-                        DataUtworzenia = c.DateTime(nullable: false),
-                        DataRozpoczecia = c.DateTime(nullable: false),
-                        DataZakonczenia = c.DateTime(nullable: false),
+                        DataUtworzenia = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
+                        DataRozpoczecia = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
+                        DataZakonczenia = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                         Zawartosc = c.String(),
                         IdKola = c.Int(nullable: false),
                     })
@@ -148,8 +148,8 @@ namespace ProjektIO.Migrations
                         IdNadawcy = c.Int(nullable: false),
                         Zawartosc = c.String(),
                         Tytul = c.String(),
-                        DataPrzeslania = c.DateTime(nullable: false),
-                        DataOdebrania = c.DateTime(nullable: false),
+                        DataPrzeslania = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
+                        DataOdebrania = c.DateTime(nullable: false, precision: 7, storeType: "datetime2"),
                         Nadawca_Id = c.Int(),
                         Odbiorca_Id = c.Int(),
                         Uzytkownik_Id = c.Int(),

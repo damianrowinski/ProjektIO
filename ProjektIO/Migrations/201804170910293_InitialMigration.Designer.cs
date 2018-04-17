@@ -7,13 +7,13 @@ namespace ProjektIO.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AddForeignKeysToPostSthEtc : IMigrationMetadata
+    public sealed partial class InitialMigration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddForeignKeysToPostSthEtc));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialMigration));
         
         string IMigrationMetadata.Id
         {
-            get { return "201804161621160_AddForeignKeysToPostSthEtc"; }
+            get { return "201804170910293_InitialMigration"; }
         }
         
         string IMigrationMetadata.Source

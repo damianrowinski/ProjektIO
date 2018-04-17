@@ -25,8 +25,7 @@ namespace ProjektIO
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css",
-                      "~/Content/for_index.css"));
+                      "~/Content/site.css"));
         }
     }
 }
