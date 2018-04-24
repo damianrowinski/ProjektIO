@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    @Styles.Render("~/Content/css")
+    <title>Strona główna - zarządzanie</title>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <div class="row align-items-center">
+                <div class="col col-12 col-sm-9">
+                    <h1 class="text-center">Katalog kół naukowych</h1>
+                </div>
+                <div class="col col-12 col-sm-3">
+                    <div class="row" style="margin-top: 20px;">
+                        <div class="col col-sd-4 offset-sd-6">
+                            <a href="@Url.Action("Login", "User")" class="btn btn-primary float-right btn-block">Zaloguj się</a>
+                        </div>
+                    </div>
+
+                    <div class="line-10"></div>
+
+                    <div class="row align-items-center">
+                        <div class="col"><button class="btn  float-right  btn-block btn-block">Zarejestruj się</button></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="line-15"></div>
+
+        <div class="row">
+            <div class="col col-12 col-sm-2">
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col col-sd-4 offset-sd-6"><button class="btn float-right btn-block">Współpraca</button></div>
+                </div>
+
+                <div class="line-10"></div>
+
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col col-sd-4 offset-sd-6"><button class="btn float-right btn-block">Kategorie kół</button></div>
+                </div>
+
+                <div class="line-10"></div>
+
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col col-sd-4 offset-sd-6"><button class="btn float-right btn-block">Regulamin</button></div>
+                </div>
+
+                <div class="line-10"></div>
+
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col col-sd-4 offset-sd-6"><button class="btn float-right btn-block">Kontakt</button></div>
+                </div>
+
+                <div class="line-10"></div>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col col-sd-4 offset-sd-6"><button class="btn float-right btn-block">Aktualności</button></div>
+                </div>
+
+                <div class="line-10"></div>
+
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col col-sd-4 offset-sd-6"><button class="btn float-right btn-block">O stronie</button></div>
+                </div>
+
+                <div class="line-10"></div>
+
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col col-sd-4 offset-sd-6"><button class="btn float-right btn-block">Aplikacja</button></div>
+                </div>
+
+            </div>
+
+            <div class="col col-12 col-sm-7">
+                @RenderBody()
+            </div>
+            <div class="col col-12 col-sm-3">
+                <img src="@Url.Content("~/Content/Images/logo_prz.png")">
+            </div>
+        </div>
+
+    </div>
+    
+    @Scripts.Render("~/Content/js")
+</body>
+</html>
