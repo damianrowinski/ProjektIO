@@ -159,7 +159,7 @@ namespace ProjektIO.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new Uzytkownik();
+                Uzytkownik user = new Uzytkownik();
                 user.Login = model.Login;
                 user.Salt = StringLibrary.RandomString(6);
                 user.Haslo = StringLibrary.CreateMD5(model.Password + StringLibrary.CreateMD5(user.Salt));

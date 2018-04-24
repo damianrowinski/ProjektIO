@@ -11,7 +11,7 @@ namespace ProjektIO.Controllers
 {
     public class UserController : Controller
     {
-        // GET: User
+        
         public ActionResult Login()
         {
             return View();
@@ -41,12 +41,58 @@ namespace ProjektIO.Controllers
                 return RedirectToAction("Index", "Home");
 
             }
-
             else
             {
                 ModelState.AddModelError("", "Podano niepoprawne dane");
                 return View(model);
             }
+        }
+
+        [AllowAnonymous]
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        public ActionResult Register(Models.Account.RegisterViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            using (var db = new Models.DatabaseContext())
+            {
+
+                if (db.Uzytkownik.Any(t => t.Login == model.Login))
+                {
+                    ModelState.AddModelError("", $"Użytkownik o nazwie \"{model.Login}\" istnieje już w bazie danych.");
+                    return View(model);
+                }
+
+                Uzytkownik user = new Uzytkownik();
+                user.Login = model.Login;
+                user.Salt = StringLibrary.RandomString(6);
+                user.Haslo = StringLibrary.CreateMD5(model.Password + StringLibrary.CreateMD5(user.Salt));
+
+                user.DataUtworzenia = DateTime.Now;
+                user.DataModyfikacji = DateTime.Now;
+                user.IDP = 1;
+                user.Rola = 0;
+
+                db.Uzytkownik.Add(user);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Login", "User");
+        }
+
+        public ActionResult LogOff()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

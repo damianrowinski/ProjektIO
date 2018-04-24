@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+
+<!DOCTYPE html>
 <html lang="pl">
 <head>
     <!-- Required meta tags -->
@@ -18,17 +20,30 @@
                     <h1 class="text-center">Katalog kół naukowych</h1>
                 </div>
                 <div class="col col-12 col-sm-3">
-                    <div class="row" style="margin-top: 20px;">
-                        <div class="col col-sd-4 offset-sd-6">
-                            <a href="@Url.Action("Login", "User")" class="btn btn-primary float-right btn-block">Zaloguj się</a>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <div>
+                            Witaj, @User.Identity.GetUserName()!<br />
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col col-sd-4 offset-sd-6">
+                                    <a href="@Url.Action("LogOff", "User")" class="btn btn-primary float-right btn-block">Wyloguj    się</a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="line-10"></div>
-
-                    <div class="row align-items-center">
-                        <div class="col"><button class="btn  float-right  btn-block btn-block">Zarejestruj się</button></div>
-                    </div>
+                    }
+                    else
+                    {
+                        <div class="row" style="margin-top: 20px;">
+                            <div class="col col-sd-4 offset-sd-6">
+                                <a href="@Url.Action("Login", "User")" class="btn btn-primary float-right btn-block">Zaloguj się</a>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 20px;">
+                            <div class="col col-sd-4 offset-sd-6">
+                                <a href="@Url.Action("Register", "User")" class="btn btn-primary float-right btn-block">Zarejestruj się</a>
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
