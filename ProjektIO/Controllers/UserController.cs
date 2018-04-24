@@ -11,6 +11,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.Data;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace ProjektIO.Controllers
 {
@@ -65,9 +66,16 @@ namespace ProjektIO.Controllers
         {
             string response = Request.QueryString["response"];
             byte[] data = Convert.FromBase64String(response.Replace(' ', '+'));
-            string decodedString = Encoding.UTF8.GetString(data);
+            string decodedString = Regex.Replace(Encoding.UTF8.GetString(data), @"\t|\n|\r", "");
 
-            return Content(decodedString);
+            
+
+            XmlSerializer ser = new XmlSerializer(typeof(Models.Account.casServiceResponse));
+            Models.Account.casServiceResponse casResponse = (Models.Account.casServiceResponse)ser.Deserialize(new StringReader(decodedString));
+
+           
+
+            return Content(HttpUtility.HtmlEncode(decodedString));
         }
 
         [AllowAnonymous]

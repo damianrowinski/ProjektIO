@@ -36,6 +36,7 @@ namespace ProjektIO.Models
         public int IDP { get; set; }
         public string Salt { get; set; }
         public int Rola { get; set; }
+        public int UsosId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Wiadomosc> Wiadomosc { get; set; }

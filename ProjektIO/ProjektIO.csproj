@@ -197,13 +197,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Libraries\DynamicXml.cs" />
     <Compile Include="Libraries\StringLibrary.cs" />
     <Compile Include="Migrations\201804170910293_InitialMigration.cs" />
     <Compile Include="Migrations\201804170910293_InitialMigration.Designer.cs">
       <DependentUpon>201804170910293_InitialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804241918329_AddedUsosId.cs" />
+    <Compile Include="Migrations\201804241918329_AddedUsosId.Designer.cs">
+      <DependentUpon>201804241918329_AddedUsosId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Account\CasResponseModel.cs" />
     <Compile Include="Models\Account\LoginViewModel.cs" />
     <Compile Include="Models\Account\RegisterViewModel.cs" />
     <Compile Include="Models\Czlonkowie.cs">
@@ -334,6 +340,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201804170910293_InitialMigration.resx">
       <DependentUpon>201804170910293_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804241918329_AddedUsosId.resx">
+      <DependentUpon>201804241918329_AddedUsosId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

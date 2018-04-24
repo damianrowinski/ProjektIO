@@ -175,6 +175,7 @@
           <NavigationProperty Name="Wiadomosc1" Relationship="Model.WiadomoscOdbiera" FromRole="Uzytkownik" ToRole="Wiadomosc" />
           <NavigationProperty Name="Uczestnictwo" Relationship="Model.UczestnictwoUzytkownik" FromRole="Uzytkownik" ToRole="Uczestnictwo" />
           <NavigationProperty Name="Czlonkowie" Relationship="Model.UzytkownikCzlonkowie" FromRole="Uzytkownik" ToRole="Czlonkowie" />
+          <Property Name="UsosId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Event">
           <Key>
