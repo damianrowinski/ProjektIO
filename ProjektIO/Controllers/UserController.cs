@@ -6,6 +6,11 @@ using System.Web.Mvc;
 using System.Web.Security;
 using ProjektIO.Libraries;
 using ProjektIO.Models;
+using System.Text;
+using System.Xml;
+using System.Xml.Serialization;
+using System.Data;
+using System.IO;
 
 namespace ProjektIO.Controllers
 {
@@ -46,6 +51,23 @@ namespace ProjektIO.Controllers
                 ModelState.AddModelError("", "Podano niepoprawne dane");
                 return View(model);
             }
+        }
+
+        public ActionResult LoginCAS()
+        {
+            string proxyKey = "05e9d57c-f2d2-4e6d-889a-b99bbf983570";
+            string proxyRedirect = "http://localhost:50860/User/CASResponse/";
+            string proxyUrl = HttpUtility.UrlEncode($"http://www.mpenar.kia.prz.edu.pl/casproxy.php?redirect={proxyRedirect}&key={proxyKey}");
+            return Redirect($"https://cas.prz.edu.pl/cas-server/login?service={proxyUrl}");
+        }
+
+        public ActionResult CASResponse()
+        {
+            string response = Request.QueryString["response"];
+            byte[] data = Convert.FromBase64String(response.Replace(' ', '+'));
+            string decodedString = Encoding.UTF8.GetString(data);
+
+            return Content(decodedString);
         }
 
         [AllowAnonymous]
