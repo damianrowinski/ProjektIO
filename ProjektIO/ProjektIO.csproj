@@ -189,6 +189,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Auth\Principal.cs" />
     <Compile Include="Auth\Repository.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -197,7 +198,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Libraries\DynamicXml.cs" />
     <Compile Include="Libraries\StringLibrary.cs" />
     <Compile Include="Migrations\201804170910293_InitialMigration.cs" />
     <Compile Include="Migrations\201804170910293_InitialMigration.Designer.cs">

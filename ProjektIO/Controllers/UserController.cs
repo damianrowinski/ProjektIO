@@ -122,20 +122,25 @@ namespace ProjektIO.Controllers
 
                     FormsAuthentication.SetAuthCookie(user.Login, false);
 
-                    var authTicket = new FormsAuthenticationTicket(1, user.Login, DateTime.Now, DateTime.Now.AddMinutes(20), false, "");
+                    Auth.Repository.LogIn(HttpContext.Response, user);
+
+                    /*var authTicket = new FormsAuthenticationTicket(1, user.Login, DateTime.Now, DateTime.Now.AddMinutes(20), false, "");
                     string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
                     var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
-                    HttpContext.Response.Cookies.Add(authCookie);
+                    HttpContext.Response.Cookies.Add(authCookie);*/
                     return RedirectToAction("Index", "Home");
+
+                    
                 }
                 else
                 {
-                    FormsAuthentication.SetAuthCookie(searchUser.Login, false);
+                    /*FormsAuthentication.SetAuthCookie(searchUser.Login, false);
 
                     var authTicket = new FormsAuthenticationTicket(1, searchUser.Login, DateTime.Now, DateTime.Now.AddMinutes(20), false, "");
                     string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
                     var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
-                    HttpContext.Response.Cookies.Add(authCookie);
+                    HttpContext.Response.Cookies.Add(authCookie);*/
+                    Auth.Repository.LogIn(HttpContext.Response, searchUser);
                     return RedirectToAction("Index", "Home");
                 }
             }

@@ -23,7 +23,7 @@
                     @if (Request.IsAuthenticated)
                     {
                         <div>
-                            Witaj, @User.Identity.GetUserName()!<br />
+                            Witaj, @User.Identity.GetUserName() (@User.Identity.GetUserId())!<br />
                             <div class="row" style="margin-top: 20px;">
                                 <div class="col col-sd-4 offset-sd-6">
                                     <a href="@Url.Action("LogOff", "User")" class="btn btn-primary float-right btn-block">Wyloguj    się</a>
