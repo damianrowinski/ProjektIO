@@ -2,6 +2,9 @@
 
 using ProjektIO.Models;
 using ProjektIO.Libraries;
+using System.Web.Security;
+using System;
+using System.Web;
 
 namespace ProjektIO.Auth
 {
@@ -24,6 +27,15 @@ namespace ProjektIO.Auth
             }
         }
 
+        public static void LogIn(HttpResponseBase responseBase, Uzytkownik user)
+        {
+            FormsAuthentication.SetAuthCookie(user.Login, false);
+
+            var authTicket = new FormsAuthenticationTicket(1, user.Login, DateTime.Now, DateTime.Now.AddMinutes(20), false, "");
+            string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
+            var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+            responseBase.Cookies.Add(authCookie);
+        }
         
     }
 }
