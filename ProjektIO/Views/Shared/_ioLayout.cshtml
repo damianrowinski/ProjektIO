@@ -12,7 +12,6 @@
     <title>Strona główna - zarządzanie</title>
 </head>
 <body>
-<<<<<<< HEAD
     <nav class="navbar navbar-dark bg-dark">
         <a class="navbar-brand" href="/">
             <img src="http://via.placeholder.com/240x40/7f7f7f/ffffff?text=LOGO GOES HERE" />
@@ -22,46 +21,6 @@
             <div>
                 Witaj, @User.Identity.GetUserName() (@User.Identity.GetUserId())!&emsp;
                 <a href="@Url.Action("LogOff", "User")" class="btn btn-primary">Wyloguj się</a>
-=======
-
-    <div class="container">
-        <div class="header">
-            <div class="row align-items-center">
-                <div class="col col-12 col-sm-9">
-                    <h1 class="text-center">Katalog kół naukowych</h1>
-                </div>
-                <div class="col col-12 col-sm-3">
-                    @if (Request.IsAuthenticated)
-                    {
-                        <div>
-                            Witaj, @User.Identity.GetUserName() (@User.Identity.GetUserId())!<br />
-                            <div class="row" style="margin-top: 20px;">
-                                <div class="col col-sd-4 offset-sd-6">
-                                    <a href="@Url.Action("LogOff", "User")" class="btn btn-primary float-right btn-block">Wyloguj    się</a>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="row" style="margin-top: 20px;">
-                            <div class="col col-sd-4 offset-sd-6">
-                                <a href="@Url.Action("Login", "User")" class="btn btn-primary float-right btn-block">Zaloguj się</a>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top: 20px;">
-                            <div class="col col-sd-4 offset-sd-6">
-                                <a href="@Url.Action("LoginCAS", "User")" class="btn btn-primary float-right btn-block">Zaloguj się (via CAS)</a>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top: 20px;">
-                            <div class="col col-sd-4 offset-sd-6">
-                                <a href="@Url.Action("Register", "User")" class="btn btn-primary float-right btn-block">Zarejestruj się</a>
-                            </div>
-                        </div>
-                    }
-                </div>
->>>>>>> 126dd0f89e742c6be46fb99dd7c2a354d7fe3d14
             </div>
         }
         else
