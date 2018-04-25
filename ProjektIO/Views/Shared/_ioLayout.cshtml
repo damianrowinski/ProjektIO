@@ -12,102 +12,80 @@
     <title>Strona główna - zarządzanie</title>
 </head>
 <body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="/">
+            <img src="http://via.placeholder.com/240x40/7f7f7f/ffffff?text=LOGO GOES HERE" />
+        </a>
+        @if (Request.IsAuthenticated)
+        {
+            <div>
+                Witaj, @User.Identity.GetUserName()!&emsp;
+                <a href="@Url.Action("LogOff", "User")" class="btn btn-primary">Wyloguj się</a>
+            </div>
+        }
+        else
+        {
+            <div class="btn-group" role="group">
+                <a href="@Url.Action("Login", "User")" class="btn btn-primary">Zaloguj się</a>
+                <a href="@Url.Action("LoginCAS", "User")" class="btn btn-primary">Zaloguj się (via CAS)</a>
+                <a href="@Url.Action("Register", "User")" class="btn btn-primary">Zarejestruj się</a>
+            </div>
+        }
+    </nav>
 
     <div class="container">
-        <div class="header">
-            <div class="row align-items-center">
-                <div class="col col-12 col-sm-9">
-                    <h1 class="text-center">Katalog kół naukowych</h1>
-                </div>
-                <div class="col col-12 col-sm-3">
-                    @if (Request.IsAuthenticated)
-                    {
-                        <div>
-                            Witaj, @User.Identity.GetUserName()!<br />
-                            <div class="row" style="margin-top: 20px;">
-                                <div class="col col-sd-4 offset-sd-6">
-                                    <a href="@Url.Action("LogOff", "User")" class="btn btn-primary float-right btn-block">Wyloguj    się</a>
-                                </div>
-                            </div>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="row" style="margin-top: 20px;">
-                            <div class="col col-sd-4 offset-sd-6">
-                                <a href="@Url.Action("Login", "User")" class="btn btn-primary float-right btn-block">Zaloguj się</a>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top: 20px;">
-                            <div class="col col-sd-4 offset-sd-6">
-                                <a href="@Url.Action("LoginCAS", "User")" class="btn btn-primary float-right btn-block">Zaloguj się (via CAS)</a>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top: 20px;">
-                            <div class="col col-sd-4 offset-sd-6">
-                                <a href="@Url.Action("Register", "User")" class="btn btn-primary float-right btn-block">Zarejestruj się</a>
-                            </div>
-                        </div>
-                    }
-                </div>
-            </div>
-        </div>
-
         <div class="line-15"></div>
 
         <div class="row">
             <div class="col col-12 col-sm-2">
                 <div class="row" style="margin-top: 20px;">
-                    <div class="col col-sd-4 offset-sd-6"><button class="btn float-right btn-block">Współpraca</button></div>
+                    <div class="col col-sd-4 offset-sd-6"><button class="btn btn-primary btn-block">Współpraca</button></div>
                 </div>
 
                 <div class="line-10"></div>
 
                 <div class="row" style="margin-top: 20px;">
-                    <div class="col col-sd-4 offset-sd-6"><button class="btn float-right btn-block">Kategorie kół</button></div>
+                    <div class="col col-sd-4 offset-sd-6"><button class="btn btn-primary btn-block">Kategorie kół</button></div>
                 </div>
 
                 <div class="line-10"></div>
 
                 <div class="row" style="margin-top: 20px;">
-                    <div class="col col-sd-4 offset-sd-6"><button class="btn float-right btn-block">Regulamin</button></div>
+                    <div class="col col-sd-4 offset-sd-6"><button class="btn btn-primary btn-block">Regulamin</button></div>
                 </div>
 
                 <div class="line-10"></div>
 
                 <div class="row" style="margin-top: 20px;">
-                    <div class="col col-sd-4 offset-sd-6"><button class="btn float-right btn-block">Kontakt</button></div>
+                    <div class="col col-sd-4 offset-sd-6"><button class="btn btn-primary btn-block">Kontakt</button></div>
                 </div>
 
                 <div class="line-10"></div>
                 <div class="row" style="margin-top: 20px;">
-                    <div class="col col-sd-4 offset-sd-6"><button class="btn float-right btn-block">Aktualności</button></div>
-                </div>
-
-                <div class="line-10"></div>
-
-                <div class="row" style="margin-top: 20px;">
-                    <div class="col col-sd-4 offset-sd-6"><button class="btn float-right btn-block">O stronie</button></div>
+                    <div class="col col-sd-4 offset-sd-6"><button class="btn btn-primary btn-block">Aktualności</button></div>
                 </div>
 
                 <div class="line-10"></div>
 
                 <div class="row" style="margin-top: 20px;">
-                    <div class="col col-sd-4 offset-sd-6"><button class="btn float-right btn-block">Aplikacja</button></div>
+                    <div class="col col-sd-4 offset-sd-6"><button class="btn btn-primary btn-block">O stronie</button></div>
+                </div>
+
+                <div class="line-10"></div>
+
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col col-sd-4 offset-sd-6"><button class="btn btn-primary btn-block">Aplikacja</button></div>
                 </div>
 
             </div>
 
-            <div class="col col-12 col-sm-7">
+            <div class="col col-12 col-sm-10 text-justify">
                 @RenderBody()
-            </div>
-            <div class="col col-12 col-sm-3">
-                <img src="@Url.Content("~/Content/Images/logo_prz.png")">
             </div>
         </div>
 
     </div>
-    
+
     @Scripts.Render("~/Content/js")
 </body>
 </html>
