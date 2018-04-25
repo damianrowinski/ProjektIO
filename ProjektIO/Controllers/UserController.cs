@@ -54,6 +54,7 @@ namespace ProjektIO.Controllers
             }
         }
 
+        [AllowAnonymous]
         public ActionResult LoginCAS()
         {
             string proxyKey = "05e9d57c-f2d2-4e6d-889a-b99bbf983570";
@@ -62,45 +63,87 @@ namespace ProjektIO.Controllers
             return Redirect($"https://cas.prz.edu.pl/cas-server/login?service={proxyUrl}");
         }
 
+        [AllowAnonymous]
         public ActionResult CASResponse()
         {
             string response = Request.QueryString["response"];
             byte[] data = Convert.FromBase64String(response.Replace(' ', '+'));
             string decodedString = Regex.Replace(Encoding.UTF8.GetString(data), @"\t|\n|\r|:", "");
 
-            StringBuilder output = new StringBuilder();
-            // Create an XmlReader
+            string casUser, casUid, casMail, casName, casLastname;
+            int casUsosId;
+   
+
             using (XmlReader reader = XmlReader.Create(new StringReader(decodedString)))
             {
                 reader.ReadToFollowing("casuser");
-                output.AppendLine($"Użytkownik: {reader.ReadElementContentAsString()}<br />");
+                casUser = reader.ReadElementContentAsString();
                 reader.ReadToFollowing("casuid");
-                output.AppendLine($"CAS UID: {reader.ReadElementContentAsString()}<br />");
+                casUid = reader.ReadElementContentAsString();
                 reader.ReadToFollowing("casmail");
-                output.AppendLine($"CAS MAIL: {reader.ReadElementContentAsString()}<br />");
+                casMail = reader.ReadElementContentAsString();
                 reader.ReadToFollowing("casusos_id");
-                output.AppendLine($"USOS ID: {reader.ReadElementContentAsString()}<br />");
-                reader.ReadToFollowing("casemployeetype");
-                output.AppendLine($"Employee Type: {reader.ReadElementContentAsString()}<br />");
-                reader.ReadToFollowing("casregisteredaddress");
-                output.AppendLine($"REGISTERED ADDRESS: {reader.ReadElementContentAsString()}<br />");
-                reader.ReadToFollowing("casdepartmentnumber");
-                output.AppendLine($"Department Number: {reader.ReadElementContentAsString()}<br />");
+                casUsosId = StringLibrary.GetNumberFromString(reader.ReadElementContentAsString());
+                // reader.ReadToFollowing("casemployeetype");
+                // output.AppendLine($"Employee Type: {reader.ReadElementContentAsString()}<br />");
+                // reader.ReadToFollowing("casregisteredaddress");
+                
+                // reader.ReadToFollowing("casdepartmentnumber");
+                // output.AppendLine($"Department Number: {reader.ReadElementContentAsString()}<br />");
                 reader.ReadToFollowing("casgivenname");
-                output.AppendLine($"Imię: {reader.ReadElementContentAsString()}<br />");
+                casName = reader.ReadElementContentAsString();
+                // output.AppendLine($"Imię: {reader.ReadElementContentAsString()}<br />");
                 reader.ReadToFollowing("cassn");
-                output.AppendLine($"Nazwisko: {reader.ReadElementContentAsString()}<br />");
+                casLastname = reader.ReadElementContentAsString();
+                // output.AppendLine($"Nazwisko: {reader.ReadElementContentAsString()}<br />");
             }
-            return Content(output.ToString());
 
+            using (var db = new DatabaseContext())
+            {
+                var searchUser = db.Uzytkownik.FirstOrDefault(t => t.UsosId == casUsosId);
+                if (searchUser == default(Uzytkownik))
+                {
+                    Uzytkownik user = new Uzytkownik();
+                    user.Login = casUser;
+                    user.Salt = null;
+                    user.Haslo = null;
+                    user.UsosId = casUsosId;
+                    user.Email = casMail;
+                    user.Imie = casName;
+                    user.Nazwisko = casLastname;
 
+                    user.DataUtworzenia = DateTime.Now;
+                    user.DataModyfikacji = DateTime.Now;
+                    user.IDP = 2;
+                    user.Rola = 0;
 
+                    db.Uzytkownik.Add(user);
+                    db.SaveChanges();
+
+                    FormsAuthentication.SetAuthCookie(user.Login, false);
+
+                    var authTicket = new FormsAuthenticationTicket(1, user.Login, DateTime.Now, DateTime.Now.AddMinutes(20), false, "");
+                    string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
+                    var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+                    HttpContext.Response.Cookies.Add(authCookie);
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    FormsAuthentication.SetAuthCookie(searchUser.Login, false);
+
+                    var authTicket = new FormsAuthenticationTicket(1, searchUser.Login, DateTime.Now, DateTime.Now.AddMinutes(20), false, "");
+                    string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
+                    var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+                    HttpContext.Response.Cookies.Add(authCookie);
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+
+           
+            
             /*XmlSerializer ser = new XmlSerializer(typeof(Models.Account.casServiceResponse));
             Models.Account.casServiceResponse casResponse = (Models.Account.casServiceResponse)ser.Deserialize(new StringReader(decodedString));*/
-
-
-
-            return Content(HttpUtility.HtmlEncode(decodedString));
         }
 
         [AllowAnonymous]
@@ -119,7 +162,7 @@ namespace ProjektIO.Controllers
                 return View(model);
             }
 
-            using (var db = new Models.DatabaseContext())
+            using (var db = new DatabaseContext())
             {
 
                 if (db.Uzytkownik.Any(t => t.Login == model.Login))

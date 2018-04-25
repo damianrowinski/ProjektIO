@@ -33,5 +33,12 @@ namespace ProjektIO.Libraries
                 return sb.ToString();
             }
         }
+
+        public static int GetNumberFromString(string text)
+        {
+            int Result = 0;
+            if (Int32.TryParse(text, out Result)) return Result;
+            else return -65535;
+        }
     }
 }
