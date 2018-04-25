@@ -66,14 +66,39 @@ namespace ProjektIO.Controllers
         {
             string response = Request.QueryString["response"];
             byte[] data = Convert.FromBase64String(response.Replace(' ', '+'));
-            string decodedString = Regex.Replace(Encoding.UTF8.GetString(data), @"\t|\n|\r", "");
+            string decodedString = Regex.Replace(Encoding.UTF8.GetString(data), @"\t|\n|\r|:", "");
 
-            
+            StringBuilder output = new StringBuilder();
+            // Create an XmlReader
+            using (XmlReader reader = XmlReader.Create(new StringReader(decodedString)))
+            {
+                reader.ReadToFollowing("casuser");
+                output.AppendLine($"Użytkownik: {reader.ReadElementContentAsString()}<br />");
+                reader.ReadToFollowing("casuid");
+                output.AppendLine($"CAS UID: {reader.ReadElementContentAsString()}<br />");
+                reader.ReadToFollowing("casmail");
+                output.AppendLine($"CAS MAIL: {reader.ReadElementContentAsString()}<br />");
+                reader.ReadToFollowing("casusos_id");
+                output.AppendLine($"USOS ID: {reader.ReadElementContentAsString()}<br />");
+                reader.ReadToFollowing("casemployeetype");
+                output.AppendLine($"Employee Type: {reader.ReadElementContentAsString()}<br />");
+                reader.ReadToFollowing("casregisteredaddress");
+                output.AppendLine($"REGISTERED ADDRESS: {reader.ReadElementContentAsString()}<br />");
+                reader.ReadToFollowing("casdepartmentnumber");
+                output.AppendLine($"Department Number: {reader.ReadElementContentAsString()}<br />");
+                reader.ReadToFollowing("casgivenname");
+                output.AppendLine($"Imię: {reader.ReadElementContentAsString()}<br />");
+                reader.ReadToFollowing("cassn");
+                output.AppendLine($"Nazwisko: {reader.ReadElementContentAsString()}<br />");
+            }
+            return Content(output.ToString());
 
-            XmlSerializer ser = new XmlSerializer(typeof(Models.Account.casServiceResponse));
-            Models.Account.casServiceResponse casResponse = (Models.Account.casServiceResponse)ser.Deserialize(new StringReader(decodedString));
 
-           
+
+            /*XmlSerializer ser = new XmlSerializer(typeof(Models.Account.casServiceResponse));
+            Models.Account.casServiceResponse casResponse = (Models.Account.casServiceResponse)ser.Deserialize(new StringReader(decodedString));*/
+
+
 
             return Content(HttpUtility.HtmlEncode(decodedString));
         }
