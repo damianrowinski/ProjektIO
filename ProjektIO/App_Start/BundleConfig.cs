@@ -16,7 +16,7 @@ namespace ProjektIO
             bundles.Add(new StyleBundle("~/Content/js").Include(
                      "~/Scripts/jquery.js",
                      "~/Scripts/popper.js",
-                     "~/Scripts/boostrap.js"));
+                     "~/Scripts/bootstrap.js"));
         }
     }
 }
