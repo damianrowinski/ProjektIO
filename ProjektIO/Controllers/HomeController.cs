@@ -13,6 +13,27 @@ namespace ProjektIO.Controllers
             return View();
         }
 
+        public ActionResult Statute()
+        {
+            return View();
+        }
+        public ActionResult News()
+        {
+            return View();
+        }
+        public ActionResult ContactToGroups()
+        {
+            return View();
+        }
+        public ActionResult Group()
+        {
+            return View("~/Views/Group/Group.cshtml");
+        }
+        public ActionResult GroupList()
+        {
+            return View("~/Views/Group/GroupList.cshtml");
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
