@@ -332,6 +332,12 @@
     <Content Include="Views\Shared\_ioLayout.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\Group\Group.cshtml" />
+    <Content Include="Views\Group\GroupList.cshtml" />
+    <Content Include="Views\Group\GroupNav.cshtml" />
+    <Content Include="Views\Home\ContactToGroups.cshtml" />
+    <Content Include="Views\Home\News.cshtml" />
+    <Content Include="Views\Home\Statute.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

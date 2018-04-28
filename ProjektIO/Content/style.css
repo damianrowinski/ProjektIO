@@ -1,20 +1,22 @@
-﻿body {
-    background-color: #c4c4c4;
+﻿html, body {
+    height: 100%;
+}
+
+body {
+    position: relative;
+    background-color: #47423f;
+    color: white;
+    margin-bottom: 140px;
+}
+
+.card {
+    color: #413d3a;
+    background-color: #ef8d02;
 }
 
 .header {
-    margin-top: 20px;
     min-height: 180px;
-}
-
-.btn-primary {
-    background-color: #ff7f26;
-    border-color: #ff7f26;
-}
-
-.bg-dark {
-    background-color: #7f7f7f !important;
-    color: #ffffff;
+    background-color: #bc6f01;
 }
 
 .line-10 {
@@ -23,4 +25,51 @@
 
 .line-15 {
     height: 15px;
+}
+/* navbar */
+.btn-separator {
+    margin-right: 10px;
+}
+
+.navbar {
+    background-color: #ef8d02;
+}
+
+.btn-primary {
+    background-color: #ef8d02;
+    border: 0;
+}
+
+    .btn-primary:hover {
+        background-color: #bc6f01;
+        border: 0;
+    }
+
+    .btn-primary:focus, .btn-primary.focus {
+        box-shadow: none;
+    }
+
+    .btn-primary.disabled, .btn-primary:disabled {
+        background-color: #ef8d02;
+        border: 0;
+    }
+
+    .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active,
+    .show > .btn-primary.dropdown-toggle {
+        background-color: #bc6f01;
+        border: 0;
+    }
+
+        .btn-primary:not(:disabled):not(.disabled):active:focus, .btn-primary:not(:disabled):not(.disabled).active:focus,
+        .show > .btn-primary.dropdown-toggle:focus {
+            box-shadow: none;
+        }
+
+/* footer */
+.footer {
+    color: white;
+    background-color: #413d3a;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }

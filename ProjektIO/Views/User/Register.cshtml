@@ -1,14 +1,14 @@
 ﻿@using ProjektIO.Models.Account
 @model RegisterViewModel
-
 @{
     ViewBag.Title = "Register";
 }
-
 @using (Html.BeginForm("Register", "User", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Utwórz nowe konto</h4>
+    <p>
+        <h1>Utwórz nowe konto</h1>
+    </p>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
@@ -31,7 +31,7 @@
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Zarejestruj" />
+            <input type="submit" class="btn btn-warning" value="Zarejestruj" />
         </div>
     </div>
 }

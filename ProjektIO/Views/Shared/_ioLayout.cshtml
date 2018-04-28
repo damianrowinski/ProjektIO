@@ -6,86 +6,144 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
     @Styles.Render("~/Content/css")
+    <!-- Ikony mediów społecznościowych -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <title>Strona główna - zarządzanie</title>
 </head>
 <body>
-    <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" href="/">
-            <img src="http://via.placeholder.com/240x40/7f7f7f/ffffff?text=LOGO GOES HERE" />
-        </a>
-        @if (Request.IsAuthenticated)
-        {
-            <div>
-                Witaj, @User.Identity.GetUserName() (@User.Identity.GetUserId())!&emsp;
-                <a href="@Url.Action("LogOff", "User")" class="btn btn-primary">Wyloguj się</a>
-            </div>
-        }
-        else
-        {
-            <div class="btn-group" role="group">
-                <a href="@Url.Action("Login", "User")" class="btn btn-primary">Zaloguj się</a>
-                <a href="@Url.Action("LoginCAS", "User")" class="btn btn-primary">Zaloguj się (via CAS)</a>
-                <a href="@Url.Action("Register", "User")" class="btn btn-primary">Zarejestruj się</a>
-            </div>
-        }
+
+    <!--  NAVBAR  -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="/">LOGO</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Współpraca</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Koła naukowe
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="@Url.Action("GroupList", "Home")">Studia artystyczne</a>
+                        <a class="dropdown-item" href="@Url.Action("GroupList", "Home")">Studia ekonomiczne</a>
+                        <a class="dropdown-item" href="@Url.Action("GroupList", "Home")">Studia filozoficzne</a>
+                        <a class="dropdown-item" href="@Url.Action("GroupList", "Home")">Hotelarstwo, turystyka i sport</a>
+                        <a class="dropdown-item" href="@Url.Action("GroupList", "Home")">Studia humanistyczne</a>
+                        <a class="dropdown-item" href="@Url.Action("GroupList", "Home")">Studia informatyczne</a>
+                        <a class="dropdown-item" href="@Url.Action("GroupList", "Home")">Transport i logistyka</a>
+                        <a class="dropdown-item" href="@Url.Action("GroupList", "Home")">Studia medyczne</a>
+                        <a class="dropdown-item" href="@Url.Action("GroupList", "Home")">Studia pedagogiczne</a>
+                        <a class="dropdown-item" href="@Url.Action("GroupList", "Home")">Studia prawnicze i administracyjne</a>
+                        <a class="dropdown-item" href="@Url.Action("GroupList", "Home")">Studia przyrodnicze</a>
+                        <a class="dropdown-item" href="@Url.Action("GroupList", "Home")">Studia społeczne</a>
+                        <a class="dropdown-item" href="@Url.Action("GroupList", "Home")">Stosunki międzynarodowe</a>
+                        <a class="dropdown-item" href="@Url.Action("GroupList", "Home")">Studia techniczne</a>
+                        <a class="dropdown-item" href="@Url.Action("GroupList", "Home")">Studia teologiczne</a>
+                        <a class="dropdown-item" href="@Url.Action("GroupList", "Home")">Zarządzanie i marketing</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("Statute", "Home")" class="nav-link">Regulamin</a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("ContactToGroups", "Home")" class="nav-link">Kontakt do kół</a>
+                </li>
+                <li class="nav-item">
+                    <a href="@Url.Action("News", "Home")" class="nav-link">Aktualności</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">O stronie</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">Aplikacja</a>
+                </li>
+
+            </ul>
+
+            <ul class="navbar-nav ml-auto">
+                @if (Request.IsAuthenticated)
+                {
+                    <li>
+                        Witaj, @User.Identity.GetUserName() (@User.Identity.GetUserId())!&emsp;
+                    </li>
+                    <li>
+                        <a href="@Url.Action("LogOff", "User")" class="btn btn-primary">Wyloguj się</a>
+                    </li>
+
+                }
+                else
+                {
+                    <li>
+                        <a href="@Url.Action("Login", "User")" class="btn btn-primary">Zaloguj się</a>
+                    </li>
+                    <li>
+                        <span class="btn-separator"></span>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("LoginCAS", "User")" class="btn btn-primary">Zaloguj się via CAS</a>
+                    </li>
+                    <li>
+                        <span class="btn-separator"></span>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Register", "User")" class="btn btn-primary">Zarejestruj się</a>
+                    </li>
+                }
+            </ul>
+        </div>
     </nav>
+    <!--  NAVBAR - koniec  -->
 
     <div class="container">
-        <div class="line-15"></div>
 
-        <div class="row">
-            <div class="col col-12 col-sm-2">
-                <div class="row" style="margin-top: 20px;">
-                    <div class="col col-sd-4 offset-sd-6"><button class="btn btn-primary btn-block">Współpraca</button></div>
-                </div>
-
-                <div class="line-10"></div>
-
-                <div class="row" style="margin-top: 20px;">
-                    <div class="col col-sd-4 offset-sd-6"><button class="btn btn-primary btn-block">Kategorie kół</button></div>
-                </div>
-
-                <div class="line-10"></div>
-
-                <div class="row" style="margin-top: 20px;">
-                    <div class="col col-sd-4 offset-sd-6"><button class="btn btn-primary btn-block">Regulamin</button></div>
-                </div>
-
-                <div class="line-10"></div>
-
-                <div class="row" style="margin-top: 20px;">
-                    <div class="col col-sd-4 offset-sd-6"><button class="btn btn-primary btn-block">Kontakt</button></div>
-                </div>
-
-                <div class="line-10"></div>
-                <div class="row" style="margin-top: 20px;">
-                    <div class="col col-sd-4 offset-sd-6"><button class="btn btn-primary btn-block">Aktualności</button></div>
-                </div>
-
-                <div class="line-10"></div>
-
-                <div class="row" style="margin-top: 20px;">
-                    <div class="col col-sd-4 offset-sd-6"><button class="btn btn-primary btn-block">O stronie</button></div>
-                </div>
-
-                <div class="line-10"></div>
-
-                <div class="row" style="margin-top: 20px;">
-                    <div class="col col-sd-4 offset-sd-6"><button class="btn btn-primary btn-block">Aplikacja</button></div>
-                </div>
-
-            </div>
-
-            <div class="col col-12 col-sm-10 text-justify">
-                @RenderBody()
-            </div>
+        <div class="col col-12 col-sm-12 text-justify">
+            @RenderBody()
         </div>
 
     </div>
 
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <!--  Stopka  -->
+    <footer class="footer">
+        <div class="row">
+            <div class="col-0 col-sm-0 col-md-1 col-lg-1 col-xl-1 "></div>
+            <div class="col col-sm col-md-4 col-lg-3 col-xl-3 ">
+                Bądźmy w kontakcie
+                <hr />
+                <div class="row">
+                    <div class="col-2"><a href="https://www.facebook.com/" class="fa fa-facebook-f" style="font-size:29px; line-height: 1.55; letter-spacing: 4px; text-align: right; background-color : #3b5998; color: white; height:36px;  width: 36px; border-radius: 2px;"></a></div>
+                    <div class="col-2"> <a href="https://twitter.com" class="fa fa-twitter" style="font-size:42px; color : #00aced;"></a></div>
+                    <div class="col-2"><a href="https://www.instagram.com" class="	fa fa-instagram mask " style="font-size:36px; width: 36px; text-align: center; border-radius: 9px; color: #fcfcfc; background: -moz-linear-gradient(top, #4c68d7 0%, #8a3ab9 13%, #bc2a8d 34%, #cd486b 62%, #e95950 72%, #fbad50 89%, #fccc63 100%); background: -webkit-linear-gradient(top, #4c68d7 0%,#8a3ab9 13%,#bc2a8d 34%,#cd486b 62%,#e95950 72%,#fbad50 89%,#fccc63 100%); background : linear-gradient(to bottom, #4c68d7 0%,#8a3ab9 13%,#bc2a8d 34%,#cd486b 62%,#e95950 72%,#fbad50 89%,#fccc63 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c68d7', endColorstr='#fccc63',GradientType=0 );"></a></div>
+                </div>
+            </div>
+            <div class="col">
+                Reklama
+                <hr />
+
+                <div class="col"></div>
+                <div class"row">
+                    <div class="col">
+                        <img src="~/Content/Images/REKLAMA.png" width="100%" height="100%" style="display: block; margin-left:-15px; margin-bottom: 10px;margin-top:-5px; max-width: 400px; max-height: 40px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--    Stopka - koniec    -->
+
     @Scripts.Render("~/Content/js")
+
 </body>
 </html>
