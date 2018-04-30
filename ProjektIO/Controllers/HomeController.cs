@@ -25,14 +25,7 @@ namespace ProjektIO.Controllers
         {
             return View();
         }
-        public ActionResult Group()
-        {
-            return View("~/Views/Group/Group.cshtml");
-        }
-        public ActionResult GroupList()
-        {
-            return View("~/Views/Group/GroupList.cshtml");
-        }
+        
 
         public ActionResult About()
         {

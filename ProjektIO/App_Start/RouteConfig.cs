@@ -18,6 +18,11 @@ namespace ProjektIO
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "Categories",
+                url: "{controller}/{action}/{id}/{page}"
+                );
         }
     }
 }
