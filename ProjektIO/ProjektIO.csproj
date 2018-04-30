@@ -338,8 +338,8 @@
     <Content Include="Views\Shared\_ioLayout.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\User\Register.cshtml" />
-    <Content Include="Views\Group\Group.cshtml" />
-    <Content Include="Views\Group\GroupList.cshtml" />
+    <Content Include="Views\Group\ShowGroup.cshtml" />
+    <Content Include="Views\Group\Categories.cshtml" />
     <Content Include="Views\Group\GroupNav.cshtml" />
     <Content Include="Views\Home\ContactToGroups.cshtml" />
     <Content Include="Views\Home\News.cshtml" />
