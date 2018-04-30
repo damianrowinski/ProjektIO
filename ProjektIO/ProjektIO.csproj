@@ -208,6 +208,10 @@
     <Compile Include="Migrations\201804241918329_AddedUsosId.Designer.cs">
       <DependentUpon>201804241918329_AddedUsosId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804301538308_CategoryProperty.cs" />
+    <Compile Include="Migrations\201804301538308_CategoryProperty.Designer.cs">
+      <DependentUpon>201804301538308_CategoryProperty.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Account\CasResponseModel.cs" />
@@ -225,6 +229,7 @@
     <Compile Include="Models\Event.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GroupsViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\KoloNaukowe.cs">
       <DependentUpon>Models.tt</DependentUpon>
@@ -350,6 +355,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804241918329_AddedUsosId.resx">
       <DependentUpon>201804241918329_AddedUsosId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804301538308_CategoryProperty.resx">
+      <DependentUpon>201804301538308_CategoryProperty.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

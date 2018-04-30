@@ -28,6 +28,7 @@ namespace ProjektIO.Models
         public int Uczelnia { get; set; }
         public bool Aktywny { get; set; }
         public System.DateTime DataDoUsuniecia { get; set; }
+        public int Kategoria { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Portfolio> Portfolio { get; private set; }
