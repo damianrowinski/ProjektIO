@@ -15,7 +15,7 @@ using System.Text.RegularExpressions;
 
 namespace ProjektIO.Controllers
 {
-    public class UserController : Controller
+    public class UserController : BaseController
     {
         
         public ActionResult Login()
@@ -38,18 +38,19 @@ namespace ProjektIO.Controllers
 
             if (user != null && user != default(Uzytkownik))
             {
-                FormsAuthentication.SetAuthCookie(model.Login, false);
+                /*FormsAuthentication.SetAuthCookie(model.Login, false);
 
-                var authTicket = new FormsAuthenticationTicket(1, user.Login, DateTime.Now, DateTime.Now.AddMinutes(20), false, "");
+                var authTicket = new FormsAuthenticationTicket(1, user.Login, DateTime.Now, DateTime.Now.AddMinutes(20), false, $"{user.Id}");
                 string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
                 var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
-                HttpContext.Response.Cookies.Add(authCookie);
+                HttpContext.Response.Cookies.Add(authCookie);*/
+                Auth.Repository.LogIn(HttpContext.Response, user);
                 return RedirectToAction("Index", "Home");
 
             }
             else
             {
-                ModelState.AddModelError("", "Podano niepoprawne dane");
+                ModelState.AddModelError("", "Podano niepoprawne dane.");
                 return View(model);
             }
         }

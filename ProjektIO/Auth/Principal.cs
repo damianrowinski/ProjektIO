@@ -7,7 +7,7 @@ namespace ProjektIO.Auth
     public class Principal : IPrincipal
     {
 
-        public Uzytkownik userData { get; set; }
+        private Uzytkownik userData { get; set; }
 
         public IIdentity Identity
         {
@@ -17,6 +17,21 @@ namespace ProjektIO.Auth
         public Principal(string username)
         {
             Identity = new GenericIdentity(username);
+            
+        }
+
+        public Principal(int userId)
+        {
+            using (var db = new DatabaseContext())
+            {
+                userData = db.Uzytkownik.FirstOrDefault(t => t.Id == userId);
+                Identity = new GenericIdentity(userData.Login);
+            }
+        }
+
+        public Uzytkownik GetUserData()
+        {
+            return userData;
         }
 
         public bool IsInRole(string role)

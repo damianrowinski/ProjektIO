@@ -71,7 +71,7 @@
                 @if (Request.IsAuthenticated)
                 {
                     <li>
-                        Witaj, @User.Identity.GetUserName() (@User.Identity.GetUserId())!&emsp;
+                        Witaj, @((User as ProjektIO.Auth.Principal).GetUserData().Login)!&emsp;
                     </li>
                     <li>
                         <a href="@Url.Action("LogOff", "User")" class="btn btn-primary">Wyloguj się</a>

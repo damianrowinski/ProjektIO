@@ -31,7 +31,7 @@ namespace ProjektIO.Auth
         {
             FormsAuthentication.SetAuthCookie(user.Login, false);
 
-            var authTicket = new FormsAuthenticationTicket(1, user.Login, DateTime.Now, DateTime.Now.AddMinutes(20), false, "");
+            var authTicket = new FormsAuthenticationTicket(1, user.Login, DateTime.Now, DateTime.Now.AddMinutes(20), false, $"{user.Id}");
             string encryptedTicket = FormsAuthentication.Encrypt(authTicket);
             var authCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
             responseBase.Cookies.Add(authCookie);

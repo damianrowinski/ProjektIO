@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
+
+using ProjektIO.Auth;
 
 namespace ProjektIO
 {
@@ -27,8 +30,14 @@ namespace ProjektIO
                 FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
                 if (authTicket != null && !authTicket.Expired)
                 {
-                    var roles = authTicket.UserData.Split(',');
-                    HttpContext.Current.User = new System.Security.Principal.GenericPrincipal(new FormsIdentity(authTicket), roles);
+                    int userId = Libraries.StringLibrary.GetNumberFromString(authTicket.UserData);
+                    Principal customPrincipal = new Principal(userId);
+                    HttpContext.Current.User = customPrincipal;
+                    // HttpContext.Current.User = new Principal(userId);
+                    
+                    // string[] roles = authTicket.UserData.Split(',');
+                    
+                    // HttpContext.Current.User = new System.Security.Principal.GenericPrincipal(new FormsIdentity(authTicket), roles);
                 }
             }
         }

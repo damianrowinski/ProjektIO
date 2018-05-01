@@ -7,7 +7,7 @@ using ProjektIO.Models;
 
 namespace ProjektIO.Controllers
 {
-    public class GroupController : Controller
+    public class GroupController : BaseController
     {
         int PageSize = 2;
         // GET: Group
