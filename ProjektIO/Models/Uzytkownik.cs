@@ -37,6 +37,7 @@ namespace ProjektIO.Models
         public string Salt { get; set; }
         public int Rola { get; set; }
         public int UsosId { get; set; }
+        public string NumerTelefonu { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Wiadomosc> Wiadomosc { get; set; }

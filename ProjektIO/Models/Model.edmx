@@ -66,6 +66,11 @@
             <End Role="Post" EntitySet="PostSet" />
             <End Role="Czlonkowie" EntitySet="CzlonkowieSet" />
           </AssociationSet>
+          <EntitySet Name="KategoriaSet" EntityType="Model.Kategoria" />
+          <AssociationSet Name="KategoriaKoloNaukowe" Association="Model.KategoriaKoloNaukowe">
+            <End Role="Kategoria" EntitySet="KategoriaSet" />
+            <End Role="KoloNaukowe" EntitySet="KoloNaukoweSet" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="KoloNaukowe">
           <Key>
@@ -80,6 +85,9 @@
           <NavigationProperty Name="Portfolio" Relationship="Model.KoloNaukowePortfolio" FromRole="KoloNaukowe" ToRole="Portfolio" cg:SetterAccess="Private" />
           <NavigationProperty Name="Czlonkowie" Relationship="Model.KoloNaukoweCzlonkowie" FromRole="KoloNaukowe" ToRole="Czlonkowie" cg:SetterAccess="Private" />
           <NavigationProperty Name="Post" Relationship="Model.PostKoloNaukowe" FromRole="KoloNaukowe" ToRole="Post" cg:SetterAccess="Private" />
+          <Property Name="Regulamin" Type="String" Nullable="false" />
+          <NavigationProperty Name="Kategoria" Relationship="Model.KategoriaKoloNaukowe" FromRole="KoloNaukowe" ToRole="Kategoria" />
+          <Property Name="KategoriaId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Portfolio">
           <Key>
@@ -176,6 +184,7 @@
           <NavigationProperty Name="Uczestnictwo" Relationship="Model.UczestnictwoUzytkownik" FromRole="Uzytkownik" ToRole="Uczestnictwo" />
           <NavigationProperty Name="Czlonkowie" Relationship="Model.UzytkownikCzlonkowie" FromRole="Uzytkownik" ToRole="Czlonkowie" />
           <Property Name="UsosId" Type="Int32" Nullable="false" />
+          <Property Name="NumerTelefonu" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Event">
           <Key>
@@ -320,6 +329,27 @@
             </Principal>
             <Dependent Role="Post">
               <PropertyRef Name="IdCzlonka" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Kategoria">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa" Type="String" Nullable="false" />
+          <Property Name="Skrot" Type="String" Nullable="false" />
+          <NavigationProperty Name="KoloNaukowe" Relationship="Model.KategoriaKoloNaukowe" FromRole="Kategoria" ToRole="KoloNaukowe" />
+        </EntityType>
+        <Association Name="KategoriaKoloNaukowe">
+          <End Type="Model.Kategoria" Role="Kategoria" Multiplicity="1" />
+          <End Type="Model.KoloNaukowe" Role="KoloNaukowe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kategoria">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="KoloNaukowe">
+              <PropertyRef Name="KategoriaId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

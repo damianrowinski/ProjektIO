@@ -23,6 +23,7 @@ namespace ProjektIO.Models
         public DbSet<Uczestnictwo> Uczestnictwo { get; set; }
         public DbSet<Uzytkownik> Uzytkownik { get; set; }
         public DbSet<Wiadomosc> Wiadomosc { get; set; }
+        public DbSet<Kategoria> Kategoria { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

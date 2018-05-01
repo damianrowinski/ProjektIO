@@ -25,6 +25,8 @@
         <AssociationConnector Association="Model.KomentarzPost" />
         <AssociationConnector Association="Model.KomentarzCzlonkowie" />
         <AssociationConnector Association="Model.PostCzlonkowie" />
+        <EntityTypeShape EntityType="Model.Kategoria" Width="1.5" PointX="8.875" PointY="8.5" />
+        <AssociationConnector Association="Model.KategoriaKoloNaukowe" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

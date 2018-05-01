@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using ProjektIO;
 
 namespace ProjektIO.Models
 {
-    public class GroupsViewModel
+    public class MembersViewModels
     {
-        public List<KoloNaukowe> Groups { get; set; }
+        public List<Czlonkowie> Members { get; set; }
         public int CurrentPage { get; set; }
         public int Pages { get; set; }
-        public int Category { get; set; }
+        public int GroupId { get; set; }
     }
 }

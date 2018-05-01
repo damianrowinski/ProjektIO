@@ -28,7 +28,8 @@ namespace ProjektIO.Models
         public int Uczelnia { get; set; }
         public bool Aktywny { get; set; }
         public System.DateTime DataDoUsuniecia { get; set; }
-        public int Kategoria { get; set; }
+        public string Regulamin { get; set; }
+        public int KategoriaId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Portfolio> Portfolio { get; private set; }
@@ -36,5 +37,6 @@ namespace ProjektIO.Models
         public virtual ICollection<Czlonkowie> Czlonkowie { get; private set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Post> Post { get; private set; }
+        public virtual Kategoria Kategoria { get; set; }
     }
 }
