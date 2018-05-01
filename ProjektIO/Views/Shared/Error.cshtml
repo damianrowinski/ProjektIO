@@ -2,24 +2,32 @@
 @{ ViewBag.Title = "Error";}
 
 <div class="alert alert-danger">
-    @switch (Model.Count())
+    @if (Model != null)
     {
-        case 0:
-            @: Coś poszło nie tak. Prosimy spróbować ponownie.
-            break;
-        case 1:
-            @Model.First();
-            break;
-        default:
-            @: Wykryto następujące błędy:
-            <ul>
-                @foreach (string error in Model)
-                {
-                    <li>@error</li>
-                }
-            </ul>
-            break;
+        switch (Model.Count())
+        {
+            case 0:
+                @: Coś poszło nie tak. Prosimy spróbować ponownie.
+                break;
+            case 1:
+                @Model.First();
+                break;
+            default:
+                @: Wykryto następujące błędy:
+                <ul>
+                    @foreach (string error in Model)
+                    {
+                        <li>@error</li>
+                    }
+                </ul>
+                break;
+        }
     }
+    else
+    {
+        @: Coś poszło nie tak. Prosimy spróbować ponownie.
+    }
+
 </div>
 @Html.ActionLink("OK", "Index", null, new { @class = "btn btn-default" })
 
