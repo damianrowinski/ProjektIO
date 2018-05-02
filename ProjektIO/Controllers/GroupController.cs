@@ -15,12 +15,16 @@ namespace ProjektIO.Controllers
         {
             using (var db = new DatabaseContext())
             {
+                MembersViewModels viewModel = new MembersViewModels();
                 KoloNaukowe group = db.KoloNaukowe.Find(id);
+
+                viewModel.Group = group;
+
                 if (group == null)
                 {
                     return View("Error", new string[] { "Takie koło nie istnieje" });
                 }
-                return View(group);
+                return View(viewModel);
             }
         }
 
@@ -110,6 +114,23 @@ namespace ProjektIO.Controllers
                 }
 
                 return View(portfolio);
+            }
+        }
+
+        public ActionResult ShowStatute(int id)
+        {
+            using (var db = new DatabaseContext())
+            {
+                MembersViewModels viewModel = new MembersViewModels();
+                KoloNaukowe group = db.KoloNaukowe.Find(id);
+
+                viewModel.Group = group;
+
+                if (group == null)
+                {
+                    return View("Error", new string[] { "Takie koło nie istnieje" });
+                }
+                return View(viewModel);
             }
         }
     }

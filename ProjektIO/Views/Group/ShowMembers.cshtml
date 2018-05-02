@@ -4,26 +4,40 @@
     ViewBag.Title = "ShowMembers";
 }
 
-<h1 style="padding-top: 1%; padding-bottom: 1%;">Członkowie koła to...</h1>
+<div class="header">
+    <div class="row align-items-center">
+        <div class="col col-12 col-sm-9">
+            <h1 class="text-center">@Model.Group.Nazwa</h1>
+        </div>
+        <img src="~/Content/Images/kolo.png" class="img-thumbnail rounded header-logo m-auto" style="position: relative; left: -25px; bottom: -10px;">
+    </div>
+    <div style="padding: 10px;"></div>
+    <div class="content">
+        @RenderPage("~/Views/Group/GroupNav.cshtml")
+    </div>
+</div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Imię</th>
-            <th scope="col">Nazwisko</th>
-            <th scope="col">Rola</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var member in Model.Members)
-        {
+
+<h1 style="padding-top: 1%; padding-bottom: 1%;">Członkowie koła</h1>
+
+    <table class="table table-striped">
+        <thead>
             <tr>
-                <th scope="row">@member.Id</th>
-                <td>@member.Uzytkownik.Imie</td>
-                <td>@member.Uzytkownik.Nazwisko</td>
-                <td>@member.Rola</td>
+                <th scope="col">#</th>
+                <th scope="col">Imię</th>
+                <th scope="col">Nazwisko</th>
+                <th scope="col">Rola</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var member in Model.Members)
+            {
+                <tr>
+                    <th scope="row">@member.Id</th>
+                    <td>@member.Uzytkownik.Imie</td>
+                    <td>@member.Uzytkownik.Nazwisko</td>
+                    <td>@member.Rola</td>
+                </tr>
+            }
+        </tbody>
+    </table>

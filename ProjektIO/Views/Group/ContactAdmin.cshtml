@@ -1,0 +1,22 @@
+﻿@using ProjektIO.Models
+@model Czlonkowie
+@{
+    ViewBag.Title = "ContactAdmin";
+}
+
+<div class="header">
+    <div class="row align-items-center">
+        <div class="col col-12 col-sm-9">
+            <h1 class="text-center">Nazwa koła</h1>
+        </div>
+        <img src="~/Content/Images/kolo.png" class="img-thumbnail rounded header-logo m-auto" style="position: relative; left: -25px; bottom: -10px;">
+    </div>
+    <div style="padding: 10px;"></div>
+    <div class="content">
+        @RenderPage("~/Views/Group/GroupNav.cshtml")
+    </div>
+</div>
+<h1 style="padding-top: 1%; padding-bottom: 1%;">Kontakt z przewodniczącym koła</h1>
+<div>
+    @Model.Id
+</div>

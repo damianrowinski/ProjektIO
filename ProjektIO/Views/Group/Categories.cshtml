@@ -4,9 +4,9 @@
     ViewBag.Title = "GroupList";
 }
 
-<h1>Lista kół z kategorii {nazwaKategorii}</h1>
+<h1>Lista kół z kategorii @Model.Category</h1>
 
-<table class="table">
+<table class="table table-striped">
     <thead>
         <tr>
             <th scope="col">#</th>
@@ -27,6 +27,8 @@
         }
     </tbody>
 </table>
+
+<!-- PAGINACJA -->
 <nav>
     <ul class="pagination">
         @if (Model.CurrentPage != 1)
