@@ -61,7 +61,7 @@ namespace ProjektIO.Controllers
                 int totalItems = db.Czlonkowie.Where(p => p.IdKola == id).Count();
                 viewModel.Pages = (int)Math.Ceiling((decimal)totalItems / PageSize);
                 viewModel.CurrentPage = page;
-                viewModel.GroupId = id;
+                viewModel.Group = db.KoloNaukowe.Find(id);
 
                 return View(viewModel);
             }
