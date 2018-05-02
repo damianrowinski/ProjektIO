@@ -97,5 +97,16 @@ namespace ProjektIO.Controllers
                 return View(viewModel);
             }
         }
+
+        public ActionResult ShowPortfolio(int id_group)
+        {
+            using (var db = new DatabaseContext())
+            {
+                //KoloNaukowe group = db.KoloNaukowe.Find(id);
+                Portfolio portfolio = db.Portfolio.Include("KoloNaukowe").FirstOrDefault(p => p.IdKola == id_group);
+      
+                return View(portfolio);
+            }
+        }
     }
 }
