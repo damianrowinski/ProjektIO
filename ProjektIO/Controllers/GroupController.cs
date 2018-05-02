@@ -98,13 +98,17 @@ namespace ProjektIO.Controllers
             }
         }
 
-        public ActionResult ShowPortfolio(int id_group)
+        public ActionResult ShowPortfolio(int id)
         {
             using (var db = new DatabaseContext())
             {
-                //KoloNaukowe group = db.KoloNaukowe.Find(id);
-                Portfolio portfolio = db.Portfolio.Include("KoloNaukowe").FirstOrDefault(p => p.IdKola == id_group);
-      
+                Portfolio portfolio = db.Portfolio.Include("KoloNaukowe").FirstOrDefault(p => p.IdKola == id);
+
+                if (portfolio == null)
+                {
+                    return View("Error", new string[] { "Nie znaleziono portfolio dla kola" });
+                }
+
                 return View(portfolio);
             }
         }
