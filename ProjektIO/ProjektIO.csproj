@@ -197,6 +197,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeaderController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PostController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -265,6 +266,7 @@
     <Compile Include="Models\Post.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PostViewModels.cs" />
     <Compile Include="Models\Uczestnictwo.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
@@ -361,6 +363,7 @@
     <Content Include="Views\Group\ShowMembers.cshtml" />
     <Content Include="Views\Leader\EditStatute.cshtml" />
     <Content Include="Views\Group\ShowPortfolio.cshtml" />
+    <Content Include="Views\Post\AddPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

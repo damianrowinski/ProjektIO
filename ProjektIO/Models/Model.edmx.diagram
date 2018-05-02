@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4842c39aef2947a6934f9ad565af5997" Name="Diagram1" ZoomLevel="85" >
+      <Diagram DiagramId="4842c39aef2947a6934f9ad565af5997" Name="Diagram1" ZoomLevel="73" >
         <EntityTypeShape EntityType="Model.KoloNaukowe" Width="1.5" PointX="8.875" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Portfolio" Width="1.5" PointX="4.5" PointY="7.375" IsExpanded="true" />
         <AssociationConnector Association="Model.KoloNaukowePortfolio" />
