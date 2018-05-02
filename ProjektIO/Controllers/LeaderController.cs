@@ -22,21 +22,19 @@ namespace ProjektIO.Controllers
             {
                 KoloNaukowe group = new KoloNaukowe();
                 group = db.KoloNaukowe.FirstOrDefault(p => p.Id == id);
-                string statute = group.Regulamin;
-                return View(statute);
+                return View(group);
             }
         }
 
         [HttpPost]
-        public ActionResult EditStatute(int id, string statute)
+        public ActionResult EditStatute(KoloNaukowe group)
         {
             using (var db = new DatabaseContext())
             {
-                KoloNaukowe group = new KoloNaukowe();
-                group = db.KoloNaukowe.FirstOrDefault(p => p.Id == id);
+                KoloNaukowe dbEntry = db.KoloNaukowe.Find(group.Id);
                 if (ModelState.IsValid)
                 {
-                    group.Regulamin = statute;
+                    dbEntry.Regulamin = group.Regulamin;
                     db.SaveChanges();
                     TempData["message"] = string.Format("Zmiany zostały zapisane");
                     return RedirectToAction("Index");

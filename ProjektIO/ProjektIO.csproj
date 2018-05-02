@@ -344,7 +344,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
-    <Folder Include="Views\Leader\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -358,6 +357,7 @@
     <Content Include="Views\Home\News.cshtml" />
     <Content Include="Views\Home\Statute.cshtml" />
     <Content Include="Views\Group\ShowMembers.cshtml" />
+    <Content Include="Views\Leader\EditStatute.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

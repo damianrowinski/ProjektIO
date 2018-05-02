@@ -1,0 +1,18 @@
+﻿@model ProjektIO.Models.KoloNaukowe
+@{ ViewBag.Title = "Edit"; }
+
+@Html.ValidationSummary(false)
+<h2>Edytuj regulamin</h2>
+<div class="form-group">
+    <p class="form-control-static">@Model.Nazwa</p>
+</div>
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(x => x.Id)
+    <div class="form-group">
+        <label>Regulamin</label>
+        @Html.TextBoxFor(x => x.Regulamin, new { @class = "form-control" })
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+}
