@@ -21,6 +21,10 @@ namespace ProjektIO.Controllers
             using (var db = new DatabaseContext())
             {
                 KoloNaukowe group = new KoloNaukowe();
+                if (group == null)
+                {
+                    return View("Error");
+                }
                 group = db.KoloNaukowe.FirstOrDefault(p => p.Id == id);
                 return View(group);
             }
