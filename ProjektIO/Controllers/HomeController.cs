@@ -20,12 +20,7 @@ namespace ProjektIO.Controllers
         public ActionResult News()
         {
             return View();
-        }
-        public ActionResult ContactToGroups()
-        {
-            return View();
-        }
-        
+        }        
 
         public ActionResult About()
         {
