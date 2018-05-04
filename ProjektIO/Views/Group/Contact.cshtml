@@ -1,0 +1,33 @@
+﻿@using ProjektIO.Models
+@model GroupsListViewModels
+@{
+    ViewBag.Title = "Contact";
+}
+
+<div>
+    <div class="row align-items-center">
+        <div class="col">
+            <h1 class="text-center" style="padding-bottom:30px;">Wszystkie koła naukowe </h1>
+        </div>
+    </div>
+</div>
+<div class="card-columns">
+
+    @foreach (var group in Model.viewGroup)
+    {
+        <div class="card">
+            <div class="card-header">
+                @group.Group.Nazwa
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Szefu: @group.LeaderName</li>
+                <li class="list-group-item">Kategoria: brak</li>
+                <li class="list-group-item">Uczelnia: @group.Group.Uczelnia</li>
+                <li class="list-group-item"><a href="@Url.Action("ShowGroup", "Group", new { id = group.Group.Id })">KLIK</a></li>
+            </ul>
+        </div>
+    }
+
+
+
+</div>
