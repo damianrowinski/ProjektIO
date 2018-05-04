@@ -224,6 +224,7 @@
     <Compile Include="Models\Account\CasResponseModel.cs" />
     <Compile Include="Models\Account\LoginViewModel.cs" />
     <Compile Include="Models\Account\RegisterViewModel.cs" />
+    <Compile Include="Models\AddCommentViewModels.cs" />
     <Compile Include="Models\Czlonkowie.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
@@ -266,6 +267,8 @@
     <Compile Include="Models\Post.cs">
       <DependentUpon>Models.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AddPostViewModels.cs" />
+    <Compile Include="Models\PostListViewModels.cs" />
     <Compile Include="Models\PostViewModels.cs" />
     <Compile Include="Models\Uczestnictwo.cs">
       <DependentUpon>Models.tt</DependentUpon>
@@ -367,6 +370,7 @@
     <Content Include="Views\Group\ShowStatute.cshtml" />
     <Content Include="Views\Group\ContactAdmin.cshtml" />
     <Content Include="Views\Leader\Index.cshtml" />
+    <Content Include="Views\Post\AddComment.cshtml" />
     <Content Include="Views\Group\JoinGroup.cshtml" />
   </ItemGroup>
   <ItemGroup>

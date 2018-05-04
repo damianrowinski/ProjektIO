@@ -141,8 +141,39 @@ namespace ProjektIO.Controllers
                 return View(viewModel);
             }
         }
-        
-        public GroupsListViewModels SetDetails(GroupsListViewModels model)
+
+        //przekazuje id koła
+        public ActionResult ShowPosts(int id, int page = 1)
+        {
+            using (var db = new DatabaseContext())
+            {
+                PostListViewModels viewModel = new PostListViewModels();
+                viewModel.Posts = db.Post.Where(p => p.IdKola == id).ToList();
+                if (viewModel.Posts == null)
+                {
+                    return View("Error", new string[] { "Brak postów" });
+                }
+
+                int totalItems = db.Post.Where(p => p.IdKola == id).Count();
+                viewModel.Pages = (int)Math.Ceiling((decimal)totalItems / PageSize);
+                viewModel.CurrentPage = page;
+
+                foreach (Post post in viewModel.Posts)
+                {
+                    Czlonkowie member = db.Czlonkowie.Include("Uzytkownik").FirstOrDefault(p => p.Id == post.IdCzlonka);
+                    if (member == null)
+                    {
+                        return View("Error");
+                    }
+                    string author = member.Uzytkownik.Imie + " " + member.Uzytkownik.Nazwisko;
+                    viewModel.AuthorsNames.Add(author);
+                }
+                return View(viewModel);
+            }
+        }
+
+      
+        private GroupsListViewModels SetDetails(GroupsListViewModels model)
         {
             using (var db = new DatabaseContext())
             {
