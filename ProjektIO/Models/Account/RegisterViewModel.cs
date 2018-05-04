@@ -13,6 +13,19 @@ namespace ProjektIO.Models.Account
         public string Login { get; set; }
 
         [Required]
+        [EmailAddress(ErrorMessage = "Podano niepoprawny adres e-mail.")]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        [Required]
+        [Display(Name = "Imię")]
+        public string Name { get; set; }
+
+        [Required]
+        [Display(Name = "Nazwisko")]
+        public string Surname { get; set; }
+
+        [Required]
         [StringLength(100, ErrorMessage = "{0} musi zawierać co najmniej następującą liczbę znaków: {2}.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Hasło")]

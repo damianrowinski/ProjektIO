@@ -179,6 +179,9 @@ namespace ProjektIO.Controllers
 
                 Uzytkownik user = new Uzytkownik();
                 user.Login = model.Login;
+                user.Email = model.Email;
+                user.Imie = model.Name;
+                user.Nazwisko = model.Surname;
                 user.Salt = StringLibrary.RandomString(6);
                 user.Haslo = StringLibrary.CreateMD5(model.Password + StringLibrary.CreateMD5(user.Salt));
 
