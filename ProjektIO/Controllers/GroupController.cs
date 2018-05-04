@@ -141,7 +141,8 @@ namespace ProjektIO.Controllers
                 return View(viewModel);
             }
         }
-        
+
+      
         public GroupsListViewModels SetDetails(GroupsListViewModels model)
         {
             using (var db = new DatabaseContext())
