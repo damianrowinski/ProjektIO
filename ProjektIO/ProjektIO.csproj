@@ -367,6 +367,7 @@
     <Content Include="Views\Group\ShowStatute.cshtml" />
     <Content Include="Views\Group\ContactAdmin.cshtml" />
     <Content Include="Views\Leader\Index.cshtml" />
+    <Content Include="Views\Group\JoinGroup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

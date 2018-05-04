@@ -163,5 +163,37 @@ namespace ProjektIO.Controllers
                 return model;
             }
         }
+        public ActionResult JoinGroup(int id)
+        {
+            using (var db = new DatabaseContext())
+            {
+                Czlonkowie tempCzlonek = new Czlonkowie();
+                Uzytkownik currentUser = User.GetUserData();
+                Uzytkownik tempUser = db.Uzytkownik.Find(currentUser.Id);
+                KoloNaukowe tempKolo = db.KoloNaukowe.Find(id);
+                bool v;
+
+                tempCzlonek.IdKola = tempKolo.Id;
+                tempCzlonek.IdUzytkownika = tempUser.Id;
+                tempCzlonek.Uzytkownik = tempUser;
+                tempCzlonek.KoloNaukowe = tempKolo;
+                tempCzlonek.Rola = 0;
+                tempCzlonek.Aktywny = false;
+
+                if (db.Czlonkowie.Any(p => p.IdUzytkownika == tempUser.Id && p.IdKola == tempKolo.Id))
+                {
+                    //mozna tutaj podac np error
+                    v = false;
+                    return View("JoinGroup",v);
+                }
+
+                db.Czlonkowie.Add(tempCzlonek);
+                db.SaveChanges();
+
+                v = true;
+                
+                return View("JoinGroup",v);
+            }
+        }
     }
 }
