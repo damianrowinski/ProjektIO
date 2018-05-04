@@ -15,7 +15,7 @@ namespace ProjektIO.Controllers
             return View();
         }
 
-        //przekazuje id uzytkownika
+        //przekazuje id członka
         public ActionResult AddPost(int id)
         {
             using (var db = new DatabaseContext())
@@ -38,6 +38,8 @@ namespace ProjektIO.Controllers
                 post.DataUtworzenia = DateTime.Now;
                 post.Zawartosc = viewModel.PostContent;
                 post.IdKola = viewModel.Member.IdKola;
+                post.KoloNaukowe = db.KoloNaukowe.Find(viewModel.Member.IdKola);
+                post.Czlonkowie = db.Czlonkowie.Find(viewModel.Member.Id);
                 db.Post.Add(post);
                 db.SaveChanges();
                 return RedirectToAction("Index");
