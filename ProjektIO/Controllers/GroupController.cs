@@ -143,7 +143,7 @@ namespace ProjektIO.Controllers
         }
 
       
-        public GroupsListViewModels SetDetails(GroupsListViewModels model)
+        private GroupsListViewModels SetDetails(GroupsListViewModels model)
         {
             using (var db = new DatabaseContext())
             {

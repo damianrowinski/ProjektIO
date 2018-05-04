@@ -78,5 +78,44 @@ namespace ProjektIO.Controllers
                 return RedirectToAction("Index");
             }
         }
+
+        //przekazuje id posta
+        public ActionResult ShowPost(int id, int page = 1)
+        {
+            int PageSize = 5;
+
+            using (var db = new DatabaseContext())
+            {
+                PostViewModels viewModel = new PostViewModels();
+                viewModel.Post = db.Post.Find(id);
+                viewModel.Comments = db.Komentarz.Where(p => p.IdPostu == id).ToList();
+                Czlonkowie author = db.Czlonkowie.Include("Uzytkownik").FirstOrDefault(p => p.Id == viewModel.Post.IdCzlonka);
+                viewModel.AuthorName = author.Uzytkownik.Imie + " " + author.Uzytkownik.Nazwisko;
+                if (viewModel.Post == null || author == null)
+                {
+                    return View("Error");
+                }
+                int totalItems = db.Komentarz.Where(p => p.IdPostu == id).ToList().Count();
+                viewModel.Pages = (int)Math.Ceiling((decimal)totalItems / PageSize);
+                viewModel.CurrentPage = page;
+                viewModel = SetCommentsAuthors(viewModel);
+                return View(viewModel);
+            }
+        }
+
+        private PostViewModels SetCommentsAuthors (PostViewModels postModel)
+        {
+            using (var db = new DatabaseContext())
+            {
+                foreach (Komentarz comment in postModel.Comments)
+                {
+                    string temp;
+                    Czlonkowie author = db.Czlonkowie.Include("Uzytkownik").FirstOrDefault(p => p.Id == comment.IdCzlonka);
+                    temp = author.Uzytkownik.Imie + " " + author.Uzytkownik.Nazwisko;
+                    postModel.CommentsAuthors.Add(temp);
+                }
+                return postModel;
+            }
+        }
     }
 }
