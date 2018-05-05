@@ -1,10 +1,10 @@
 ﻿@using ProjektIO.Models
-@model GroupListViewModel
+@model ViewModels
 @{
     ViewBag.Title = "GroupList";
 }
 
-<h1>Lista kół z kategorii @Model.Category</h1>
+<h1>Lista kół z kategorii @Model.GroupList.Category</h1>
 
 <table class="table table-striped">
     <thead>
@@ -16,7 +16,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (GroupViewModel group in Model.viewGroup)
+        @foreach (GroupViewModel group in Model.GroupList.viewGroup)
         {
             <tr>
                 <th scope="row">@group.Group.Id</th>
@@ -31,27 +31,27 @@
 <!-- PAGINACJA -->
 <nav>
     <ul class="pagination">
-        @if (Model.CurrentPage != 1)
+        @if (Model.GroupList.CurrentPage != 1)
         {
             <li class="page-item">
-                <a class="page-link" href="@Url.Action("Categories", "Group", new { id = Model.Category, page = Model.CurrentPage - 1 }))">Poprzednia</a>
+                <a class="page-link" href="@Url.Action("Categories", "Group", new { id = Model.GroupList.Category, page = Model.GroupList.CurrentPage - 1 }))">Poprzednia</a>
             </li>
         }
 
-        @for (int i = 1; i <= Model.Pages; i++)
+        @for (int i = 1; i <= Model.GroupList.Pages; i++)
         {
-            if (i >= Model.CurrentPage - 3 && i < Model.CurrentPage + 3)
+            if (i >= Model.GroupList.CurrentPage - 3 && i < Model.GroupList.CurrentPage + 3)
             {
                 <li class="page-item">
-                    <a class="page-link" href="@Url.Action("Categories", "Group", new { id = Model.Category, page = i })">@i</a>
+                    <a class="page-link" href="@Url.Action("Categories", "Group", new { id = Model.GroupList.Category, page = i })">@i</a>
                 </li>
             }
         }
 
-        @if (Model.CurrentPage != Model.Pages)
+        @if (Model.GroupList.CurrentPage != Model.GroupList.Pages)
         {
             <li class="page-item">
-                <a class="page-link" href="@Url.Action("Categories", "Group", new { id = Model.Category, page = Model.CurrentPage + 1 })">Następna</a>
+                <a class="page-link" href="@Url.Action("Categories", "Group", new { id = Model.GroupList.Category, page = Model.GroupList.CurrentPage + 1 })">Następna</a>
             </li>
         }
     </ul>

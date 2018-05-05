@@ -1,5 +1,5 @@
 ﻿@using ProjektIO.Models
-@model MembersViewModel
+@model ViewModels
 @{
     ViewBag.Title = "ShowStatute";
 }
@@ -7,7 +7,7 @@
 <div class="header">
     <div class="row align-items-center">
         <div class="col col-12 col-sm-9">
-            <h1 class="text-center">@Model.Group.Nazwa</h1>
+            <h1 class="text-center">@Model.Members.Group.Nazwa</h1>
         </div>
         <img src="~/Content/Images/kolo.png" class="img-thumbnail rounded header-logo m-auto" style="position: relative; left: -25px; bottom: -10px;">
     </div>
@@ -18,7 +18,7 @@
 </div>
 <h1 style="padding-top: 1%; padding-bottom: 1%;">Nasz regulamin</h1>
 <p>
-    @Model.Group.Regulamin
+    @Model.Members.Group.Regulamin
 </p>
 
-<button class="btn btn-warning"><a href="@Url.Action("EditStatute", "Leader", new { id = Model.Group.Id })">Edytuj</a></button>
+<button class="btn btn-warning"><a href="@Url.Action("EditStatute", "Leader", new { id = Model.Members.Group.Id })">Edytuj</a></button>

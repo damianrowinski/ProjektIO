@@ -1,5 +1,5 @@
 ﻿@using ProjektIO.Models
-@model GroupListViewModel
+@model ViewModels
 @{
     ViewBag.Title = "Contact";
 }
@@ -13,7 +13,7 @@
 </div>
 <div class="card-columns">
 
-    @foreach (var group in Model.viewGroup)
+    @foreach (var group in Model.GroupList.viewGroup)
     {
         <div class="card">
             <div class="card-header">

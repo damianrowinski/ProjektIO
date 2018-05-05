@@ -1,5 +1,5 @@
 ﻿@using ProjektIO.Models
-@model Portfolio
+@model ViewModels
 
 @{
     ViewBag.Title = "ShowPortfolio";
@@ -8,18 +8,18 @@
 <div class="header">
     <div class="row align-items-center">
         <div class="col col-12 col-sm-9">
-            <h1 class="text-center">@Model.KoloNaukowe.Nazwa</h1>
+            <h1 class="text-center">@Model.Portfolio.KoloNaukowe.Nazwa</h1>
         </div>
         <img src="~/Content/Images/kolo.png" class="img-thumbnail rounded header-logo m-auto" style="position: relative; left: -25px; bottom: -10px;">
     </div>
     <div style="padding: 10px;"></div>
     <div class="content">
-        @RenderPage("~/Views/Group/GroupNav.cshtml")
+        @RenderPage("~/Views/Group/GroupNav.cshtml",Model)
     </div>
 </div>
 
 <h1 style="padding-top: 1%; padding-bottom: 1%;">Porfolio koła:</h1>
-<p>@Model.Zawartosc</p>
-<h5 style="padding-top: 1%; padding-bottom: 1%;">Data utworzenia: @Model.DataUtworzenia</h5>
+<p>@Model.Portfolio.Zawartosc</p>
+<h5 style="padding-top: 1%; padding-bottom: 1%;">Data utworzenia: @Model.Portfolio.DataUtworzenia</h5>
 
 </div>
