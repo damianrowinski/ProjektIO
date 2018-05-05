@@ -15,7 +15,7 @@ namespace ProjektIO.Controllers
         {
             using (var db = new DatabaseContext())
             {
-                MembersViewModels viewModel = new MembersViewModels();
+                MembersViewModel viewModel = new MembersViewModel();
                 KoloNaukowe group = db.KoloNaukowe.Find(id);
                 viewModel.Group = group;
                 if (group == null)
@@ -30,7 +30,7 @@ namespace ProjektIO.Controllers
         {
             using (var db = new DatabaseContext())
             {
-                GroupsListViewModels viewModel = new GroupsListViewModels();
+                GroupListViewModel viewModel = new GroupListViewModel();
                 Kategoria category = db.Kategoria.FirstOrDefault(p => p.Nazwa == id);
                 if (category == null)
                 {
@@ -57,7 +57,7 @@ namespace ProjektIO.Controllers
         {
             using (var db = new DatabaseContext())
             {
-                MembersViewModels viewModel = new MembersViewModels();
+                MembersViewModel viewModel = new MembersViewModel();
                 viewModel.Members = db.Czlonkowie.Include("Uzytkownik").Where(p => p.IdKola == id)
                     .OrderBy(p => p.Id).Skip((page - 1) * PageSize).Take(PageSize).ToList();
                 if (viewModel.Members ==  null)
@@ -92,7 +92,7 @@ namespace ProjektIO.Controllers
         {
             using (var db = new DatabaseContext())
             {
-                GroupsListViewModels viewModel = new GroupsListViewModels();
+                GroupListViewModel viewModel = new GroupListViewModel();
                 viewModel.Groups = db.KoloNaukowe.Select(p => p).
                  OrderBy(p => p.Id).Skip((page - 1) * PageSize).Take(PageSize).ToList();
 
@@ -129,7 +129,7 @@ namespace ProjektIO.Controllers
         {
             using (var db = new DatabaseContext())
             {
-                MembersViewModels viewModel = new MembersViewModels();
+                MembersViewModel viewModel = new MembersViewModel();
                 KoloNaukowe group = db.KoloNaukowe.Find(id);
 
                 viewModel.Group = group;
@@ -147,7 +147,7 @@ namespace ProjektIO.Controllers
         {
             using (var db = new DatabaseContext())
             {
-                PostListViewModels viewModel = new PostListViewModels();
+                PostListViewModel viewModel = new PostListViewModel();
                 viewModel.Posts = db.Post.Where(p => p.IdKola == id).ToList();
                 if (viewModel.Posts == null)
                 {
@@ -173,13 +173,13 @@ namespace ProjektIO.Controllers
         }
 
       
-        private GroupsListViewModels SetDetails(GroupsListViewModels model)
+        private GroupListViewModel SetDetails(GroupListViewModel model)
         {
             using (var db = new DatabaseContext())
             {
                 foreach (KoloNaukowe group in model.Groups)
                 {
-                    GroupViewModels temp = new GroupViewModels();
+                    GroupViewModel temp = new GroupViewModel();
                     Czlonkowie leader = new Czlonkowie();
                     leader = db.Czlonkowie.Include("Uzytkownik").First(p => p.IdKola == group.Id && p.Rola == 1);
                     if (leader != null)

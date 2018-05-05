@@ -1,5 +1,5 @@
 ﻿@using ProjektIO.Models
-@model GroupsListViewModels
+@model GroupListViewModel
 @{
     ViewBag.Title = "GroupList";
 }
@@ -16,7 +16,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (GroupViewModels group in Model.viewGroup)
+        @foreach (GroupViewModel group in Model.viewGroup)
         {
             <tr>
                 <th scope="row">@group.Group.Id</th>

@@ -21,7 +21,7 @@ namespace ProjektIO.Controllers
         {
             using (var db = new DatabaseContext())
             {
-                AddPostViewModels viewModel = new AddPostViewModels();
+                AddPostViewModel viewModel = new AddPostViewModel();
                 int userId = (User as ProjektIO.Auth.Principal).GetUserData().Id;
                 Czlonkowie member = db.Czlonkowie.FirstOrDefault(p => p.IdUzytkownika == userId);
                 viewModel.Member = member;
@@ -30,7 +30,7 @@ namespace ProjektIO.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddPost(AddPostViewModels viewModel)
+        public ActionResult AddPost(AddPostViewModel viewModel)
         {
             using (var db = new DatabaseContext())
             {
@@ -52,13 +52,13 @@ namespace ProjektIO.Controllers
         //id to id postu
         public ActionResult AddComment(int id)
         {
-           AddCommentViewModels viewModel = new AddCommentViewModels();
+           AddCommentViewModel viewModel = new AddCommentViewModel();
             viewModel.PostId = id;
            return View(viewModel);
         }
 
         [HttpPost]
-        public ActionResult AddComment (AddCommentViewModels viewModel)
+        public ActionResult AddComment (AddCommentViewModel viewModel)
         {
             using (var db = new DatabaseContext())
             {
@@ -86,7 +86,7 @@ namespace ProjektIO.Controllers
 
             using (var db = new DatabaseContext())
             {
-                PostViewModels viewModel = new PostViewModels();
+                PostViewModel viewModel = new PostViewModel();
                 viewModel.Post = db.Post.Find(id);
                 viewModel.Comments = db.Komentarz.Where(p => p.IdPostu == id).ToList();
                 Czlonkowie author = db.Czlonkowie.Include("Uzytkownik").FirstOrDefault(p => p.Id == viewModel.Post.IdCzlonka);
@@ -103,7 +103,7 @@ namespace ProjektIO.Controllers
             }
         }
 
-        private PostViewModels SetCommentsAuthors (PostViewModels postModel)
+        private PostViewModel SetCommentsAuthors (PostViewModel postModel)
         {
             using (var db = new DatabaseContext())
             {
