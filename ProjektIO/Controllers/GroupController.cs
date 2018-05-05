@@ -15,9 +15,9 @@ namespace ProjektIO.Controllers
         {
             using (var db = new DatabaseContext())
             {
-                MembersViewModel viewModel = new MembersViewModel();
+                ViewModels viewModel = new ViewModels();
                 KoloNaukowe group = db.KoloNaukowe.Find(id);
-                viewModel.Group = group;
+                viewModel.Members.Group = group;
                 if (group == null)
                 {
                     return View("Error", new string[] { "Takie koło nie istnieje" });
@@ -30,25 +30,25 @@ namespace ProjektIO.Controllers
         {
             using (var db = new DatabaseContext())
             {
-                GroupListViewModel viewModel = new GroupListViewModel();
+                ViewModels viewModel = new ViewModels();
                 Kategoria category = db.Kategoria.FirstOrDefault(p => p.Nazwa == id);
                 if (category == null)
                 {
                     return View("Error", new string[] { "Nie ma kategorii o podanej nazwie" });
                 }
 
-                viewModel.Groups = (db.KoloNaukowe.Where(p => p.KategoriaId == category.Id).
+                viewModel.GroupList.Groups = (db.KoloNaukowe.Where(p => p.KategoriaId == category.Id).
                  OrderBy(p => p.Id).Skip((page - 1) * PageSize).Take(PageSize)).ToList();
-                if (viewModel.Groups == null)
+                if (viewModel.GroupList.Groups == null)
                 {
                     return View("Error", new string[] { "Brak kół w kategorii" });
                 }
 
                 int totalItems = db.KoloNaukowe.Where(p => p.KategoriaId == category.Id).Count();
-                viewModel.Pages = (int)Math.Ceiling((decimal)totalItems / PageSize);
-                viewModel.CurrentPage = page;
-                viewModel.Category = id;
-                viewModel = SetDetails(viewModel);
+                viewModel.GroupList.Pages = (int)Math.Ceiling((decimal)totalItems / PageSize);
+                viewModel.GroupList.CurrentPage = page;
+                viewModel.GroupList.Category = id;
+                viewModel.GroupList = SetDetails(viewModel.GroupList);
                 return View(viewModel);
             }
         }
@@ -57,17 +57,17 @@ namespace ProjektIO.Controllers
         {
             using (var db = new DatabaseContext())
             {
-                MembersViewModel viewModel = new MembersViewModel();
-                viewModel.Members = db.Czlonkowie.Include("Uzytkownik").Where(p => p.IdKola == id)
+                ViewModels viewModel = new ViewModels();
+                viewModel.Members.Members = db.Czlonkowie.Include("Uzytkownik").Where(p => p.IdKola == id)
                     .OrderBy(p => p.Id).Skip((page - 1) * PageSize).Take(PageSize).ToList();
                 if (viewModel.Members ==  null)
                 {
                     return View("Error", new string[] { "Brak członków" });
                 }
                 int totalItems = db.Czlonkowie.Where(p => p.IdKola == id).Count();
-                viewModel.Pages = (int)Math.Ceiling((decimal)totalItems / PageSize);
-                viewModel.CurrentPage = page;
-                viewModel.Group = db.KoloNaukowe.Find(id);
+                viewModel.Members.Pages = (int)Math.Ceiling((decimal)totalItems / PageSize);
+                viewModel.Members.CurrentPage = page;
+                viewModel.Members.Group = db.KoloNaukowe.Find(id);
 
                 return View(viewModel);
             }
@@ -77,13 +77,13 @@ namespace ProjektIO.Controllers
         {
             using (var db = new DatabaseContext())
             {
-                Czlonkowie leader = new Czlonkowie();
-                leader = db.Czlonkowie.Include("Uzytkownik").FirstOrDefault(p => p.Rola == 1 && p.IdKola == id);
-                if (leader == null)
+                ViewModels viewModel = new ViewModels();
+                viewModel.Member = db.Czlonkowie.Include("Uzytkownik").FirstOrDefault(p => p.Rola == 1 && p.IdKola == id);
+                if (viewModel.Member == null)
                 {
                     return View("Error", new string[] { "Ta grupa nie ma przewodniczącego" });
                 }
-                return View(leader);
+                return View(viewModel);
             }
         }
 
@@ -92,19 +92,19 @@ namespace ProjektIO.Controllers
         {
             using (var db = new DatabaseContext())
             {
-                GroupListViewModel viewModel = new GroupListViewModel();
-                viewModel.Groups = db.KoloNaukowe.Select(p => p).
+                ViewModels viewModel = new ViewModels();
+                viewModel.GroupList.Groups = db.KoloNaukowe.Select(p => p).
                  OrderBy(p => p.Id).Skip((page - 1) * PageSize).Take(PageSize).ToList();
 
-                if (viewModel.Groups == null)
+                if (viewModel.GroupList.Groups == null)
                 {
                     return View("Error");
                 }
 
                 int totalItems = db.KoloNaukowe.Select(p => p).Count();
-                viewModel.Pages = (int)Math.Ceiling((decimal)totalItems / PageSize);
-                viewModel.CurrentPage = page;
-                viewModel = SetDetails(viewModel);
+                viewModel.GroupList.Pages = (int)Math.Ceiling((decimal)totalItems / PageSize);
+                viewModel.GroupList.CurrentPage = page;
+                viewModel.GroupList = SetDetails(viewModel.GroupList);
 
                 return View(viewModel);
             }
@@ -120,8 +120,9 @@ namespace ProjektIO.Controllers
                 {
                     return View("Error", new string[] { "Nie znaleziono portfolio dla kola" });
                 }
-
-                return View(portfolio);
+                ViewModels viewModel = new ViewModels();
+                viewModel.Portfolio = portfolio;
+                return View(viewModel);
             }
         }
 
@@ -129,10 +130,10 @@ namespace ProjektIO.Controllers
         {
             using (var db = new DatabaseContext())
             {
-                MembersViewModel viewModel = new MembersViewModel();
+                ViewModels viewModel = new ViewModels();
                 KoloNaukowe group = db.KoloNaukowe.Find(id);
 
-                viewModel.Group = group;
+                viewModel.Members.Group = group;
 
                 if (group == null)
                 {
@@ -147,18 +148,18 @@ namespace ProjektIO.Controllers
         {
             using (var db = new DatabaseContext())
             {
-                PostListViewModel viewModel = new PostListViewModel();
-                viewModel.Posts = db.Post.Where(p => p.IdKola == id).ToList();
-                if (viewModel.Posts == null)
+                ViewModels viewModel = new ViewModels();
+                viewModel.PostList.Posts = db.Post.Where(p => p.IdKola == id).ToList();
+                if (viewModel.PostList.Posts == null)
                 {
                     return View("Error", new string[] { "Brak postów" });
                 }
 
                 int totalItems = db.Post.Where(p => p.IdKola == id).Count();
-                viewModel.Pages = (int)Math.Ceiling((decimal)totalItems / PageSize);
-                viewModel.CurrentPage = page;
+                viewModel.PostList.Pages = (int)Math.Ceiling((decimal)totalItems / PageSize);
+                viewModel.PostList.CurrentPage = page;
 
-                foreach (Post post in viewModel.Posts)
+                foreach (Post post in viewModel.PostList.Posts)
                 {
                     Czlonkowie member = db.Czlonkowie.Include("Uzytkownik").FirstOrDefault(p => p.Id == post.IdCzlonka);
                     if (member == null)
@@ -166,7 +167,7 @@ namespace ProjektIO.Controllers
                         return View("Error");
                     }
                     string author = member.Uzytkownik.Imie + " " + member.Uzytkownik.Nazwisko;
-                    viewModel.AuthorsNames.Add(author);
+                    viewModel.PostList.AuthorsNames.Add(author);
                 }
                 return View(viewModel);
             }

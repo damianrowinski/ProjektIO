@@ -21,31 +21,32 @@ namespace ProjektIO.Controllers
             using (var db = new DatabaseContext())
             {
                 KoloNaukowe group = new KoloNaukowe();
+                group = db.KoloNaukowe.FirstOrDefault(p => p.Id == id);
                 if (group == null)
                 {
                     return View("Error");
                 }
-                group = db.KoloNaukowe.FirstOrDefault(p => p.Id == id);
-                return View(group);
+                ViewModels viewModel = new ViewModels();
+                viewModel.Group.Group = group;
+                return View(viewModel);
             }
         }
 
         [HttpPost]
-        public ActionResult EditStatute(KoloNaukowe group)
+        public ActionResult EditStatute(ViewModels viewModel)
         {
             using (var db = new DatabaseContext())
             {
-                KoloNaukowe dbEntry = db.KoloNaukowe.Find(group.Id);
+                KoloNaukowe dbEntry = db.KoloNaukowe.Find(viewModel.Group.Group.Id);
                 if (ModelState.IsValid)
                 {
-                    dbEntry.Regulamin = group.Regulamin;
+                    dbEntry.Regulamin = viewModel.Group.Group.Regulamin;
                     db.SaveChanges();
-                    TempData["message"] = string.Format("Zmiany zostały zapisane");
                     return RedirectToAction("Index");
                 }
                 else
                 {
-                    return View(group.Regulamin);
+                    return View(viewModel);
                 }
             }
         }

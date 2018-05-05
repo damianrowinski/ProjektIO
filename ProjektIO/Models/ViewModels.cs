@@ -19,6 +19,10 @@ namespace ProjektIO.Models
         public GroupViewModel Group { get; set; }
         public GroupListViewModel GroupList { get; set; }
         public MembersViewModel Members { get; set; }
+        public PostViewModel Post { get; set; }
+        public PostListViewModel PostList { get; set; }
+        public AddCommentViewModel AddComment { get; set; }
+        public AddPostViewModel AddPost { get; set; }
         public IndexViewModel Index { get; set; }
         public ManageLoginsViewModel ManageLogins { get; set; }
         public FactorViewModel Factor { get; set; }
@@ -27,5 +31,7 @@ namespace ProjektIO.Models
         public AddPhoneNumberViewModel AddPhoneNumber { get; set; }
         public VerifyPhoneNumberViewModel VerifyPhoneNumber { get; set; }
         public ConfigureTwoFactorViewModel ConfigureTwoFactor { get; set; }
+        public Czlonkowie Member { get; set; }
+        public Portfolio Portfolio { get; set; }
     }
 }

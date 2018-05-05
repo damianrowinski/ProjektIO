@@ -21,27 +21,27 @@ namespace ProjektIO.Controllers
         {
             using (var db = new DatabaseContext())
             {
-                AddPostViewModel viewModel = new AddPostViewModel();
+                ViewModels viewModel = new ViewModels();
                 int userId = (User as ProjektIO.Auth.Principal).GetUserData().Id;
                 Czlonkowie member = db.Czlonkowie.FirstOrDefault(p => p.IdUzytkownika == userId);
-                viewModel.Member = member;
+                viewModel.AddPost.Member = member;
                 return View(viewModel);
             }
         }
 
         [HttpPost]
-        public ActionResult AddPost(AddPostViewModel viewModel)
+        public ActionResult AddPost(ViewModels viewModel)
         {
             using (var db = new DatabaseContext())
             {
                 Post post = new Post();
-                post.IdCzlonka = viewModel.Member.Id;
+                post.IdCzlonka = viewModel.AddPost.Member.Id;
                 post.Przypiety = false;
                 post.DataUtworzenia = DateTime.Now;
-                post.Zawartosc = viewModel.PostContent;
-                post.IdKola = viewModel.Member.IdKola;
-                post.KoloNaukowe = db.KoloNaukowe.Find(viewModel.Member.IdKola);
-                post.Czlonkowie = db.Czlonkowie.Find(viewModel.Member.Id);
+                post.Zawartosc = viewModel.AddPost.PostContent;
+                post.IdKola = viewModel.AddPost.Member.IdKola;
+                post.KoloNaukowe = db.KoloNaukowe.Find(viewModel.AddPost.Member.IdKola);
+                post.Czlonkowie = db.Czlonkowie.Find(viewModel.AddPost.Member.Id);
                 db.Post.Add(post);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -52,28 +52,28 @@ namespace ProjektIO.Controllers
         //id to id postu
         public ActionResult AddComment(int id)
         {
-           AddCommentViewModel viewModel = new AddCommentViewModel();
-            viewModel.PostId = id;
+           ViewModels viewModel = new ViewModels();
+            viewModel.AddComment.PostId = id;
            return View(viewModel);
         }
 
         [HttpPost]
-        public ActionResult AddComment (AddCommentViewModel viewModel)
+        public ActionResult AddComment (ViewModels viewModel)
         {
             using (var db = new DatabaseContext())
             {
                 int id = (User as ProjektIO.Auth.Principal).GetUserData().Id;
                 Czlonkowie member = db.Czlonkowie.FirstOrDefault(p => p.IdUzytkownika == id);
-                Post post = db.Post.Find(viewModel.PostId);
+                Post post = db.Post.Find(viewModel.AddComment.PostId);
                 if (member == null || post == null)
                 {
                     return View("Error");
                 }
-                viewModel.Comment.IdPostu = post.Id;
-                viewModel.Comment.Post = post;
-                viewModel.Comment.IdCzlonka = member.Id;
-                viewModel.Comment.Czlonkowie = member;
-                db.Komentarz.Add(viewModel.Comment);
+                viewModel.AddComment.Comment.IdPostu = post.Id;
+                viewModel.AddComment.Comment.Post = post;
+                viewModel.AddComment.Comment.IdCzlonka = member.Id;
+                viewModel.AddComment.Comment.Czlonkowie = member;
+                db.Komentarz.Add(viewModel.AddComment.Comment);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
