@@ -22,9 +22,11 @@ namespace ProjektIO.Controllers
             using (var db = new DatabaseContext())
             {
                 ViewModels viewModel = new ViewModels();
+                AddPostViewModel addPost = new AddPostViewModel();
                 int userId = (User as ProjektIO.Auth.Principal).GetUserData().Id;
                 Czlonkowie member = db.Czlonkowie.FirstOrDefault(p => p.IdUzytkownika == userId);
-                viewModel.AddPost.Member = member;
+                addPost.Member = member;
+                viewModel.AddPost = addPost;
                 return View(viewModel);
             }
         }
@@ -52,9 +54,11 @@ namespace ProjektIO.Controllers
         //id to id postu
         public ActionResult AddComment(int id)
         {
-           ViewModels viewModel = new ViewModels();
+            ViewModels viewModel = new ViewModels();
+            AddCommentViewModel addComment = new AddCommentViewModel();
+            viewModel.AddComment = addComment;
             viewModel.AddComment.PostId = id;
-           return View(viewModel);
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -86,19 +90,21 @@ namespace ProjektIO.Controllers
 
             using (var db = new DatabaseContext())
             {
-                PostViewModel viewModel = new PostViewModel();
-                viewModel.Post = db.Post.Find(id);
-                viewModel.Comments = db.Komentarz.Where(p => p.IdPostu == id).ToList();
-                Czlonkowie author = db.Czlonkowie.Include("Uzytkownik").FirstOrDefault(p => p.Id == viewModel.Post.IdCzlonka);
-                viewModel.AuthorName = author.Uzytkownik.Imie + " " + author.Uzytkownik.Nazwisko;
-                if (viewModel.Post == null || author == null)
+                PostViewModel post = new PostViewModel();
+                ViewModels viewModel = new ViewModels();
+                post.Post = db.Post.Find(id);
+                post.Comments = db.Komentarz.Where(p => p.IdPostu == id).ToList();
+                Czlonkowie author = db.Czlonkowie.Include("Uzytkownik").FirstOrDefault(p => p.Id == post.Post.IdCzlonka);
+                post.AuthorName = author.Uzytkownik.Imie + " " + author.Uzytkownik.Nazwisko;
+                if (post.Post == null || author == null)
                 {
                     return View("Error");
                 }
                 int totalItems = db.Komentarz.Where(p => p.IdPostu == id).ToList().Count();
-                viewModel.Pages = (int)Math.Ceiling((decimal)totalItems / PageSize);
-                viewModel.CurrentPage = page;
-                viewModel = SetCommentsAuthors(viewModel);
+                post.Pages = (int)Math.Ceiling((decimal)totalItems / PageSize);
+                post.CurrentPage = page;
+                post = SetCommentsAuthors(post);
+                viewModel.Post = post;
                 return View(viewModel);
             }
         }

@@ -27,7 +27,7 @@ namespace ProjektIO.Controllers
                     return View("Error");
                 }
                 ViewModels viewModel = new ViewModels();
-                viewModel.GroupView.Group = group;
+                viewModel.Group = group;
                 return View(viewModel);
             }
         }
@@ -37,10 +37,10 @@ namespace ProjektIO.Controllers
         {
             using (var db = new DatabaseContext())
             {
-                KoloNaukowe dbEntry = db.KoloNaukowe.Find(viewModel.GroupView.Group.Id);
+                KoloNaukowe dbEntry = db.KoloNaukowe.Find(viewModel.Group.Id);
                 if (ModelState.IsValid)
                 {
-                    dbEntry.Regulamin = viewModel.GroupView.Group.Regulamin;
+                    dbEntry.Regulamin = viewModel.Group.Regulamin;
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }

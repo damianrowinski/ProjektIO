@@ -106,7 +106,7 @@ namespace ProjektIO.Controllers
                 GroupListViewModel groupList = new GroupListViewModel();
                 groupList.Groups = db.KoloNaukowe.Select(p => p).
                  OrderBy(p => p.Id).Skip((page - 1) * PageSize).Take(PageSize).ToList();
-
+           
                 if (groupList.Groups == null)
                 {
                     return View("Error");
@@ -166,12 +166,14 @@ namespace ProjektIO.Controllers
             using (var db = new DatabaseContext())
             {
                 ViewModels viewModel = new ViewModels();
-                viewModel.PostList.Posts = db.Post.Where(p => p.IdKola == id).ToList();
-                if (viewModel.PostList.Posts == null)
+                PostListViewModel postList = new PostListViewModel();
+                postList.Posts = db.Post.Where(p => p.IdKola == id).ToList();
+                if (postList.Posts == null)
                 {
                     return View("Error", new string[] { "Brak postów" });
                 }
 
+                viewModel.PostList.Posts = postList.Posts;
                 int totalItems = db.Post.Where(p => p.IdKola == id).Count();
                 viewModel.PostList.Pages = (int)Math.Ceiling((decimal)totalItems / PageSize);
                 viewModel.PostList.CurrentPage = page;
