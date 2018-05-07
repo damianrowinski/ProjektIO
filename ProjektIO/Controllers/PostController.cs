@@ -200,7 +200,22 @@ namespace ProjektIO.Controllers
             }
         }
 
-
+        //przekazuje id komentarza
+        public ActionResult DeleteComment(int id)
+        {
+            using (var db = new DatabaseContext())
+            {
+                Komentarz dbEntry = new Komentarz();
+                dbEntry = db.Komentarz.FirstOrDefault(p => p.Id == id);
+                if (dbEntry == null)
+                {
+                    return View("Error");
+                }
+                db.Komentarz.Remove(dbEntry);
+                db.SaveChanges();
+                return View();
+            }
+        }
 
         private PostViewModel SetCommentsAuthors (PostViewModel postModel)
         {
