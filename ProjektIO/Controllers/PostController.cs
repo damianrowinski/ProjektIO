@@ -145,6 +145,42 @@ namespace ProjektIO.Controllers
             }
         }
 
+        //przekazuje id komentarza
+        public ActionResult EditComment(int id)
+        {
+            using (var db = new DatabaseContext())
+            {
+                Komentarz comment = new Komentarz();
+                comment = db.Komentarz.FirstOrDefault(p => p.Id == id);
+                if (comment == null)
+                {
+                    return View("Error");
+                }
+                ViewModels viewModel = new ViewModels();
+                viewModel.Comment = comment;
+                return View(viewModel);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult EditComment(ViewModels viewModel)
+        {
+            using (var db = new DatabaseContext())
+            {
+                Komentarz dbEntry = db.Komentarz.Find(viewModel.Comment.Id);
+                if (ModelState.IsValid)
+                {
+                    dbEntry.Zawartosc = viewModel.Comment.Zawartosc;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View(viewModel);
+                }
+            }
+        }
+
         private PostViewModel SetCommentsAuthors (PostViewModel postModel)
         {
             using (var db = new DatabaseContext())

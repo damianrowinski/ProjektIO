@@ -35,5 +35,6 @@ namespace ProjektIO.Models
         public Portfolio Portfolio { get; set; }
         public KoloNaukowe Group { get; set; }
         public Post Post { get; set; }
+        public Komentarz Comment { get; set; }
     }
 }
