@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using ProjektIO.Models;
 using Microsoft.AspNet.Identity;
 
+
+//trzeba bedzie pozmieniac wszystkie redirect to action index
 namespace ProjektIO.Controllers
 {
     public class PostController : Controller
@@ -144,6 +146,23 @@ namespace ProjektIO.Controllers
                 }
             }
         }
+        
+        //przekazuje id postu
+        public ActionResult DeletePost(int id)
+        {
+            using (var db = new DatabaseContext())
+            {
+                Post dbEntry = new Post();
+                dbEntry = db.Post.FirstOrDefault(p => p.Id == id);
+                if (dbEntry == null)
+                {
+                    return View("Error");
+                }
+                db.Post.Remove(dbEntry);
+                db.SaveChanges();
+                return View();
+            }
+        }
 
         //przekazuje id komentarza
         public ActionResult EditComment(int id)
@@ -180,6 +199,8 @@ namespace ProjektIO.Controllers
                 }
             }
         }
+
+
 
         private PostViewModel SetCommentsAuthors (PostViewModel postModel)
         {
