@@ -26,6 +26,7 @@ namespace ProjektIO.Models
         public string Zawartosc { get; set; }
         public System.DateTime DataUtworzenia { get; set; }
         public bool Przypiety { get; set; }
+        public bool AktywneKom { get; set; }
     
         public virtual KoloNaukowe KoloNaukowe { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

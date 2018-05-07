@@ -162,6 +162,7 @@
           <NavigationProperty Name="KoloNaukowe" Relationship="Model.PostKoloNaukowe" FromRole="Post" ToRole="KoloNaukowe" />
           <NavigationProperty Name="Komentarz" Relationship="Model.KomentarzPost" FromRole="Post" ToRole="Komentarz" />
           <NavigationProperty Name="Czlonkowie" Relationship="Model.PostCzlonkowie" FromRole="Post" ToRole="Czlonkowie" />
+          <Property Name="AktywneKom" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Uzytkownik">
           <Key>
