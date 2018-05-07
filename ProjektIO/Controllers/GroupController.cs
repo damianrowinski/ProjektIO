@@ -11,6 +11,32 @@ namespace ProjektIO.Controllers
     {
         int PageSize = 2;
         // GET: Group
+
+        public ActionResult AddGroup()
+        {
+            ViewModels viewModel = new ViewModels();
+            AddGroupViewModel addGroup = new AddGroupViewModel();
+            KoloNaukowe group = new KoloNaukowe();
+            addGroup.Group = group;
+            viewModel.AddGroup = addGroup;
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult AddGroup(ViewModels viewModel)
+        {
+            using (var db = new DatabaseContext())
+            {
+                Kategoria category = new Kategoria();
+                category = db.Kategoria.FirstOrDefault(p => p.Nazwa == viewModel.AddGroup.Category);
+                viewModel.AddGroup.Group.Aktywny = true;
+                viewModel.AddGroup.Group.DataUtworzenia = DateTime.Today;
+                viewModel.AddGroup.Group.DataDoUsuniecia = DateTime.Today.AddYears(1);
+                viewModel.AddGroup.Group.KategoriaId = category.Id;
+                return View();
+            }
+        }
+
         public ActionResult ShowGroup(int id)
         {
             using (var db = new DatabaseContext())

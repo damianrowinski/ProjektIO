@@ -36,5 +36,6 @@ namespace ProjektIO.Models
         public KoloNaukowe Group { get; set; }
         public Post Post { get; set; }
         public Komentarz Comment { get; set; }
+        public AddGroupViewModel AddGroup { get; set; }
     }
 }

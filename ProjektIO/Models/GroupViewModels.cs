@@ -29,4 +29,10 @@ namespace ProjektIO.Models
         public int CurrentPage { get; set; }
         public int Pages { get; set; }
     }
+
+    public class AddGroupViewModel
+    {
+        public KoloNaukowe Group { get; set; }
+        public string Category { get; set; }
+    }
 }
