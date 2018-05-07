@@ -104,8 +104,44 @@ namespace ProjektIO.Controllers
                 post.Pages = (int)Math.Ceiling((decimal)totalItems / PageSize);
                 post.CurrentPage = page;
                 post = SetCommentsAuthors(post);
+                viewModel.PostModel = post;
+                return View(viewModel);
+            }
+        }
+
+        //przekazuje id postu
+        public ActionResult EditPost(int id)
+        {
+            using (var db = new DatabaseContext())
+            {
+                Post post = new Post();
+                post = db.Post.FirstOrDefault(p => p.Id == id);
+                if (post == null)
+                {
+                    return View("Error");
+                }
+                ViewModels viewModel = new ViewModels();
                 viewModel.Post = post;
                 return View(viewModel);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult EditPost (ViewModels viewModel)
+        {
+            using (var db = new DatabaseContext())
+            {
+                Post dbEntry = db.Post.Find(viewModel.Post.Id);
+                if (ModelState.IsValid)
+                {
+                    dbEntry.Zawartosc = viewModel.Post.Zawartosc;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View(viewModel);
+                }
             }
         }
 

@@ -16,10 +16,10 @@ namespace ProjektIO.Models
         public RegisterViewModel Register { get; set; }
         public ResetPasswordViewModel GetResetPassword { get; set; }
         public ForgotPasswordViewModel ForgotPassword { get; set; }
-        public GroupViewModel GroupView { get; set; }
+        public GroupViewModel GroupModel { get; set; }
         public GroupListViewModel GroupList { get; set; }
         public MembersViewModel Members { get; set; }
-        public PostViewModel Post { get; set; }
+        public PostViewModel PostModel { get; set; }
         public PostListViewModel PostList { get; set; }
         public AddCommentViewModel AddComment { get; set; }
         public AddPostViewModel AddPost { get; set; }
@@ -34,5 +34,6 @@ namespace ProjektIO.Models
         public Czlonkowie Member { get; set; }
         public Portfolio Portfolio { get; set; }
         public KoloNaukowe Group { get; set; }
+        public Post Post { get; set; }
     }
 }
