@@ -42,7 +42,7 @@ namespace ProjektIO.Controllers
                 {
                     dbEntry.Regulamin = viewModel.Group.Regulamin;
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    return RedirectToAction("ShowStatute", "Group", new { id = viewModel.Group.Id });
                 }
                 else
                 {
