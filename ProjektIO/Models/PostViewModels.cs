@@ -18,6 +18,7 @@ namespace ProjektIO.Models
     public class PostListViewModel
     {
         public List<Post> Posts { get; set; }
+        public KoloNaukowe Group { get; set; }
         public List<string> AuthorsNames { get; set; }
         public int Pages { get; set; }
         public int CurrentPage { get; set; }

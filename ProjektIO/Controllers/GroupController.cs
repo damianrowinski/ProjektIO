@@ -193,8 +193,10 @@ namespace ProjektIO.Controllers
             {
                 ViewModels viewModel = new ViewModels();
                 PostListViewModel postList = new PostListViewModel();
+                KoloNaukowe group = new KoloNaukowe();
                 List<string> authors = new List<string>();
                 postList.Posts = db.Post.Where(p => p.IdKola == id).ToList();
+                group = db.KoloNaukowe.FirstOrDefault(p => p.Id == id);
                 if (postList.Posts == null)
                 {
                     return View("Error", new string[] { "Brak postów" });
@@ -216,6 +218,7 @@ namespace ProjektIO.Controllers
                     authors.Add(author);
                 }
                 viewModel.PostList.AuthorsNames = authors;
+                viewModel.PostList.Group = group;
                 return View(viewModel);
             }
         }
