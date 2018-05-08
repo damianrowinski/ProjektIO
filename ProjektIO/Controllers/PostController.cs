@@ -227,13 +227,15 @@ namespace ProjektIO.Controllers
         {
             using (var db = new DatabaseContext())
             {
+                List<string> authors = new List<string>();
                 foreach (Komentarz comment in postModel.Comments)
                 {
                     string temp;
                     Czlonkowie author = db.Czlonkowie.Include("Uzytkownik").FirstOrDefault(p => p.Id == comment.IdCzlonka);
                     temp = author.Uzytkownik.Imie + " " + author.Uzytkownik.Nazwisko;
-                    postModel.CommentsAuthors.Add(temp);
+                    authors.Add(temp);
                 }
+                postModel.CommentsAuthors = authors;
                 return postModel;
             }
         }
