@@ -36,7 +36,7 @@
                         <a class="dropdown-item" href="@Url.Action("GroupList", "Home")">Studia filozoficzne</a>
                         <a class="dropdown-item" href="@Url.Action("GroupList", "Home")">Hotelarstwo, turystyka i sport</a>
                         <a class="dropdown-item" href="@Url.Action("GroupList", "Home")">Studia humanistyczne</a>
-                        <a class="dropdown-item" href="@Url.Action("GroupList", "Home")">Studia informatyczne</a>
+                        <a class="dropdown-item" href="@Url.Action("Categories", "Group", new { id = "it" })">Studia informatyczne</a>
                         <a class="dropdown-item" href="@Url.Action("GroupList", "Home")">Transport i logistyka</a>
                         <a class="dropdown-item" href="@Url.Action("GroupList", "Home")">Studia medyczne</a>
                         <a class="dropdown-item" href="@Url.Action("GroupList", "Home")">Studia pedagogiczne</a>
@@ -71,7 +71,10 @@
                 @if (Request.IsAuthenticated)
                 {
                     <li>
-                        Witaj, @((User as ProjektIO.Auth.Principal).GetUserData().Login)!&emsp;
+                        <a href="#" class="btn btn-primary">Witaj, @((User as ProjektIO.Auth.Principal).GetUserData().Login)!</a>
+                    </li>
+                    <li>
+                        <span class="btn-separator"></span>
                     </li>
                     <li>
                         <a href="@Url.Action("LogOff", "User")" class="btn btn-primary">Wyloguj się</a>

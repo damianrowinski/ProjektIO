@@ -23,7 +23,7 @@
                 <li class="list-group-item">Szefu: @group.LeaderName</li>
                 <li class="list-group-item">Kategoria: brak</li>
                 <li class="list-group-item">Uczelnia: @group.Group.Uczelnia</li>
-                <li class="list-group-item"><a href="@Url.Action("ShowGroup", "Group", new { id = group.Group.Id })">KLIK</a></li>
+                <li class="list-group-item"><a class="btn btn-warning" href="@Url.Action("ShowGroup", "Group", new { id = group.Group.Id })">Przejdź</a></li>
             </ul>
         </div>
     }
@@ -31,3 +31,33 @@
 
 
 </div>
+
+
+<!-- PAGINACJA -->
+<nav>
+    <ul class="pagination">
+        @if (Model.GroupList.CurrentPage != 1)
+        {
+            <li class="page-item">
+                <a class="page-link bg-dark" style="color: orange;" href="@Url.Action("Contact", "Group", new { id = 1, page = Model.GroupList.CurrentPage - 1 }))">Poprzednia</a>
+            </li>
+        }
+
+        @for (int i = 1; i <= Model.GroupList.Pages; i++)
+        {
+            if (i >= Model.GroupList.CurrentPage - 3 && i < Model.GroupList.CurrentPage + 3)
+            {
+                <li class="page-item">
+                    <a class="page-link bg-dark" style="color: orange;" href="@Url.Action("Contact", "Group", new { id = 1, page = i })">@i</a>
+                </li>
+            }
+        }
+
+        @if (Model.GroupList.CurrentPage != Model.GroupList.Pages)
+        {
+            <li class="page-item">
+                <a class="page-link bg-dark" style="color:orange;" href="@Url.Action("Contact", "Group", new { id = 1, page = Model.GroupList.CurrentPage + 1 })">Następna</a>
+            </li>
+        }
+    </ul>
+</nav>

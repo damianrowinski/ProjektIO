@@ -4,7 +4,7 @@
     ViewBag.Title = "GroupList";
 }
 
-<h1>Lista kół z kategorii @Model.GroupList.Category</h1>
+<h1 style="margin-top: 1%; margin-bottom: 1%;">Lista kół z kategorii @Model.GroupList.Category</h1>
 
 <table class="table table-striped">
     <thead>
@@ -22,7 +22,7 @@
                 <th scope="row">@group.Group.Id</th>
                 <td>@group.Group.Nazwa</td>
                 <td>@group.LeaderName</td>
-                <td><a href="@Url.Action("ShowGroup", "Group", new { id = group.Group.Id })">KLIK</a></td>
+                <td><a class="btn btn-warning" href="@Url.Action("ShowGroup", "Group", new { id = group.Group.Id })">KLIK</a></td>
             </tr>
         }
     </tbody>
@@ -34,7 +34,7 @@
         @if (Model.GroupList.CurrentPage != 1)
         {
             <li class="page-item">
-                <a class="page-link" href="@Url.Action("Categories", "Group", new { id = Model.GroupList.Category, page = Model.GroupList.CurrentPage - 1 }))">Poprzednia</a>
+                <a class="page-link bg-dark" style="color: orange;" href="@Url.Action("Categories", "Group", new { id = Model.GroupList.Category, page = Model.GroupList.CurrentPage - 1 }))">Poprzednia</a>
             </li>
         }
 
@@ -43,7 +43,7 @@
             if (i >= Model.GroupList.CurrentPage - 3 && i < Model.GroupList.CurrentPage + 3)
             {
                 <li class="page-item">
-                    <a class="page-link" href="@Url.Action("Categories", "Group", new { id = Model.GroupList.Category, page = i })">@i</a>
+                    <a class="page-link bg-dark" style="color: orange;" href="@Url.Action("Categories", "Group", new { id = Model.GroupList.Category, page = i })">@i</a>
                 </li>
             }
         }
@@ -51,7 +51,7 @@
         @if (Model.GroupList.CurrentPage != Model.GroupList.Pages)
         {
             <li class="page-item">
-                <a class="page-link" href="@Url.Action("Categories", "Group", new { id = Model.GroupList.Category, page = Model.GroupList.CurrentPage + 1 })">Następna</a>
+                <a class="page-link bg-dark" style="color: orange;" href="@Url.Action("Categories", "Group", new { id = Model.GroupList.Category, page = Model.GroupList.CurrentPage + 1 })">Następna</a>
             </li>
         }
     </ul>

@@ -1,4 +1,9 @@
-﻿@{ ViewBag.Title = "Zapisano";}
+﻿@using ProjektIO.Models
+@model GroupViewModel
+
+@{ ViewBag.Title = "Zapisano";}
 
 <div class="alert alert-success">Zmiany zostały zapisane</div>
 @Html.ActionLink("OK", "Index", null, new { @class = "btn btn-default" })
+
+@Response.Redirect(Url.Action("ShowGroup", "Group", new { id = Model.Group.Id }))

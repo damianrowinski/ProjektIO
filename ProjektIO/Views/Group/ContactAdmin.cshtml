@@ -7,7 +7,7 @@
 <div class="header">
     <div class="row align-items-center">
         <div class="col col-12 col-sm-9">
-            <h1 class="text-center">Nazwa koła</h1>
+            <h1 class="text-center">@Model.Group.Nazwa</h1>
         </div>
         <img src="~/Content/Images/kolo.png" class="img-thumbnail rounded header-logo m-auto" style="position: relative; left: -25px; bottom: -10px;">
     </div>
@@ -18,5 +18,13 @@
 </div>
 <h1 style="padding-top: 1%; padding-bottom: 1%;">Kontakt z przewodniczącym koła</h1>
 <div>
-    @Model.Member.Id
+    <div class="card">
+        <div class="card-header">
+            @Model.Member.Uzytkownik.Imie
+            @Model.Member.Uzytkownik.Nazwisko
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Numer telefonu: @Model.Member.Uzytkownik.NumerTelefonu</li>
+        </ul>
+    </div>
 </div>

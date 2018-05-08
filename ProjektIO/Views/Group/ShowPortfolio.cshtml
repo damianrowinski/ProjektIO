@@ -18,8 +18,16 @@
     </div>
 </div>
 
-<h1 style="padding-top: 1%; padding-bottom: 1%;">Porfolio koła:</h1>
-<p>@Model.Portfolio.Zawartosc</p>
-<h5 style="padding-top: 1%; padding-bottom: 1%;">Data utworzenia: @Model.Portfolio.DataUtworzenia</h5>
+<h1 style="padding-top: 1%; padding-bottom: 1%;">Porfolio koła</h1>
 
+<div class="card" style="color: white;">
+    <div class="card-body bg-dark">
+        
+        @Model.Portfolio.Zawartosc  
+    </div>
+    <div class="card-footer">
+        @Model.Portfolio.DataUtworzenia
+    </div>
 </div>
+
+

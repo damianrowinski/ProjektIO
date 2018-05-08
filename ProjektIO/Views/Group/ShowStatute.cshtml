@@ -17,8 +17,9 @@
     </div>
 </div>
 <h1 style="padding-top: 1%; padding-bottom: 1%;">Nasz regulamin</h1>
-<p>
-    @Model.Members.Group.Regulamin
-</p>
-
-<button class="btn btn-warning"><a href="@Url.Action("EditStatute", "Leader", new { id = Model.Members.Group.Id })">Edytuj</a></button>
+<blockquote class="blockquote">
+    <p class="mb-0">
+        @Model.Members.Group.Regulamin
+    </p>
+</blockquote>
+<a class="btn btn-warning" href="@Url.Action("EditStatute", "Leader", new { id = Model.Members.Group.Id })">Edytuj</></a>
