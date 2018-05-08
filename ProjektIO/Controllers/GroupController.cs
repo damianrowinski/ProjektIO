@@ -219,6 +219,7 @@ namespace ProjektIO.Controllers
                 }
                 viewModel.PostList.AuthorsNames = authors;
                 viewModel.PostList.Group = group;
+                viewModel.Group = group;
                 return View(viewModel);
             }
         }
