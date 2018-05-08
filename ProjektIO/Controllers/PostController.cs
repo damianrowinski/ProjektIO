@@ -153,12 +153,18 @@ namespace ProjektIO.Controllers
             using (var db = new DatabaseContext())
             {
                 Post dbEntry = new Post();
+                List<Komentarz> comEntry = new List<Komentarz>();
                 dbEntry = db.Post.FirstOrDefault(p => p.Id == id);
+                comEntry = db.Komentarz.Where(p => p.IdPostu == id).ToList();
                 if (dbEntry == null)
                 {
                     return View("Error");
                 }
                 db.Post.Remove(dbEntry);
+                foreach (Komentarz comment in comEntry)
+                {
+                    db.Komentarz.Remove(comment);
+                }
                 db.SaveChanges();
                 return View();
             }
