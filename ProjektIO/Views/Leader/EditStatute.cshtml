@@ -23,6 +23,6 @@
     <div class="form-group">
         @Html.TextBoxFor(x => x.Group.Regulamin, new { @class = "form-control" })
     </div>
-    <button type="submit" class="btn btn-warning">Zapisz</button>
+    <button type="submit" class="btn btn-warning">Save</button>
     <a class="btn btn-danger" href="@Url.Action("ShowStatute", "Group", new { id = Model.Group.Id })">Anuluj</a>
 }

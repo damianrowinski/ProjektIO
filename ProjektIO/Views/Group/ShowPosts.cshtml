@@ -1,0 +1,72 @@
+﻿@using ProjektIO.Models
+@model ViewModels
+@{
+    ViewBag.Title = "ShowPosts";
+}
+
+<div class="header">
+    <div class="row align-items-center">
+        <div class="col col-12 col-sm-9">
+            <h1 class="text-center">@Model.PostList.Group.Nazwa</h1>
+        </div>
+        <img src="~/Content/Images/kolo.png" class="img-thumbnail rounded header-logo m-auto" style="position: relative; left: -25px; bottom: -10px;">
+    </div>
+    <div style="padding: 10px;"></div>
+    <div class="content">
+        @RenderPage("~/Views/Group/GroupNav.cshtml")
+    </div>
+</div>
+
+<div style="margin-top: 1%;"></div>
+<h1>Wszystkie posty</h1>
+<div style="margin-top: 1%;"></div>
+
+
+<table class="table">
+
+    <tbody>
+
+        @foreach (var post in Model.PostList.Posts)
+        {
+            <tr>
+                <th scope="row">@post.Id</th>
+                <td>@post.Zawartosc.</td>
+                <td><a href="@Url.Action("ShowPost", "Post", new { id = post.Id })" class="btn btn-warning">Czytaj post</a></td>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+
+<a class="btn btn-success" href="@Url.Action("AddPost", "Post")">Dodaj post</a>
+<div style="margin-top: 1%;"></div>
+
+<!-- PAGINACJA -->
+<nav>
+    <ul class="pagination">
+        @if (Model.PostList.CurrentPage != 1)
+        {
+            <li class="page-item">
+                <a class="page-link bg-dark" style="color: orange;" href="@Url.Action("ShowPosts", "Group", new { id = Model.PostList.Group.Id, page = Model.PostList.CurrentPage - 1 })">Poprzednia</a>
+            </li>
+        }
+
+        @for (int i = 1; i <= Model.PostList.Pages; i++)
+        {
+            if (i >= Model.PostList.CurrentPage - 3 && i < Model.PostList.CurrentPage + 3)
+            {
+                <li class="page-item">
+                    <a class="page-link bg-dark" style="color: orange;" href="@Url.Action("ShowPosts", "Group", new { id = Model.PostList.Group.Id, page = i })">@i</a>
+                </li>
+            }
+        }
+
+        @if (Model.PostList.CurrentPage != Model.PostList.Pages)
+        {
+            <li class="page-item">
+                <a class="page-link bg-dark" style="color: orange;" href="@Url.Action("ShowPosts", "Group", new { id = Model.PostList.Group.Id, page = Model.PostList.CurrentPage + 1 })">Następna</a>
+            </li>
+        }
+    </ul>
+</nav>

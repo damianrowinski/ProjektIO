@@ -1,0 +1,48 @@
+﻿@using ProjektIO.Models
+@model ViewModels
+@{
+    ViewBag.Title = "ShowPost";
+}
+<div style="margin-top: 1%;"></div>
+
+
+
+
+<div class="row">
+    <div class="col-md-10">
+        <h1>Tytułek postu XXX</h1>
+
+        <p>@Model.PostModel.Post.Zawartosc</p>
+
+    </div>
+</div>
+
+<hr />
+
+<h2>Komentarze</h2>
+
+
+<div class="row">
+    <div class="col col-md-8">
+
+        @foreach (var comment in Model.PostModel.Comments)
+        {
+
+        <div class="">
+            <div class="">
+                <img class="rounded float-left img-thumbnail" height="200" width="200" src="https://www.1plusx.com/app/mu-plugins/all-in-one-seo-pack-pro/images/default-user-image.png" />
+            </div>
+            <div class="">
+                <h4 class="media-heading">Nazwa komentującego</h4>
+                <p>
+                    @comment.Zawartosc
+                </p>
+            </div>
+        </div>
+        <div style="margin-bottom: 1%;">
+            <hr />
+        </div>
+        }
+
+    </div>
+</div>
