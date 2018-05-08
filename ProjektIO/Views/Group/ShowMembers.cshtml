@@ -20,24 +20,54 @@
 
 <h1 style="padding-top: 1%; padding-bottom: 1%;">Członkowie koła</h1>
 
-    <table class="table table-striped">
-        <thead>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Imię</th>
+            <th scope="col">Nazwisko</th>
+            <th scope="col">Rola</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var member in Model.Members.Members)
+        {
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Imię</th>
-                <th scope="col">Nazwisko</th>
-                <th scope="col">Rola</th>
+                <th scope="row">@member.Id</th>
+                <td>@member.Uzytkownik.Imie</td>
+                <td>@member.Uzytkownik.Nazwisko</td>
+                <td>@member.Rola</td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var member in Model.Members.Members)
+        }
+    </tbody>
+</table>
+
+
+<!-- PAGINACJA -->
+<nav>
+    <ul class="pagination">
+        @if (Model.Members.CurrentPage != 1)
+        {
+            <li class="page-item">
+                <a class="page-link bg-dark" style="color: orange;" href="@Url.Action("ShowMembers", "Group", new { id = Model.Members.Group.Id, page = Model.Members.CurrentPage - 1 }))">Poprzednia</a>
+            </li>
+        }
+
+        @for (int i = 1; i <= Model.Members.Pages; i++)
+        {
+            if (i >= Model.Members.CurrentPage - 3 && i < Model.Members.CurrentPage + 3)
             {
-                <tr>
-                    <th scope="row">@member.Id</th>
-                    <td>@member.Uzytkownik.Imie</td>
-                    <td>@member.Uzytkownik.Nazwisko</td>
-                    <td>@member.Rola</td>
-                </tr>
+                <li class="page-item">
+                    <a class="page-link bg-dark" style="color: orange;" href="@Url.Action("ShowMembers", "Group", new { id = Model.Members.Group.Id, page = i })">@i</a>
+                </li>
             }
-        </tbody>
-    </table>
+        }
+
+        @if (Model.Members.CurrentPage != Model.Members.Pages)
+        {
+            <li class="page-item">
+                <a class="page-link bg-dark" style="color: orange;" href="@Url.Action("ShowMembers", "Group", new { id = Model.Members.Group.Id, page = Model.Members.CurrentPage + 1 })">Następna</a>
+            </li>
+        }
+    </ul>
+</nav>
