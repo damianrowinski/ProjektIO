@@ -259,7 +259,8 @@ namespace ProjektIO.Controllers
 
                 if (db.Czlonkowie.Any(p => p.IdUzytkownika == tempUser.Id && p.IdKola == tempKolo.Id))
                 {
-                    return View("Error", new string[] { "Dołączono już do tego koła" });
+                    viewModel.Group = tempCzlonek.KoloNaukowe;
+                    return View("JoinGroupError", viewModel);
                 }
 
                 db.Czlonkowie.Add(tempCzlonek);
