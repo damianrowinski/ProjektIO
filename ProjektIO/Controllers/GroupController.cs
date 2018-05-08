@@ -226,9 +226,9 @@ namespace ProjektIO.Controllers
                 foreach (KoloNaukowe group in model.Groups)
                 {
                     GroupViewModel temp = new GroupViewModel();
-                    Czlonkowie leader = new Czlonkowie();
-                    leader = db.Czlonkowie.Include("Uzytkownik").First(p => p.IdKola == group.Id && p.Rola == 1);
-                    if (leader != null)
+                    Czlonkowie leader = db.Czlonkowie.Include("Uzytkownik").FirstOrDefault(p => p.IdKola == group.Id && p.Rola == 1);
+
+                    if (leader != default(Czlonkowie))
                     {
                         temp.LeaderName = leader.Uzytkownik.Imie + " " + leader.Uzytkownik.Nazwisko ?? "Brak";
                         temp.Mail = leader.Uzytkownik.Email ?? "Brak";
