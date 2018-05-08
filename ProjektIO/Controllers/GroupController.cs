@@ -193,13 +193,14 @@ namespace ProjektIO.Controllers
             {
                 ViewModels viewModel = new ViewModels();
                 PostListViewModel postList = new PostListViewModel();
+                List<string> authors = new List<string>();
                 postList.Posts = db.Post.Where(p => p.IdKola == id).ToList();
                 if (postList.Posts == null)
                 {
                     return View("Error", new string[] { "Brak postów" });
                 }
 
-                viewModel.PostList.Posts = postList.Posts;
+                viewModel.PostList = postList;
                 int totalItems = db.Post.Where(p => p.IdKola == id).Count();
                 viewModel.PostList.Pages = (int)Math.Ceiling((decimal)totalItems / PageSize);
                 viewModel.PostList.CurrentPage = page;
@@ -212,13 +213,15 @@ namespace ProjektIO.Controllers
                         return View("Error");
                     }
                     string author = member.Uzytkownik.Imie + " " + member.Uzytkownik.Nazwisko;
-                    viewModel.PostList.AuthorsNames.Add(author);
+                    authors.Add(author);
                 }
+                viewModel.PostList.AuthorsNames = authors;
                 return View(viewModel);
             }
         }
 
-      
+
+
         private GroupListViewModel SetDetails(GroupListViewModel model)
         {
             using (var db = new DatabaseContext())
