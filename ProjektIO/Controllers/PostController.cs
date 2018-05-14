@@ -46,6 +46,7 @@ namespace ProjektIO.Controllers
                 post.IdKola = viewModel.AddPost.Member.IdKola;
                 post.KoloNaukowe = db.KoloNaukowe.FirstOrDefault(p => p.Id == viewModel.AddPost.Member.IdKola);
                 post.Czlonkowie = db.Czlonkowie.FirstOrDefault(p => p.Id == viewModel.AddPost.Member.Id);
+                post.AktywneKom = true;
                 db.Post.Add(post);
                 db.SaveChanges();
                 return RedirectToAction("Index");
