@@ -88,7 +88,7 @@ namespace ProjektIO.Controllers
             {
                 ViewModels viewModel = new ViewModels();
                 MembersViewModel members = new MembersViewModel();
-                members.Members = db.Czlonkowie.Include("Uzytkownik").Where(p => p.IdKola == id)
+                members.Members = db.Czlonkowie.Include("Uzytkownik").Where(p => p.IdKola == id && p.Rola != 0)
                     .OrderBy(p => p.Id).Skip((page - 1) * PageSize).Take(PageSize).ToList();
                 if (members ==  null)
                 {
