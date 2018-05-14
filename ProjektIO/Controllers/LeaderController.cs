@@ -37,7 +37,7 @@ namespace ProjektIO.Controllers
         {
             using (var db = new DatabaseContext())
             {
-                KoloNaukowe dbEntry = db.KoloNaukowe.Find(viewModel.Group.Id);
+                KoloNaukowe dbEntry = db.KoloNaukowe.FirstOrDefault(p => p.Id == viewModel.Group.Id);
                 if (ModelState.IsValid)
                 {
                     dbEntry.Regulamin = viewModel.Group.Regulamin;

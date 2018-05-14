@@ -44,8 +44,8 @@ namespace ProjektIO.Controllers
                 post.DataUtworzenia = DateTime.Now;
                 post.Zawartosc = viewModel.AddPost.PostContent;
                 post.IdKola = viewModel.AddPost.Member.IdKola;
-                post.KoloNaukowe = db.KoloNaukowe.Find(viewModel.AddPost.Member.IdKola);
-                post.Czlonkowie = db.Czlonkowie.Find(viewModel.AddPost.Member.Id);
+                post.KoloNaukowe = db.KoloNaukowe.FirstOrDefault(p => p.Id == viewModel.AddPost.Member.IdKola);
+                post.Czlonkowie = db.Czlonkowie.FirstOrDefault(p => p.Id == viewModel.AddPost.Member.Id);
                 db.Post.Add(post);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -70,7 +70,7 @@ namespace ProjektIO.Controllers
             {
                 int id = (User as ProjektIO.Auth.Principal).GetUserData().Id;
                 Czlonkowie member = db.Czlonkowie.FirstOrDefault(p => p.IdUzytkownika == id);
-                Post post = db.Post.Find(viewModel.AddComment.PostId);
+                Post post = db.Post.FirstOrDefault(p => p.Id == viewModel.AddComment.PostId);
                 if (member == null || post == null)
                 {
                     return View("Error");
@@ -94,7 +94,7 @@ namespace ProjektIO.Controllers
             {
                 PostViewModel post = new PostViewModel();
                 ViewModels viewModel = new ViewModels();
-                post.Post = db.Post.Find(id);
+                post.Post = db.Post.FirstOrDefault(p => p.Id == id);
                 post.Comments = db.Komentarz.Where(p => p.IdPostu == id).ToList();
                 Czlonkowie author = db.Czlonkowie.Include("Uzytkownik").FirstOrDefault(p => p.Id == post.Post.IdCzlonka);
                 post.AuthorName = author.Uzytkownik.Imie + " " + author.Uzytkownik.Nazwisko;
@@ -133,7 +133,7 @@ namespace ProjektIO.Controllers
         {
             using (var db = new DatabaseContext())
             {
-                Post dbEntry = db.Post.Find(viewModel.Post.Id);
+                Post dbEntry = db.Post.FirstOrDefault(p => p.Id == viewModel.Post.Id);
                 if (ModelState.IsValid)
                 {
                     dbEntry.Zawartosc = viewModel.Post.Zawartosc;
@@ -192,7 +192,7 @@ namespace ProjektIO.Controllers
         {
             using (var db = new DatabaseContext())
             {
-                Komentarz dbEntry = db.Komentarz.Find(viewModel.Comment.Id);
+                Komentarz dbEntry = db.Komentarz.FirstOrDefault(p => p.Id == viewModel.Comment.Id);
                 if (ModelState.IsValid)
                 {
                     dbEntry.Zawartosc = viewModel.Comment.Zawartosc;

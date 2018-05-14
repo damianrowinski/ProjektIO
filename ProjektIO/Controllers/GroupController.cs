@@ -42,7 +42,7 @@ namespace ProjektIO.Controllers
             using (var db = new DatabaseContext())
             {
                 ViewModels viewModel = new ViewModels();
-                KoloNaukowe group = db.KoloNaukowe.Find(id);
+                KoloNaukowe group = db.KoloNaukowe.FirstOrDefault(p => p.Id == id);
                 viewModel.Group = group;
                 if (group == null)
                 {
@@ -171,7 +171,7 @@ namespace ProjektIO.Controllers
             using (var db = new DatabaseContext())
             {
                 ViewModels viewModel = new ViewModels();
-                KoloNaukowe group = db.KoloNaukowe.Find(id);
+                KoloNaukowe group = db.KoloNaukowe.FirstOrDefault(p => p.Id == id);
                 MembersViewModel members = new MembersViewModel();
 
                 members.Group = group;
@@ -234,7 +234,7 @@ namespace ProjektIO.Controllers
                 {
                     GroupViewModel temp = new GroupViewModel();
                     Czlonkowie leader = new Czlonkowie();
-                    leader = db.Czlonkowie.Include("Uzytkownik").First(p => p.IdKola == group.Id && p.Rola == 1);
+                    leader = db.Czlonkowie.Include("Uzytkownik").FirstOrDefault(p => p.IdKola == group.Id && p.Rola == 1);
                     if (leader != null)
                     {
                         temp.LeaderName = leader.Uzytkownik.Imie + " " + leader.Uzytkownik.Nazwisko ?? "Brak";
@@ -254,8 +254,8 @@ namespace ProjektIO.Controllers
                 ViewModels viewModel = new ViewModels();
                 Czlonkowie tempCzlonek = new Czlonkowie();
                 Uzytkownik currentUser = User.GetUserData();
-                Uzytkownik tempUser = db.Uzytkownik.Find(currentUser.Id);
-                KoloNaukowe tempKolo = db.KoloNaukowe.Find(id);
+                Uzytkownik tempUser = db.Uzytkownik.FirstOrDefault(p => p.Id == currentUser.Id);
+                KoloNaukowe tempKolo = db.KoloNaukowe.FirstOrDefault(p => p.Id == id);
 
                 tempCzlonek.IdKola = tempKolo.Id;
                 tempCzlonek.IdUzytkownika = tempUser.Id;
