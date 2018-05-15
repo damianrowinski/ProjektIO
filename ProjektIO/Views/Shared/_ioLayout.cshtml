@@ -71,7 +71,7 @@
                 @if (Request.IsAuthenticated)
                 {
                     <li>
-                        <a href="#" class="btn btn-primary">Witaj, @((User as ProjektIO.Auth.Principal).GetUserData().Login)!</a>
+                        <a href="@Url.Action("UserSettings","Home")" class="btn btn-primary">Witaj, @((User as ProjektIO.Auth.Principal).GetUserData().Login)!</a>
                     </li>
                     <li>
                         <span class="btn-separator"></span>

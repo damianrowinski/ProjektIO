@@ -20,7 +20,12 @@ namespace ProjektIO.Controllers
         public ActionResult News()
         {
             return View();
-        }        
+        }
+
+        public ActionResult UserSettings()
+        {
+            return View();
+        }
 
         public ActionResult About()
         {
