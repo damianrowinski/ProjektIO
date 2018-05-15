@@ -38,6 +38,8 @@ namespace ProjektIO.Controllers
 
             if (user != null && user != default(Uzytkownik))
             {
+              
+             
                 /*FormsAuthentication.SetAuthCookie(model.Login, false);
 
                 var authTicket = new FormsAuthenticationTicket(1, user.Login, DateTime.Now, DateTime.Now.AddMinutes(20), false, $"{user.Id}");
@@ -184,7 +186,7 @@ namespace ProjektIO.Controllers
                 user.Nazwisko = model.Surname;
                 user.Salt = StringLibrary.RandomString(6);
                 user.Haslo = StringLibrary.CreateMD5(model.Password + StringLibrary.CreateMD5(user.Salt));
-
+                
                 user.DataUtworzenia = DateTime.Now;
                 user.DataModyfikacji = DateTime.Now;
                 user.IDP = 1;
