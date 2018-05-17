@@ -16,7 +16,9 @@ namespace ProjektIO.Controllers
         public ActionResult Statute()
         {
             return View();
-        }
+        }        
+
+        [Authorize(Roles = "administrator")]
         public ActionResult News()
         {
             return View();

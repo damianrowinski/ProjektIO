@@ -9,7 +9,7 @@ namespace ProjektIO.Controllers
 {
     public class GroupController : BaseController
     {
-        int PageSize = 2;
+        int PageSize = 4;
         // GET: Group
 
         public ActionResult AddGroup()
@@ -23,6 +23,7 @@ namespace ProjektIO.Controllers
         }
 
         [HttpPost]
+       
         public ActionResult AddGroup(ViewModels viewModel)
         {
             using (var db = new DatabaseContext())

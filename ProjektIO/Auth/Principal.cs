@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Security.Principal;
 using ProjektIO.Models;
 
@@ -36,7 +37,9 @@ namespace ProjektIO.Auth
 
         public bool IsInRole(string role)
         {
-            throw new System.NotImplementedException();
+            
+            var x = new Random().NextDouble() > 0.5;
+            return x;
         }
     }
 }
