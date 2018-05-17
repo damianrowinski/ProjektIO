@@ -202,6 +202,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Libraries\RoleLibrary.cs" />
     <Compile Include="Libraries\StringLibrary.cs" />
     <Compile Include="Migrations\201804170910293_InitialMigration.cs" />
     <Compile Include="Migrations\201804170910293_InitialMigration.Designer.cs">

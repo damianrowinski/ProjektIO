@@ -3,6 +3,8 @@ using System.Linq;
 using System.Security.Principal;
 using ProjektIO.Models;
 
+using ProjektIO.Libraries;
+
 namespace ProjektIO.Auth
 {
     public class Principal : IPrincipal
@@ -37,9 +39,15 @@ namespace ProjektIO.Auth
 
         public bool IsInRole(string role)
         {
-            
-            var x = new Random().NextDouble() > 0.5;
-            return x;
+            switch (role)
+            {
+                default:
+                    return false;
+
+                case RoleLibrary.ADMIN:
+                    return (userData.Rola & 1) > 0;
+
+            }
         }
     }
 }

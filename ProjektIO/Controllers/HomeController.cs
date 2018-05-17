@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+using ProjektIO.Libraries;
+
 namespace ProjektIO.Controllers
 {
     public class HomeController : BaseController
@@ -18,7 +20,7 @@ namespace ProjektIO.Controllers
             return View();
         }        
 
-        [Authorize(Roles = "administrator")]
+        [Authorize(Roles = RoleLibrary.ADMIN)]
         public ActionResult News()
         {
             return View();

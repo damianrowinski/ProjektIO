@@ -33,11 +33,6 @@ namespace ProjektIO
                     int userId = Libraries.StringLibrary.GetNumberFromString(authTicket.UserData);
                     Principal customPrincipal = new Principal(userId);
                     HttpContext.Current.User = customPrincipal;
-                    // HttpContext.Current.User = new Principal(userId);
-                    
-                    // string[] roles = authTicket.UserData.Split(',');
-                    
-                    // HttpContext.Current.User = new System.Security.Principal.GenericPrincipal(new FormsIdentity(authTicket), roles);
                 }
             }
         }
