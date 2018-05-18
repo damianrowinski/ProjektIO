@@ -10,36 +10,100 @@
 <!--   NAVBAR KOŁA!     -->
 <nav class="navbar-nav navbar-expand-md navbar-dark bg-kolo m-auto">
     <ul class="navbar-nav">
-        <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("ShowGroup", "Group", new { id = Model.Group.Id })">Zakres działalności</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("ShowMembers", "Group", new { id = Model.Group.Id })">Członkowie koła</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("ShowStatute", "Group", new { id = Model.Group.Id })">Regulamin koła</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("ContactAdmin", "Group", new { id = Model.Group.Id })">Kontakt z prowadzącym</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("ShowPortfolio", "Group", new { id = Model.Group.Id })">Portfolio koła</a>
-        </li>
+        
+        @if (@Request.Url.AbsolutePath == Url.Action("ShowGroup", "Group", new { id = Model.Group.Id }))
+        {
+            <li class="nav-item">
+                <a class="nav-link active" href="@Url.Action("ShowGroup", "Group", new { id = Model.Group.Id })">Zakres działalności</a>
+            </li>
+        }
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("ShowGroup", "Group", new { id = Model.Group.Id })">Zakres działalności</a>
+            </li>
+        }
+
+        @if (@Request.Url.AbsolutePath == Url.Action("ShowMembers", "Group", new { id = Model.Group.Id }))
+        {
+            <li class="nav-item">
+                <a class="nav-link active" href="@Url.Action("ShowMembers", "Group", new { id = Model.Group.Id })">Członkowie koła</a>
+            </li>
+        }
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("ShowMembers", "Group", new { id = Model.Group.Id })">Członkowie koła</a>
+            </li>
+        }
+
+        @if (@Request.Url.AbsolutePath == Url.Action("ShowStatute", "Group", new { id = Model.Group.Id }))
+        {
+            <li class="nav-item">
+                <a class="nav-link active" href="@Url.Action("ShowStatute", "Group", new { id = Model.Group.Id })">Regulamin</a>
+            </li>
+        }
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("ShowStatute", "Group", new { id = Model.Group.Id })">Regulamin</a>
+            </li>
+        }
+
+        @if (@Request.Url.AbsolutePath == Url.Action("ContactAdmin", "Group", new { id = Model.Group.Id }))
+        {
+            <li class="nav-item">
+                <a class="nav-link active" href="@Url.Action("ContactAdmin", "Group", new { id = Model.Group.Id })">Kontakt z przewodniczącym</a>
+            </li>
+        }
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("ContactAdmin", "Group", new { id = Model.Group.Id })">Kontakt z przewodniczącym</a>
+            </li>
+        }
+
+        @if (@Request.Url.AbsolutePath == Url.Action("ShowPortfolio", "Group", new { id = Model.Group.Id }))
+        {
+            <li class="nav-item">
+                <a class="nav-link active" href="@Url.Action("ShowPortfolio", "Group", new { id = Model.Group.Id })">Portfolio koła</a>
+            </li>
+        }
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("ShowPortfolio", "Group", new { id = Model.Group.Id })">Portfolio koła</a>
+            </li>
+        }
+   
+
         <li class="nav-item">
             <a class="nav-link" href="#">Galeria</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">Spotkania i wydarzenia</a>
         </li>
-        <li>
-            <a class="nav-link" href="@Url.Action("ShowPosts", "Group", new { id = Model.Group.Id })">Posty</a>
-        </li>
-        @if (Request.IsAuthenticated)
+
+        @if (@Request.Url.AbsolutePath == Url.Action("ShowPosts", "Group", new { id = Model.Group.Id }))
         {
             <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("JoinGroup", "Group", new { id = Model.Group.Id })">Dołacz</a>
+                <a class="nav-link active" href="@Url.Action("ShowPosts", "Group", new { id = Model.Group.Id })">Posty</a>
             </li>
         }
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("ShowPosts", "Group", new { id = Model.Group.Id })">Posty</a>
+            </li>
+        }
+
+
+        @if (Request.IsAuthenticated)
+    {
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("JoinGroup", "Group", new { id = Model.Group.Id })">Dołacz</a>
+        </li>
+}
     </ul>
 </nav>
 <!--    KONIEC NAVBARU KOŁA    -->
