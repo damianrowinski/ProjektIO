@@ -20,7 +20,7 @@ namespace ProjektIO.Controllers
             return View();
         }        
 
-        [Authorize(Roles = RoleLibrary.ADMIN)]
+        
         public ActionResult News()
         {
             return View();

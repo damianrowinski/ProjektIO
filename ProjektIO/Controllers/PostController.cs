@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using ProjektIO.Models;
 using Microsoft.AspNet.Identity;
+using ProjektIO.Libraries;
 
 
 //trzeba bedzie pozmieniac wszystkie redirect to action index
@@ -18,7 +19,7 @@ namespace ProjektIO.Controllers
             return View();
         }
 
-        
+        [Authorize(Roles = RoleLibrary.ADMIN + "," + RoleLibrary.MEMBER)]
         public ActionResult AddPost()
         {
             using (var db = new DatabaseContext())
@@ -53,8 +54,9 @@ namespace ProjektIO.Controllers
             }
         }
 
-        
+
         //id to id postu
+        [Authorize(Roles = RoleLibrary.ADMIN + "," + RoleLibrary.MEMBER)]
         public ActionResult AddComment(int id)
         {
             ViewModels viewModel = new ViewModels();
@@ -87,6 +89,7 @@ namespace ProjektIO.Controllers
         }
 
         //przekazuje id posta
+        [Authorize(Roles = RoleLibrary.ADMIN + "," + RoleLibrary.MEMBER)]
         public ActionResult ShowPost(int id, int page = 1)
         {
             int PageSize = 5;
@@ -113,6 +116,7 @@ namespace ProjektIO.Controllers
         }
 
         //przekazuje id postu
+        [Authorize(Roles = RoleLibrary.ADMIN + "," + RoleLibrary.POST_AUTHOR)]
         public ActionResult EditPost(int id)
         {
             using (var db = new DatabaseContext())
@@ -147,8 +151,9 @@ namespace ProjektIO.Controllers
                 }
             }
         }
-        
+
         //przekazuje id postu
+        [Authorize(Roles = RoleLibrary.ADMIN + "," + RoleLibrary.POST_AUTHOR)]
         public ActionResult DeletePost(int id)
         {
             using (var db = new DatabaseContext())
@@ -172,6 +177,7 @@ namespace ProjektIO.Controllers
         }
 
         //przekazuje id komentarza
+        [Authorize(Roles = RoleLibrary.ADMIN + "," + RoleLibrary.COMMENT_AUTHOR)]
         public ActionResult EditComment(int id)
         {
             using (var db = new DatabaseContext())
@@ -208,6 +214,7 @@ namespace ProjektIO.Controllers
         }
 
         //przekazuje id komentarza
+        [Authorize(Roles = RoleLibrary.ADMIN + "," + RoleLibrary.COMMENT_AUTHOR)]
         public ActionResult DeleteComment(int id)
         {
             using (var db = new DatabaseContext())

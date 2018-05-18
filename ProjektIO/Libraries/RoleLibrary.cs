@@ -8,6 +8,9 @@ namespace ProjektIO.Libraries
     public static class RoleLibrary
     {
         public const string
-            ADMIN = "administrator";
+            ADMIN = "administrator",
+            MEMBER = "member",
+            POST_AUTHOR = "postAuthor",
+            COMMENT_AUTHOR = "commentAuthor";
     }
 }

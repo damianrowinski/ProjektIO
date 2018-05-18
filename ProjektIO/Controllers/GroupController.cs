@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ProjektIO.Libraries;
 using ProjektIO.Models;
+using ProjektIO.Auth;
 
 namespace ProjektIO.Controllers
 {
@@ -12,6 +14,7 @@ namespace ProjektIO.Controllers
         int PageSize = 4;
         // GET: Group
 
+        [Authorize]
         public ActionResult AddGroup()
         {
             ViewModels viewModel = new ViewModels();
@@ -23,7 +26,6 @@ namespace ProjektIO.Controllers
         }
 
         [HttpPost]
-       
         public ActionResult AddGroup(ViewModels viewModel)
         {
             using (var db = new DatabaseContext())
@@ -83,6 +85,8 @@ namespace ProjektIO.Controllers
             }
         }
 
+        [Authorize(Roles = RoleLibrary.ADMIN + "," + RoleLibrary.MEMBER)]
+        //przekazuje id kola
         public ActionResult ShowMembers(int id, int page = 1)
         {
             using (var db = new DatabaseContext())
@@ -188,6 +192,7 @@ namespace ProjektIO.Controllers
         }
 
         //przekazuje id koła
+        [Authorize(Roles = RoleLibrary.ADMIN + "," + RoleLibrary.MEMBER)]
         public ActionResult ShowPosts(int id, int page = 1)
         {
             using (var db = new DatabaseContext())
@@ -248,6 +253,8 @@ namespace ProjektIO.Controllers
                 return model;
             }
         }
+
+        [Authorize]
         public ActionResult JoinGroup(int id)
         {
             using (var db = new DatabaseContext())
