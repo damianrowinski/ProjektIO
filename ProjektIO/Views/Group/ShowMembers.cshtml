@@ -38,7 +38,14 @@
                 <th scope="row">@j</th>
                 <td>@member.Uzytkownik.Imie</td>
                 <td>@member.Uzytkownik.Nazwisko</td>
-                <td>@member.Rola</td>
+                @if(member.Rola == 1)
+                {
+                    <td>Administrator</td>
+                }
+                else
+                {
+                    <td>Członek</td>
+                }
             </tr>
         }
     </tbody>

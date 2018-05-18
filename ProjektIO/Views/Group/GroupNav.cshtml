@@ -99,11 +99,11 @@
 
 
         @if (Request.IsAuthenticated)
-    {
-        <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("JoinGroup", "Group", new { id = Model.Group.Id })">Dołacz</a>
-        </li>
-}
+        {
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("JoinGroup", "Group", new { id = Model.Group.Id })">Dołacz</a>
+            </li>
+        }
     </ul>
 </nav>
 <!--    KONIEC NAVBARU KOŁA    -->
