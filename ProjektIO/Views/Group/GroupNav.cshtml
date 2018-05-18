@@ -1,8 +1,11 @@
 ﻿@using ProjektIO.Models
+
 @model ViewModels
 @{
     ViewBag.Title = "GroupNav";
+
 }
+
 
 <!--   NAVBAR KOŁA!     -->
 <nav class="navbar-nav navbar-expand-md navbar-dark bg-kolo m-auto">
@@ -33,9 +36,9 @@
         </li>
         @if (Request.IsAuthenticated)
         {
-        <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("JoinGroup", "Group", new { id = Model.Group.Id })">Dołacz</a>     
-        </li>
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("JoinGroup", "Group", new { id = Model.Group.Id })">Dołacz</a>
+            </li>
         }
     </ul>
 </nav>

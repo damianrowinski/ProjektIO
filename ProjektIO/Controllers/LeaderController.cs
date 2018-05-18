@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using ProjektIO.Libraries;
 using ProjektIO.Models;
 
 namespace ProjektIO.Controllers
@@ -16,6 +17,7 @@ namespace ProjektIO.Controllers
         }
         // GET: Leader
         //id w parametrze to id koła
+        [Authorize(Roles = RoleLibrary.ADMIN)]
         public ActionResult EditStatute(int id)
         {
             using (var db = new DatabaseContext())
