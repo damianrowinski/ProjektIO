@@ -20,9 +20,11 @@
                 @group.Group.Nazwa
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Szefu: @group.LeaderName</li>
+                <li class="list-group-item">Przewodniczący: @group.LeaderName</li>
                 <li class="list-group-item">Kategoria: brak</li>
                 <li class="list-group-item">Uczelnia: @group.Group.Uczelnia</li>
+                <li class="list-group-item">Numer telefonu: @group.PhoneNumber</li>
+                <li class="list-group-item">Mail: <a href="mailto:@group.Mail">@group.Mail</a></li>
                 <li class="list-group-item"><a class="btn btn-warning" href="@Url.Action("ShowGroup", "Group", new { id = group.Group.Id })">Przejdź</a></li>
             </ul>
         </div>
