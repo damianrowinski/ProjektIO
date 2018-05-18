@@ -30,10 +30,12 @@
         </tr>
     </thead>
     <tbody>
+        @{ int j = 0; }
         @foreach (var member in Model.Members.Members)
         {
+            { j++; }
             <tr>
-                <th scope="row">@member.Id</th>
+                <th scope="row">@j</th>
                 <td>@member.Uzytkownik.Imie</td>
                 <td>@member.Uzytkownik.Nazwisko</td>
                 <td>@member.Rola</td>
