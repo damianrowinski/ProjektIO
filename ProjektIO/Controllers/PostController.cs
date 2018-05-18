@@ -116,7 +116,7 @@ namespace ProjektIO.Controllers
         }
 
         //przekazuje id postu
-        [Authorize(Roles = RoleLibrary.ADMIN + "," + RoleLibrary.POST_AUTHOR)]
+        [Authorize(Roles = RoleLibrary.POST_AUTHOR)]
         public ActionResult EditPost(int id)
         {
             using (var db = new DatabaseContext())
@@ -177,7 +177,7 @@ namespace ProjektIO.Controllers
         }
 
         //przekazuje id komentarza
-        [Authorize(Roles = RoleLibrary.ADMIN + "," + RoleLibrary.COMMENT_AUTHOR)]
+        [Authorize(Roles = RoleLibrary.COMMENT_AUTHOR)]
         public ActionResult EditComment(int id)
         {
             using (var db = new DatabaseContext())
