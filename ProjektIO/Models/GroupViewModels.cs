@@ -20,6 +20,7 @@ namespace ProjektIO.Models
         public int CurrentPage { get; set; }
         public int Pages { get; set; }
         public string Category { get; set; }
+        public string CategoryName { get; set; }
     }
 
     public class MembersViewModel
