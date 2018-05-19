@@ -135,7 +135,7 @@ namespace ProjektIO.Controllers
             {
                 ViewModels viewModel = new ViewModels();
                 GroupListViewModel groupList = new GroupListViewModel();
-                groupList.Groups = db.KoloNaukowe.Select(p => p).
+                groupList.Groups = db.KoloNaukowe.Include("Kategoria").Select(p => p).
                  OrderBy(p => p.Id).Skip((page - 1) * PageSize).Take(PageSize).ToList();
            
                 if (groupList.Groups == null)
