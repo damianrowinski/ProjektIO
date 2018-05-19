@@ -61,7 +61,7 @@ namespace ProjektIO.Controllers
             {
                 ViewModels viewModel = new ViewModels();
                 GroupListViewModel groupList = new GroupListViewModel();
-                Kategoria category = db.Kategoria.FirstOrDefault(p => p.Nazwa == id);
+                Kategoria category = db.Kategoria.FirstOrDefault(p => p.Skrot == id);
                 if (category == null)
                 {
                     return View("Error", new string[] { "Nie ma kategorii o podanej nazwie" });
@@ -200,6 +200,7 @@ namespace ProjektIO.Controllers
                 ViewModels viewModel = new ViewModels();
                 PostListViewModel postList = new PostListViewModel();
                 KoloNaukowe group = new KoloNaukowe();
+                List<PostViewModel> postModels = new List<PostViewModel>();
                 List<string> authors = new List<string>();
                 postList.Posts = db.Post.Where(p => p.IdKola == id).ToList();
                 group = db.KoloNaukowe.FirstOrDefault(p => p.Id == id);
@@ -216,16 +217,32 @@ namespace ProjektIO.Controllers
                 foreach (Post post in viewModel.PostList.Posts)
                 {
                     Czlonkowie member = db.Czlonkowie.Include("Uzytkownik").FirstOrDefault(p => p.Id == post.IdCzlonka);
+                    string author;
                     if (member == null)
                     {
-                        return View("Error");
+                        author = "";
                     }
-                    string author = member.Uzytkownik.Imie + " " + member.Uzytkownik.Nazwisko;
+                    author = member.Uzytkownik.Imie + " " + member.Uzytkownik.Nazwisko;
                     authors.Add(author);
                 }
                 viewModel.PostList.AuthorsNames = authors;
                 viewModel.PostList.Group = group;
                 viewModel.Group = group;
+                foreach (Post post in viewModel.PostList.Posts)
+                {
+                    PostViewModel postView = new PostViewModel();
+                    postView.Post = db.Post.FirstOrDefault(p => p.Id == id);
+                    postView.Comments = db.Komentarz.Where(p => p.IdPostu == id).ToList();
+                    Czlonkowie author = db.Czlonkowie.Include("Uzytkownik").FirstOrDefault(p => p.Id == postView.Post.IdCzlonka);
+                    postView.AuthorName = author.Uzytkownik.Imie + " " + author.Uzytkownik.Nazwisko;
+                    if (postView.Post == null || author == null)
+                    {
+                        return View("Error");
+                    }
+                    postView = SetCommentsAuthors(postView);
+                    postModels.Add(postView);
+                }
+                viewModel.PostList.PostsModels = postModels;
                 return View(viewModel);
             }
         }
@@ -284,6 +301,23 @@ namespace ProjektIO.Controllers
                 viewModel.Group = tempCzlonek.KoloNaukowe;
                 viewModel.Member = tempCzlonek;
                 return View(viewModel);
+            }
+        }
+
+        private PostViewModel SetCommentsAuthors(PostViewModel postModel)
+        {
+            using (var db = new DatabaseContext())
+            {
+                List<string> authors = new List<string>();
+                foreach (Komentarz comment in postModel.Comments)
+                {
+                    string temp;
+                    Czlonkowie author = db.Czlonkowie.Include("Uzytkownik").FirstOrDefault(p => p.Id == comment.IdCzlonka);
+                    temp = author.Uzytkownik.Imie + " " + author.Uzytkownik.Nazwisko;
+                    authors.Add(temp);
+                }
+                postModel.CommentsAuthors = authors;
+                return postModel;
             }
         }
     }
