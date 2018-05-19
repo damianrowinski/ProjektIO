@@ -67,7 +67,7 @@ namespace ProjektIO.Controllers
                     return View("Error", new string[] { "Nie ma kategorii o podanej nazwie" });
                 }
 
-                groupList.Groups = (db.KoloNaukowe.Include("Kategoria").Where(p => p.KategoriaId == category.Id).
+                groupList.Groups = (db.KoloNaukowe.Where(p => p.KategoriaId == category.Id).
                  OrderBy(p => p.Id).Skip((page - 1) * PageSize).Take(PageSize)).ToList();
                 if (groupList.Groups == null)
                 {
@@ -78,6 +78,7 @@ namespace ProjektIO.Controllers
                 groupList.Pages = (int)Math.Ceiling((decimal)totalItems / PageSize);
                 groupList.CurrentPage = page;
                 groupList.Category = id;
+                groupList.CategoryName = category.Nazwa;
                 groupList = SetDetails(groupList);
 
                 viewModel.GroupList = groupList;
