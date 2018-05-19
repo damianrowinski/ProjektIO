@@ -26,12 +26,44 @@
 
     <tbody>
 
+        @{ int k = 0; }
         @foreach (var post in Model.PostList.Posts)
         {
+            { k++; }
             <tr>
                 <th scope="row">@post.Id</th>
                 <td>@post.Zawartosc.</td>
-                <td><a href="@Url.Action("ShowPost", "Post", new { id = post.Id })" class="btn btn-warning">Czytaj post</a></td>
+                <td><a href="#collapsePost_@k" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapsePost_@k" class="btn btn-primary">Rozwiń komentarze</a></td>
+            </tr>
+            <tr class="collapse" id="collapsePost_@k">
+                <td>
+                    testTESTtest
+                    <!--  <h2>Komentarze</!--h2>
+                    <div class="row">
+                        <div class="col col-md-8">
+
+                            !MAŁPA!foreach (var comment in Model.PostModel.Comments)
+                            {
+
+                            <div class="">
+                                <div class="">
+                                    <img class="rounded float-left img-thumbnail" height="200" width="200" src="https://www.1plusx.com/app/mu-plugins/all-in-one-seo-pack-pro/images/default-user-image.png" />
+                                </div>
+                                <div class="">
+                                    <h4 class="media-heading">Nazwa komentującego</h4>
+                                    <p>
+                                        !MAŁPA!comment.Zawartosc
+                                    </p>
+                                </div>
+                            </div>
+                            <div style="margin-bottom: 1%;">
+                                <hr />
+                            </div>
+                            }
+
+                        </div>
+                    </div>  -->
+                </td>
             </tr>
         }
 
@@ -39,7 +71,10 @@
 
 </table>
 
+
 <a class="btn btn-success" href="@Url.Action("AddPost", "Post")">Dodaj post</a>
+
+
 <div style="margin-top: 1%;"></div>
 
 <!-- PAGINACJA -->
