@@ -38,11 +38,11 @@
             <tr class="collapse" id="collapsePost_@k">
                 <td>
                     testTESTtest
-                    <!--  <h2>Komentarze</!--h2>
+                    <h2>Komentarze</h2>
                     <div class="row">
                         <div class="col col-md-8">
 
-                            !MAŁPA!foreach (var comment in Model.PostModel.Comments)
+                            @foreach (var comment in Model.PostList.Posts)
                             {
 
                             <div class="">
@@ -52,7 +52,7 @@
                                 <div class="">
                                     <h4 class="media-heading">Nazwa komentującego</h4>
                                     <p>
-                                        !MAŁPA!comment.Zawartosc
+                                        @comment.Zawartosc
                                     </p>
                                 </div>
                             </div>
@@ -62,7 +62,7 @@
                             }
 
                         </div>
-                    </div>  -->
+                    </div>  
                 </td>
             </tr>
         }

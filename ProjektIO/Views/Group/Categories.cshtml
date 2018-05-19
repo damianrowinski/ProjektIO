@@ -4,7 +4,7 @@
     ViewBag.Title = "GroupList";
 }
 
-<h1 style="margin-top: 1%; margin-bottom: 1%;">Lista kół z kategorii @Model.GroupList.Category</h1>
+<h1 style="margin-top: 1%; margin-bottom: 1%;">Lista kół z kategorii @Model.GroupList.CategoryName</h1>
 
 <table class="table table-striped">
     <thead>
@@ -23,7 +23,7 @@
                 <td>@group.Group.Nazwa</td>
                 <td>@group.LeaderName</td>
                 <td></td>
-                <td><a class="btn btn-warning" href="@Url.Action("ShowGroup", "Group", new { id = group.Group.Id })">KLIK</a></td>
+                <td><a class="btn btn-primary" href="@Url.Action("ShowGroup", "Group", new { id = group.Group.Id })">KLIK</a></td>
             </tr>
         }
     </tbody>
