@@ -22,8 +22,8 @@
                 <th scope="row">@group.Group.Id</th>
                 <td>@group.Group.Nazwa</td>
                 <td>@group.LeaderName</td>
-                <td></td>
-                <td><a class="btn btn-primary" href="@Url.Action("ShowGroup", "Group", new { id = group.Group.Id })">KLIK</a></td>
+                
+                <td><a class="btn btn-primary" href="@Url.Action("ShowGroup", "Group", new { id = group.Group.Id })">Przejdź do strony koła</a></td>
             </tr>
         }
     </tbody>
