@@ -231,8 +231,8 @@ namespace ProjektIO.Controllers
                 foreach (Post post in viewModel.PostList.Posts)
                 {
                     PostViewModel postView = new PostViewModel();
-                    postView.Post = db.Post.FirstOrDefault(p => p.Id == id);
-                    postView.Comments = db.Komentarz.Where(p => p.IdPostu == id).ToList();
+                    postView.Post = post;
+                    postView.Comments = db.Komentarz.Where(p => p.IdPostu == post.Id).ToList();
                     Czlonkowie author = db.Czlonkowie.Include("Uzytkownik").FirstOrDefault(p => p.Id == postView.Post.IdCzlonka);
                     postView.AuthorName = author.Uzytkownik.Imie + " " + author.Uzytkownik.Nazwisko;
                     if (postView.Post == null || author == null)
