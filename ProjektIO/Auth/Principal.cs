@@ -109,6 +109,13 @@ namespace ProjektIO.Auth
                     return urlSegments[2];
                 }
             }
+            if (library.LeaderFirst.Contains(urlSegments[0]))
+            {
+                if (library.LeaderSecond.Find(p => p == urlSegments[1]) != null)
+                {
+                    return urlSegments[2];
+                }
+            }
             return null;
         }
 

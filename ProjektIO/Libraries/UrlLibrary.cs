@@ -11,5 +11,7 @@ namespace ProjektIO.Libraries
         public List<string> GroupSecond = new List<string> { "ShowMembers", "ShowPosts"};
         public string PostFirst = "Post";
         public List<string> PostSecond = new List<string> { "EditPost", "DeletePost", "EditComment", "DeleteComment" };
+        public string LeaderFirst = "Leader";
+        public List<string> LeaderSecond = new List<string> { "EditStatute" };
     }
 }
