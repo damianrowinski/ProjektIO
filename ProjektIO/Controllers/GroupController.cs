@@ -233,7 +233,9 @@ namespace ProjektIO.Controllers
                 {
                     PostViewModel postView = new PostViewModel();
                     postView.Post = post;
-                    postView.Comments = db.Komentarz.Where(p => p.IdPostu == post.Id).ToList();
+                    List<Komentarz> comList = new List<Komentarz>();
+                    comList = db.Komentarz.Where(p => p.IdPostu == post.Id).ToList();
+                    postView.Comments = comList;
                     Czlonkowie author = db.Czlonkowie.Include("Uzytkownik").FirstOrDefault(p => p.Id == postView.Post.IdCzlonka);
                     postView.AuthorName = author.Uzytkownik.Imie + " " + author.Uzytkownik.Nazwisko;
                     if (postView.Post == null || author == null)
@@ -328,7 +330,6 @@ namespace ProjektIO.Controllers
             {
                 KoloNaukowe tempKolo = db.KoloNaukowe.FirstOrDefault(p => p.Id == id);
                 ViewModels model = new ViewModels();
-                System.Diagnostics.Debug.WriteLine("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
                 model.Group = tempKolo;
                 return View(model);
             }
@@ -341,8 +342,7 @@ namespace ProjektIO.Controllers
             {
                 ViewModels viewModel = new ViewModels();
                 KoloNaukowe tempKolo = db.KoloNaukowe.FirstOrDefault(p => p.Id == id);
-                tempKolo.SciezkaDoObrazu = model.ChangeImage.Sciezka;
-                System.Diagnostics.Debug.WriteLine("$$$$$$$$$$$$$$$$$$4" + model.ChangeImage.Sciezka);
+                tempKolo.SciezkaDoObrazu = model.ChangeImage.Sciezka;                
                 viewModel.Group = tempKolo;               
                 db.SaveChanges();
                 return View(viewModel);

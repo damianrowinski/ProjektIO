@@ -3,9 +3,7 @@
 @{
     ViewBag.Title = "GroupList";
 }
-
 <h1 style="margin-top: 1%; margin-bottom: 1%;">Lista kół z kategorii @Model.GroupList.CategoryName</h1>
-
 <table class="table table-striped">
     <thead>
         <tr>
@@ -22,13 +20,12 @@
                 <th scope="row">@group.Group.Id</th>
                 <td>@group.Group.Nazwa</td>
                 <td>@group.LeaderName</td>
-                <td></td>
-                <td><a class="btn btn-primary" href="@Url.Action("ShowGroup", "Group", new { id = group.Group.Id })">KLIK</a></td>
+
+                <td><a class="btn btn-primary" href="@Url.Action("ShowGroup", "Group", new { id = group.Group.Id })">Przejdź do strony koła</a></td>
             </tr>
         }
     </tbody>
 </table>
-
 <!-- PAGINACJA -->
 <nav>
     <ul class="pagination">
@@ -38,7 +35,6 @@
                 <a class="page-link bg-dark" style="color: orange;" href="@Url.Action("Categories", "Group", new { id = Model.GroupList.Category, page = Model.GroupList.CurrentPage - 1 }))">Poprzednia</a>
             </li>
         }
-
         @for (int i = 1; i <= Model.GroupList.Pages; i++)
         {
             if (i >= Model.GroupList.CurrentPage - 3 && i < Model.GroupList.CurrentPage + 3)
@@ -48,7 +44,6 @@
                 </li>
             }
         }
-
         @if (Model.GroupList.CurrentPage != Model.GroupList.Pages)
         {
             <li class="page-item">

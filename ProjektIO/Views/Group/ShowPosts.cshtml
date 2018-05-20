@@ -16,16 +16,12 @@
 
     @RenderPage("~/Views/Group/GroupNav.cshtml")
 </div>
-
 <div style="margin-top: 1%;"></div>
 <h1>Wszystkie posty</h1>
 <div style="margin-top: 1%;"></div>
 
-
 <table class="table">
-
     <tbody>
-
         @{ int k = 0; }
         @foreach (var post in Model.PostList.Posts)
         {
@@ -37,12 +33,10 @@
             </tr>
             <tr class="collapse" id="collapsePost_@k">
                 <td>
-                    testTESTtest
                     <h2>Komentarze</h2>
                     <div class="row">
                         <div class="col col-md-8">
-
-                            @foreach (var comment in Model.PostList.Posts)
+                            @foreach (var comment in Model.PostList.PostsModels)
                             {
 
                                 <div class="">
@@ -52,7 +46,7 @@
                                     <div class="">
                                         <h4 class="media-heading">Nazwa komentującego</h4>
                                         <p>
-                                            @comment.Zawartosc
+                                            @comment.
                                         </p>
                                     </div>
                                 </div>
@@ -60,23 +54,17 @@
                                     <hr />
                                 </div>
                             }
-
                         </div>
                     </div>
                 </td>
             </tr>
         }
-
     </tbody>
-
 </table>
-
 
 <a class="btn btn-success" href="@Url.Action("AddPost", "Post")">Dodaj post</a>
 
-
 <div style="margin-top: 1%;"></div>
-
 <!-- PAGINACJA -->
 <nav>
     <ul class="pagination">
@@ -86,7 +74,6 @@
                 <a class="page-link bg-dark" style="color: orange;" href="@Url.Action("ShowPosts", "Group", new { id = Model.PostList.Group.Id, page = Model.PostList.CurrentPage - 1 })">Poprzednia</a>
             </li>
         }
-
         @for (int i = 1; i <= Model.PostList.Pages; i++)
         {
             if (i >= Model.PostList.CurrentPage - 3 && i < Model.PostList.CurrentPage + 3)
@@ -96,7 +83,6 @@
                 </li>
             }
         }
-
         @if (Model.PostList.CurrentPage != Model.PostList.Pages)
         {
             <li class="page-item">
@@ -105,3 +91,4 @@
         }
     </ul>
 </nav>
+
