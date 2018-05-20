@@ -4,17 +4,17 @@
     ViewBag.Title = "ShowPosts";
 }
 
-<div class="header">
+<div class="header" id="image" style="background-image: url('@Model.Group.SciezkaDoObrazu');background-size: 100% 100%">
     <div class="row align-items-center">
-        <div class="col col-12 col-sm-9">
-            <h1 class="text-center">@Model.PostList.Group.Nazwa</h1>
+        <div class="col">
+            <h1 class="text-center">@Model.Group.Nazwa</h1>
         </div>
-        <img src="~/Content/Images/kolo.png" class="img-thumbnail rounded header-logo m-auto" style="position: relative; left: -25px; bottom: -10px;">
     </div>
-    <div style="padding: 10px;"></div>
-    <div class="content">
-        @RenderPage("~/Views/Group/GroupNav.cshtml")
-    </div>
+    <div style="padding: 100px;"></div>
+</div>
+<div class="content" style="position: relative; padding-bottom: 0px;">
+
+    @RenderPage("~/Views/Group/GroupNav.cshtml")
 </div>
 
 <div style="margin-top: 1%;"></div>
@@ -45,24 +45,24 @@
                             @foreach (var comment in Model.PostList.Posts)
                             {
 
-                            <div class="">
                                 <div class="">
-                                    <img class="rounded float-left img-thumbnail" height="200" width="200" src="https://www.1plusx.com/app/mu-plugins/all-in-one-seo-pack-pro/images/default-user-image.png" />
+                                    <div class="">
+                                        <img class="rounded float-left img-thumbnail" height="200" width="200" src="https://www.1plusx.com/app/mu-plugins/all-in-one-seo-pack-pro/images/default-user-image.png" />
+                                    </div>
+                                    <div class="">
+                                        <h4 class="media-heading">Nazwa komentującego</h4>
+                                        <p>
+                                            @comment.Zawartosc
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="">
-                                    <h4 class="media-heading">Nazwa komentującego</h4>
-                                    <p>
-                                        @comment.Zawartosc
-                                    </p>
+                                <div style="margin-bottom: 1%;">
+                                    <hr />
                                 </div>
-                            </div>
-                            <div style="margin-bottom: 1%;">
-                                <hr />
-                            </div>
                             }
 
                         </div>
-                    </div>  
+                    </div>
                 </td>
             </tr>
         }

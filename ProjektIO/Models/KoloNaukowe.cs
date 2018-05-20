@@ -30,6 +30,7 @@ namespace ProjektIO.Models
         public System.DateTime DataDoUsuniecia { get; set; }
         public string Regulamin { get; set; }
         public int KategoriaId { get; set; }
+        public string SciezkaDoObrazu { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Portfolio> Portfolio { get; private set; }

@@ -88,6 +88,7 @@
           <Property Name="Regulamin" Type="String" Nullable="false" />
           <NavigationProperty Name="Kategoria" Relationship="Model.KategoriaKoloNaukowe" FromRole="KoloNaukowe" ToRole="Kategoria" />
           <Property Name="KategoriaId" Type="Int32" Nullable="false" />
+          <Property Name="SciezkaDoObrazu" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Portfolio">
           <Key>

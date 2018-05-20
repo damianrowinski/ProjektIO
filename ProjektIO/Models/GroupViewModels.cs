@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -35,5 +36,13 @@ namespace ProjektIO.Models
     {
         public KoloNaukowe Group { get; set; }
         public string Category { get; set; }
+    }
+
+    public class ChangeImageViewModel
+    {
+        public KoloNaukowe Group { get; set; }
+
+        [Display(Name = "Ścieżka do pliku")]
+        public string Sciezka { get; set; }
     }
 }

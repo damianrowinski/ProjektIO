@@ -225,6 +225,10 @@
     <Compile Include="Migrations\201805071936010_CommentBlock.Designer.cs">
       <DependentUpon>201805071936010_CommentBlock.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805201454465_Model.edmx.cs" />
+    <Compile Include="Migrations\201805201454465_Model.edmx.Designer.cs">
+      <DependentUpon>201805201454465_Model.edmx.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Account\CasResponseModel.cs" />
@@ -379,6 +383,7 @@
     <Content Include="Views\Group\ShowPosts.cshtml" />
     <Content Include="Views\Post\ShowPost.cshtml" />
     <Content Include="Views\Home\UserSettings.cshtml" />
+    <Content Include="Views\Group\ChangeImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
@@ -399,6 +404,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805071936010_CommentBlock.resx">
       <DependentUpon>201805071936010_CommentBlock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805201454465_Model.edmx.resx">
+      <DependentUpon>201805201454465_Model.edmx.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

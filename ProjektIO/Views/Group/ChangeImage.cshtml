@@ -1,0 +1,40 @@
+﻿@using ProjektIO.Models
+@model ViewModels
+@{
+    ViewBag.Title = "ChangeImage";
+}
+
+<div class="header" id="image" style="background-image: url('@Model.Group.SciezkaDoObrazu');background-size: 100% 100%">
+    <div class="row align-items-center">
+        <div class="col">
+            <h1 class="text-center">@Model.Group.Nazwa</h1>
+        </div>
+    </div>
+    <div style="padding: 100px;"></div>
+</div>
+<div class="content" style="position: relative; padding-bottom: 0px;">
+
+    @RenderPage("~/Views/Group/GroupNav.cshtml")
+</div>
+@using (Html.BeginForm("ChangeImage", "Group", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <p>
+        <h1>Zmień obraz koła</h1>
+    </p>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.ChangeImage.Sciezka, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.ChangeImage.Sciezka, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-warning" value="Zmień" />
+        </div>
+    </div>
+
+}
+

@@ -14,11 +14,12 @@ body{
 	background-color:  #387FBC;
 }
 
-.header{
-	color: #F0EDEE;
-	min-height: 180px;
-	background-color: #3374AB;
+.header {
+    color: #F0EDEE;
+    min-height: 180px;
+    background-color: #3374AB;
 }
+
 .line-10{
 	height: 10px;
 }

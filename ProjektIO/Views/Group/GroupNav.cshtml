@@ -10,7 +10,7 @@
 <!--   NAVBAR KOŁA!     -->
 <nav class="navbar-nav navbar-expand-md navbar-dark bg-kolo m-auto">
     <ul class="navbar-nav">
-        
+
         @if (@Request.Url.AbsolutePath == Url.Action("ShowGroup", "Group", new { id = Model.Group.Id }))
         {
             <li class="nav-item">
@@ -75,14 +75,14 @@
                 <a class="nav-link" href="@Url.Action("ShowPortfolio", "Group", new { id = Model.Group.Id })">Portfolio koła</a>
             </li>
         }
-   
+
 
         <li class="nav-item">
             <a class="nav-link" href="#">Galeria</a>
         </li>
-<!--        <li class="nav-item">
-            <a class="nav-link" href="#">Spotkania i wydarzenia</a>
-        </li> -->
+        <!--        <li class="nav-item">
+        <a class="nav-link" href="#">Spotkania i wydarzenia</a>
+    </li> -->
 
         @if (@Request.Url.AbsolutePath == Url.Action("ShowPosts", "Group", new { id = Model.Group.Id }))
         {
@@ -103,7 +103,17 @@
             <li class="nav-item">
                 <a class="nav-link" href="@Url.Action("JoinGroup", "Group", new { id = Model.Group.Id })">Dołacz</a>
             </li>
+            if ((User as ProjektIO.Auth.Principal).GetUserData().Rola == 1)
+            {
+
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("ChangeImage", "Group", new { id = Model.Group.Id })">Zmien obraz</a>
+                </li>
+            }
+
         }
+
+
     </ul>
 </nav>
 <!--    KONIEC NAVBARU KOŁA    -->

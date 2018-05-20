@@ -145,7 +145,7 @@ namespace ProjektIO.Controllers
                 }
 
                 int totalItems = db.KoloNaukowe.Select(p => p).Count();
-                groupList.Pages = (int)Math.Ceiling((decimal)totalItems / PageSize);
+                groupList.Pages = 1;
                 groupList.CurrentPage = page;
                 groupList = SetDetails(groupList);
 
@@ -321,5 +321,33 @@ namespace ProjektIO.Controllers
                 return postModel;
             }
         }
+
+        public ActionResult ChangeImage(int id)
+        {
+            using (var db = new DatabaseContext())
+            {
+                KoloNaukowe tempKolo = db.KoloNaukowe.FirstOrDefault(p => p.Id == id);
+                ViewModels model = new ViewModels();
+                System.Diagnostics.Debug.WriteLine("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                model.Group = tempKolo;
+                return View(model);
+            }
+        }
+        [HttpPost]
+        [Authorize]
+        public ActionResult ChangeImage(int id, ViewModels model)
+        {
+            using (var db = new DatabaseContext())
+            {
+                ViewModels viewModel = new ViewModels();
+                KoloNaukowe tempKolo = db.KoloNaukowe.FirstOrDefault(p => p.Id == id);
+                tempKolo.SciezkaDoObrazu = model.ChangeImage.Sciezka;
+                System.Diagnostics.Debug.WriteLine("$$$$$$$$$$$$$$$$$$4" + model.ChangeImage.Sciezka);
+                viewModel.Group = tempKolo;               
+                db.SaveChanges();
+                return View(viewModel);
+            }
+        }
+
     }
 }

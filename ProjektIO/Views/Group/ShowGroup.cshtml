@@ -4,21 +4,20 @@
     ViewBag.Title = "Group";
 }
 
-<div class="header">
+<div class="header" id="image" style="background-image: url('@Model.Group.SciezkaDoObrazu');background-size: 100% 100%">
     <div class="row align-items-center">
-        <div class="col col-12 col-sm-9">
+        <div class="col">
             <h1 class="text-center">@Model.Group.Nazwa</h1>
         </div>
-        <img src="~/Content/Images/kolo.png" class="img-thumbnail rounded header-logo m-auto" style="position: relative; left: -25px; bottom: -10px;">
     </div>
-    <div style="padding: 10px;"></div>
-    <div class="content">
-        @RenderPage("~/Views/Group/GroupNav.cshtml")
-    </div>
+    <div style="padding: 100px;"></div>
+</div>
+<div class="content" style="position: relative; padding-bottom: 0px;">
+
+    @RenderPage("~/Views/Group/GroupNav.cshtml")
 </div>
 <h1 style="padding-top: 1%; padding-bottom: 1%;">Prezentacja koła</h1>
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste, nihil eveniet rerum! Sequi, nostrum, distinctio. Eaque totam libero molestiae aliquid! Molestias eos necessitatibus quam corrupti amet odio qui inventore dolore!</p>
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam architecto itaque explicabo, similique. Ipsa aliquam delectus et optio illum cupiditate dolor? Perspiciatis modi eligendi, provident ullam veritatis asperiores recusandae repudiandae!</p>
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fuga hic vitae dolorem culpa. Minima cumque expedita libero accusamus excepturi facere eligendi maxime quo, asperiores, aliquid adipisci quaerat amet doloremque error!</p>
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim ut ipsa repellat magni nemo vel aliquam asperiores accusamus assumenda cum et tempore dolore, blanditiis, odit iste ipsam excepturi a fugiat.</p>
-</div>

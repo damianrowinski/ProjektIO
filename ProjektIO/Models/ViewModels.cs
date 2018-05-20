@@ -37,5 +37,6 @@ namespace ProjektIO.Models
         public Post Post { get; set; }
         public Komentarz Comment { get; set; }
         public AddGroupViewModel AddGroup { get; set; }
+        public ChangeImageViewModel ChangeImage { get; set; }
     }
 }
