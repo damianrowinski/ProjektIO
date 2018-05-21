@@ -100,15 +100,32 @@
 
         @if (Request.IsAuthenticated)
         {
-            <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("JoinGroup", "Group", new { id = Model.Group.Id })">Dołacz</a>
-            </li>
+            if (@Request.Url.AbsolutePath == Url.Action("JoinGroup", "Group", new { id = Model.Group.Id }))
+            {
+                <li class="nav-item">
+                    <a class="nav-link active" href="@Url.Action("JoinGroup", "Group", new { id = Model.Group.Id })">Dołacz</a>
+                </li>
+            }
+            else
+            {
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("JoinGroup", "Group", new { id = Model.Group.Id })">Dołacz</a>
+                </li>
+            }
             if ((User as ProjektIO.Auth.Principal).GetUserData().Rola == 1)
             {
-
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("ChangeImage", "Group", new { id = Model.Group.Id })">Zmien obraz</a>
-                </li>
+                if (@Request.Url.AbsolutePath == Url.Action("ChangeImage", "Group", new { id = Model.Group.Id }))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link active" href="@Url.Action("ChangeImage", "Group", new { id = Model.Group.Id })">Zmien obraz</a>
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("ChangeImage", "Group", new { id = Model.Group.Id })">Zmien obraz</a>
+                    </li>
+                }
             }
 
         }
