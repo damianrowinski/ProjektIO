@@ -145,7 +145,7 @@ namespace ProjektIO.Controllers
                 }
 
                 int totalItems = db.KoloNaukowe.Select(p => p).Count();
-                groupList.Pages = 1;
+                groupList.Pages = (int)Math.Ceiling((decimal)totalItems / PageSize);
                 groupList.CurrentPage = page;
                 groupList = SetDetails(groupList);
 
