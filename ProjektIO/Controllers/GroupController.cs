@@ -11,7 +11,7 @@ namespace ProjektIO.Controllers
 {
     public class GroupController : BaseController
     {
-        int PageSize = 4;
+        int PageSize = 2;
         // GET: Group
 
         [Authorize]
@@ -324,6 +324,7 @@ namespace ProjektIO.Controllers
             }
         }
 
+        [Authorize(Roles = RoleLibrary.ADMIN)]
         public ActionResult ChangeImage(int id)
         {
             using (var db = new DatabaseContext())
@@ -334,8 +335,8 @@ namespace ProjektIO.Controllers
                 return View(model);
             }
         }
+
         [HttpPost]
-        [Authorize]
         public ActionResult ChangeImage(int id, ViewModels model)
         {
             using (var db = new DatabaseContext())
