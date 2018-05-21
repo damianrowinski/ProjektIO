@@ -11,7 +11,7 @@ namespace ProjektIO.Controllers
 {
     public class GroupController : BaseController
     {
-        int PageSize = 2;
+        int PageSize = 3;
         // GET: Group
 
         [Authorize]
