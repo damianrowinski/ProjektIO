@@ -19,7 +19,7 @@ namespace ProjektIO.Controllers
             return View();
         }
 
-        [Authorize(Roles = RoleLibrary.ADMIN + "," + RoleLibrary.MEMBER)]
+        [Authorize]
         public ActionResult AddPost()
         {
             using (var db = new DatabaseContext())
@@ -50,7 +50,7 @@ namespace ProjektIO.Controllers
                 post.AktywneKom = true;
                 db.Post.Add(post);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return View();
             }
         }
 
@@ -84,12 +84,12 @@ namespace ProjektIO.Controllers
                 viewModel.AddComment.Comment.Czlonkowie = member;
                 db.Komentarz.Add(viewModel.AddComment.Comment);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return View();
             }
         }
 
         //przekazuje id posta
-       /* [Authorize(Roles = RoleLibrary.ADMIN + "," + RoleLibrary.MEMBER)]
+       [Authorize(Roles = RoleLibrary.ADMIN + "," + RoleLibrary.MEMBER)]
         public ActionResult ShowPost(int id, int page = 1)
         {
             int PageSize = 5;
@@ -113,7 +113,7 @@ namespace ProjektIO.Controllers
                 viewModel.PostModel = post;
                 return View(viewModel);
             }
-        }*/
+        }
 
         //przekazuje id postu
         [Authorize(Roles = RoleLibrary.POST_AUTHOR)]
@@ -231,7 +231,7 @@ namespace ProjektIO.Controllers
             }
         }
 
-       /* private PostViewModel SetCommentsAuthors (PostViewModel postModel)
+       private PostViewModel SetCommentsAuthors (PostViewModel postModel)
         {
             using (var db = new DatabaseContext())
             {
@@ -246,6 +246,6 @@ namespace ProjektIO.Controllers
                 postModel.CommentsAuthors = authors;
                 return postModel;
             }
-        }*/
+        }
     }
 }
